@@ -8,7 +8,15 @@ public class FoodMenu implements Serializable {
 
 
 
+    public FoodMenu(int food_id, String food_name, int food_price) {
+        this.food_id=food_id;
+        this.food_name=food_name;
+        this.food_price=food_price;
+    }
 
+    public FoodMenu() {
+
+    }
 
 
     public int getFood_id() {

@@ -1,4 +1,4 @@
-package Login;
+package Controller;
 
 import dao.VendorDao;
 import javafx.fxml.FXML;
@@ -11,18 +11,12 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
-public class Controller {
+public class LoginController {
 
     @FXML
     private AnchorPane login_pane;
 
-    @FXML
-    private AnchorPane loginPane;
 
     @FXML
     private TextField txtEmail;
@@ -47,12 +41,11 @@ public class Controller {
         System.out.println(passwordText);
         try {
             VendorDao vd= (VendorDao) Naming.lookup("rmi://localhost/HelloServer");
-            //VendorDao vd = new VendorDaoImpl();
             Boolean rs = vd.checkVendor(txtEmail.getText(), txtPassword.getText());
 
             try {
                 if (rs) {
-                    AnchorPane pane = FXMLLoader.load(getClass().getResource("../Dashboard/dashboard.fxml"));
+                    AnchorPane pane = FXMLLoader.load(getClass().getResource("../View/VendorDashboard.fxml"));
                     System.out.print("Moved to next page");
                     login_pane.getChildren().setAll(pane);
                 } else {
@@ -88,12 +81,8 @@ public class Controller {
 
 
     public void goto_Register() throws IOException, NotBoundException {
-//        Registry registry = LocateRegistry.getRegistry("localhost");
-//        VendorDao vd = (VendorDao) registry.lookup("HelloServer");
-//        System.out.println("Server object " + vd + " found");
-//        vd.printSomething();
         System.out.println("Button Pressed");
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("../Register/register.fxml"));
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("../View/Register.fxml"));
         login_pane.getChildren().setAll(pane);
 
     }

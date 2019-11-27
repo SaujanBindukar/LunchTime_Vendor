@@ -1,4 +1,4 @@
-package Register;
+package Controller;
 
 import bll.Student;
 import dao.StudentDao;

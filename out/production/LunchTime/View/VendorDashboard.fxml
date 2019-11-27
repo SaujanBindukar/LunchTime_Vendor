@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="userOrderPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.VendorDashboardController">
+   <children>
+      <ImageView fitHeight="82.0" fitWidth="193.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/logo.jpg" />
+         </image>
+      </ImageView>
+      <JFXButton fx:id="btnUserOrder" layoutX="146.0" layoutY="-1.0" onAction="#btnUserOrder" prefHeight="83.0" prefWidth="146.0" style="-fx-background-color: white;" text="User Order">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnAddFood" layoutX="292.0" layoutY="-1.0" onAction="#btnAddFood" prefHeight="83.0" prefWidth="163.0" style="-fx-background-color: white;" text="Add Food Items">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btnSalesDetails" layoutX="455.0" layoutY="-1.0" prefHeight="83.0" prefWidth="185.0" style="-fx-background-color: white;" text="View Sales Details">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+         </font>
+      </JFXButton>
+      <AnchorPane layoutY="153.0" prefHeight="449.0" prefWidth="1000.0" style="-fx-background-color: white;">
+         <children>
+            <TableView fx:id="orderTable" layoutX="313.0" prefHeight="443.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+              <columns>
+                <TableColumn fx:id="order_id" minWidth="-Infinity" prefWidth="93.99999749660492" text="Order ID" />
+                <TableColumn fx:id="date" prefWidth="84.66669464111328" text="Date" />
+                  <TableColumn fx:id="user_id" prefWidth="75.0" text="User ID" />
+                  <TableColumn fx:id="food_id" prefWidth="75.0" text="Food ID" />
+                  <TableColumn fx:id="quantity" prefWidth="75.0" text="Quantity" />
+                  <TableColumn fx:id="total_price" prefWidth="75.0" text="Total Price" />
+                  <TableColumn fx:id="status" prefWidth="75.0" text="Status" />
+              </columns>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </TableView>
+         </children></AnchorPane>
+      <JFXTextField focusColor="WHITE" layoutX="11.0" layoutY="101.0" prefHeight="51.0" prefWidth="764.0" promptText="Search By Name" style="-fx-border-width: 1px; -fx-border-color: black;" unFocusColor="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXButton layoutX="791.0" layoutY="101.0" prefHeight="51.0" prefWidth="185.0" style="-fx-background-color: #d11d53;" text="Search" textAlignment="JUSTIFY" textFill="WHITE">
+         <font>
+            <Font name="Arial Rounded MT Bold" size="24.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="28.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/search.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </JFXButton>
+   </children>
+</AnchorPane>
