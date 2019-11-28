@@ -17,15 +17,8 @@ public class LoginController {
     @FXML
     private AnchorPane login_pane;
 
-
     @FXML
     private TextField txtEmail;
-
-    @FXML
-    private Button btnSignin;
-
-    @FXML
-    private Hyperlink goto_Register;
 
     @FXML
     private PasswordField txtPassword;

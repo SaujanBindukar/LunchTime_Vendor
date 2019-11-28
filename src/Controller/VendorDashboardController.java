@@ -13,6 +13,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
@@ -69,6 +71,45 @@ public class VendorDashboardController implements Initializable, Serializable {
     private TableColumn<UserOrder, String> status;
 
     ObservableList<UserOrder> oblist = FXCollections.observableArrayList();
+
+    @FXML
+    private JFXButton btnTopUpUser;
+
+    @FXML
+    private ImageView btnLogout;
+
+    @FXML
+    private ImageView myProfile;
+
+    @FXML
+    void btnLogout(MouseEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("../View/Login.fxml"));
+        userOrderPane.getChildren().setAll(pane);
+
+    }
+
+    @FXML
+    void btnSalesDetails(ActionEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("../View/salesDetail.fxml"));
+        userOrderPane.getChildren().setAll(pane);
+
+    }
+
+    @FXML
+    void myProfile(MouseEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("../View/myProfile.fxml"));
+        userOrderPane.getChildren().setAll(pane);
+
+    }
+
+    @FXML
+    void btnTopUpUser(MouseEvent event) throws IOException {
+        AnchorPane pane = FXMLLoader.load(getClass().getResource("../View/topupUser.fxml"));
+        userOrderPane.getChildren().setAll(pane);
+
+
+    }
+
 
     @FXML
     void btnAddFood(ActionEvent event) throws IOException {
