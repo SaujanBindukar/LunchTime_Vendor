@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -48,11 +49,11 @@
         </ImageView>
         <AnchorPane layoutY="82.0" prefHeight="520.0" prefWidth="1000.0" style="-fx-background-color: white;">
          <children>
-            <TableView fx:id="MenuTable" layoutX="595.0" layoutY="12.0" prefHeight="495.0" prefWidth="369.0">
+            <TableView fx:id="MenuTable" layoutX="473.0" layoutY="12.0" prefHeight="495.0" prefWidth="491.0">
               <columns>
-                <TableColumn fx:id="food_id" prefWidth="73.33331298828125" text="Food Id" />
-                <TableColumn fx:id="food_name" minWidth="0.0" prefWidth="184.66668701171875" text="Food Name" />
-                  <TableColumn fx:id="food_price" prefWidth="132.6666259765625" text="Food Price" />
+                <TableColumn fx:id="food_id" prefWidth="114.00006103515625" text="Food Id" />
+                <TableColumn fx:id="food_name" minWidth="0.0" prefWidth="264.00006103515625" text="Food Name" />
+                  <TableColumn fx:id="food_price" prefWidth="109.99993896484375" text="Food Price" />
               </columns>
             </TableView>
             <JFXTextField fx:id="txtSearchFoodName" focusColor="#eb1818" labelFloat="true" layoutX="38.0" layoutY="14.0" onKeyReleased="#loadFoodMenu" prefHeight="41.0" prefWidth="275.0" promptText="Search By Food Name" style="-fx-border-color: black;" unFocusColor="WHITE">
@@ -82,7 +83,7 @@
                         <Font name="Arial Rounded MT Bold" size="14.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton layoutX="145.0" layoutY="363.0" prefHeight="41.0" prefWidth="112.0" style="-fx-background-color: blue;" text="Update" textFill="WHITE">
+                  <JFXButton fx:id="btnUpdate" layoutX="145.0" layoutY="363.0" onMouseClicked="#btnUpdate" prefHeight="41.0" prefWidth="112.0" style="-fx-background-color: blue;" text="Update" textFill="WHITE">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="14.0" />
                      </font>
@@ -92,6 +93,11 @@
                         <Font name="Arial Rounded MT Bold" size="14.0" />
                      </font>
                   </JFXButton>
+                  <TextArea layoutX="12.0" layoutY="147.0" prefHeight="191.0" prefWidth="385.0" promptText="Choose Image" style="-fx-border-color: black;">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="12.0" />
+                     </font>
+                  </TextArea>
                </children>
             </AnchorPane>
          </children></AnchorPane>

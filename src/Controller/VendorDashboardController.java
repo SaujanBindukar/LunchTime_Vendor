@@ -32,7 +32,7 @@ import java.util.Date;
 import java.util.Observable;
 import java.util.ResourceBundle;
 
-public class VendorDashboardController implements Initializable, Serializable {
+public class VendorDashboardController implements Initializable {
 
     @FXML
     private AnchorPane userOrderPane;
@@ -130,12 +130,12 @@ public class VendorDashboardController implements Initializable, Serializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-//            UserOrderDao ud= (UserOrderDao) Naming.lookup("rmi://localhost/HelloUserOrder");
-//            ResultSet rs=ud.getUserOrder();
-                        Class.forName("com.mysql.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/lunchtime", "root", "");
-
-            ResultSet rs= cn.createStatement().executeQuery("select * from user_order");
+            UserOrderDao ud= (UserOrderDao) Naming.lookup("rmi://localhost/HelloUserOrder");
+            ResultSet rs=ud.getUserOrder();
+//                        Class.forName("com.mysql.jdbc.Driver");
+//            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/lunchtime", "root", "");
+//
+//            ResultSet rs= cn.createStatement().executeQuery("select * from user_order");
             while(rs.next()){
                 oblist.add(new UserOrder(
                         rs.getInt("order_id"),
@@ -150,7 +150,11 @@ public class VendorDashboardController implements Initializable, Serializable {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (NotBoundException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
             e.printStackTrace();
         }
 

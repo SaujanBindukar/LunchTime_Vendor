@@ -7,6 +7,7 @@ public class UserOrder implements Serializable {
     public int order_id,user_id,food_id,quantity, total_price;
     public String status;
     public Date date;
+    private static final long serialVersionUID =1L;
 
     public UserOrder(int order_id, int user_id, int food_id, int quantity, int total_price, String status, Date date) {
         this.order_id = order_id;

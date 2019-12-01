@@ -6,6 +6,6 @@ import java.rmi.RemoteException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public interface UserOrderDao extends Remote,Serializable {
+public interface UserOrderDao extends Remote {
     ResultSet getUserOrder() throws RemoteException, SQLException;
 }
