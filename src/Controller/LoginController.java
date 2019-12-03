@@ -1,5 +1,7 @@
 package Controller;
 
+import com.jfoenix.controls.JFXPasswordField;
+import com.jfoenix.controls.JFXTextField;
 import dao.VendorDao;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -11,6 +13,7 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.sql.SQLException;
 
 public class LoginController {
 
@@ -18,21 +21,22 @@ public class LoginController {
     private AnchorPane login_pane;
 
     @FXML
-    private TextField txtEmail;
+    private JFXTextField txtEmail;
 
     @FXML
-    private PasswordField txtPassword;
+    private JFXPasswordField txtPassword;
 
     Alert a = new Alert(Alert.AlertType.NONE);
 
 
     public void checkUser() {
-        System.out.print("Login Button Pressed");
+        System.out.println("Login Button Pressed");
         String emailText = txtEmail.getText();
         String passwordText = txtPassword.getText();
         System.out.println(emailText);
         System.out.println(passwordText);
         try {
+
             VendorDao vd= (VendorDao) Naming.lookup("rmi://localhost/HelloServer");
             Boolean rs = vd.checkVendor(txtEmail.getText(), txtPassword.getText());
 
@@ -50,7 +54,7 @@ public class LoginController {
                 }
             } catch (IOException ex) {
                 System.out.print(ex);
-                System.out.print("Database not connected1");
+
             }
 
 
@@ -66,6 +70,9 @@ public class LoginController {
         } catch (NotBoundException e) {
             e.printStackTrace();
         } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+        catch (Exception e){
             e.printStackTrace();
         }
 

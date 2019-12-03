@@ -6,6 +6,8 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 public interface StudentDao extends Remote {
-    void addVendor(Student s) throws RemoteException;
+    void updateUser(String firstName, String lastName,
+                    String email, String phoneNumber,
+                    int currentBalance, int addBalance, int userId) throws RemoteException;
 
 }

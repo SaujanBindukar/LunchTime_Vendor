@@ -1,12 +1,18 @@
 package Controller;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDatePicker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.chart.BarChart;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TableColumn;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
+import java.util.Date;
+
 
 public class SalesDetailController{
 
@@ -31,6 +37,35 @@ public class SalesDetailController{
 
     @FXML
     private ImageView myProfile;
+
+    @FXML
+    private BarChart<?, ?> expenseGraph;
+
+    @FXML
+    private JFXDatePicker initialDate;
+
+    @FXML
+    private JFXDatePicker finalDate;
+
+    @FXML
+    private JFXButton btnGo;
+
+    @FXML
+    private TableColumn<?, ?> date;
+
+    @FXML
+    private TableColumn<?, ?> totalSales;
+
+    @FXML
+    void btnGo(MouseEvent event) {
+
+        System.out.println(initialDate.getValue());
+        System.out.println(finalDate.getValue());
+
+
+
+
+    }
 
     @FXML
     void btnLogout(MouseEvent event) throws IOException {

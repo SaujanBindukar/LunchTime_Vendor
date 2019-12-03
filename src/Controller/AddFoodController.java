@@ -15,6 +15,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.event.ActionEvent;
+
+import javax.sql.RowSet;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -25,10 +27,6 @@ import java.sql.*;
 import java.util.ResourceBundle;
 
 public class AddFoodController implements Initializable {
-    public AddFoodController(){
-
-
-    }
 
     @FXML
     private AnchorPane addFoodItemsPane;
@@ -65,44 +63,49 @@ public class AddFoodController implements Initializable {
 
     @FXML
     private TextField txtSearchFoodName;
+
     @FXML
     private TextField txtSearch;
 
     @FXML
     private JFXButton btnUpdate;
 
+    @FXML
+    private JFXButton btnSearch;
+
+    int foodId;
 
 
     ObservableList<FoodMenu> oblist = FXCollections.observableArrayList();
 
     Alert a = new Alert(Alert.AlertType.NONE);
 
+
     @FXML
-    void btnUpdate(MouseEvent event) throws IOException {
+    void btnUpdate(MouseEvent event) throws IOException, ClassNotFoundException {
 
-        System.out.print(txtFoodPrice.getText());;
-        try {
-            if(txtFoodName.getText().isEmpty() || txtFoodPrice.getText().isEmpty()){
-                a.setAlertType(Alert.AlertType.ERROR);
-                a.setContentText("Please fill all the fields");
-                a.show();
-            }
-            else{
-                FoodDao fd= (FoodDao) Naming.lookup("rmi://localhost/HelloFoodMenu");
-                fd.deleteMenu(txtFoodName.getText());
-                a.setAlertType(Alert.AlertType.INFORMATION);
-                a.setContentText("Delete Successfully");
-                a.show();
-                txtFoodName.clear();
-                txtFoodPrice.clear();
-                MenuTable.getItems().clear();
-                loadData();
+        try{
 
-            }
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/lunchtime", "root", "");
+            String sql= "UPDATE menu SET food_name= ?, food_price=? WHERE food_id =?";
+            PreparedStatement ps =cn.prepareStatement(sql);
+            ps.setString(1, food_name.getText());
+            ps.setInt(2, Integer.parseInt(food_price.getText()));
+            ps.setInt(3, foodId);
+            ps.executeUpdate();
 
-        } catch (NotBoundException e) {
+            a.setAlertType(Alert.AlertType.INFORMATION);
+            a.setContentText(" Updated Successfully");
+            a.show();
 
         }
+        catch (Exception e){
+            System.out.print(e);
+        }
+
+
+
 
     }
 
@@ -161,6 +164,8 @@ public class AddFoodController implements Initializable {
                 fm.setFood_name(txtFoodName.getText());
                 fm.setFood_price(Integer.parseInt(txtFoodPrice.getText()));
                 sd.addMenu(fm);
+
+
                 a.setAlertType(Alert.AlertType.INFORMATION);
                 a.setContentText("Successfully Added");
                 a.show();
@@ -188,6 +193,40 @@ public class AddFoodController implements Initializable {
     }
 
     @FXML
+    void btnDelete(MouseEvent event) {
+
+        try {
+            if(txtFoodName.getText().isEmpty() || txtFoodPrice.getText().isEmpty()){
+                a.setAlertType(Alert.AlertType.ERROR);
+                a.setContentText("Please fill all the fields");
+                a.show();
+            }
+            else{
+                FoodDao fd= (FoodDao) Naming.lookup("rmi://localhost/HelloFoodMenu");
+                fd.deleteMenu(txtFoodName.getText());
+                a.setAlertType(Alert.AlertType.INFORMATION);
+                a.setContentText("Delete Successfully");
+                a.show();
+                txtFoodName.clear();
+                txtFoodPrice.clear();
+                MenuTable.getItems().clear();
+                loadData();
+
+            }
+
+        } catch (NotBoundException e) {
+
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+    @FXML
     void btnSearch(ActionEvent event) {
 
         try{
@@ -195,7 +234,7 @@ public class AddFoodController implements Initializable {
 //            FoodDao sd= (FoodDao) Naming.lookup("rmi://localhost/HelloFoodMenu");
 //            ResultSet rs= sd.getFoodByName(Integer.parseInt(txtSearch.getText()));
 
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/lunchtime", "root", "");
             String sql = "SELECT * FROM menu WHERE food_name=?";
             PreparedStatement ps = cn.prepareStatement(sql);
@@ -226,11 +265,11 @@ public class AddFoodController implements Initializable {
     }
     void loadData(){
         try {
-           FoodDao fd= (FoodDao) Naming.lookup("rmi://localhost/HelloFoodMenu");
-           ResultSet rs=fd.showMenu();
-//            Class.forName("com.mysql.jdbc.Driver");
-//            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/lunchtime", "root", "");
-//            ResultSet rs= cn.createStatement().executeQuery("select * from menu");
+           //FoodDao fd= (FoodDao) Naming.lookup("rmi://localhost/HelloFoodMenu");
+           //ResultSet rs=  fd.showMenu();
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/lunchtime", "root", "");
+            ResultSet rs= cn.createStatement().executeQuery("select * from menu");
             while(rs.next()){
                 oblist.add(new FoodMenu(
                         rs.getInt("food_id"),
@@ -245,17 +284,14 @@ public class AddFoodController implements Initializable {
             MenuTable.setOnMouseClicked(e ->{
                 txtFoodName.setText(MenuTable.getSelectionModel().getSelectedItem().getFood_name());
                 txtFoodPrice.setText(String.valueOf(MenuTable.getSelectionModel().getSelectedItem().getFood_price()));
+                foodId= Integer.parseInt(String.valueOf(MenuTable.getSelectionModel().getSelectedItem().getFood_id()));
 
 
 
             });
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (RemoteException e) {
-            e.printStackTrace();
-        } catch (NotBoundException e) {
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
 

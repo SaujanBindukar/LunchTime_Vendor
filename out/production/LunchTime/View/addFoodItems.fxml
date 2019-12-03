@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="addFoodItemsPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddFoodController">
+<AnchorPane fx:id="addFoodItemsPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddFoodController">
     <children>
         <ImageView fitHeight="82.0" fitWidth="193.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -88,7 +88,7 @@
                         <Font name="Arial Rounded MT Bold" size="14.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton layoutX="281.0" layoutY="363.0" prefHeight="41.0" prefWidth="112.0" style="-fx-background-color: red;" text="Delete" textFill="WHITE">
+                  <JFXButton fx:id="btnDelete" layoutX="281.0" layoutY="363.0" onMouseClicked="#btnDelete" prefHeight="41.0" prefWidth="112.0" style="-fx-background-color: red;" text="Delete" textFill="WHITE">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="14.0" />
                      </font>

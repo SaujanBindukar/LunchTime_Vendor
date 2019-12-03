@@ -1,19 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXDatePicker?>
-<?import javafx.scene.chart.BarChart?>
-<?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="userOrderPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.SalesDetailController">
+<AnchorPane fx:id="userOrderPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.TopupUserController">
     <children>
         <ImageView fitHeight="82.0" fitWidth="193.0" pickOnBounds="true" preserveRatio="true">
             <image>
@@ -35,39 +29,9 @@
                 <Font name="Arial Rounded MT Bold" size="18.0" />
             </font>
         </JFXButton>
-        <AnchorPane layoutY="87.0" prefHeight="515.0" prefWidth="1000.0" style="-fx-background-color: white;">
+        <AnchorPane layoutY="153.0" prefHeight="449.0" prefWidth="1000.0" style="-fx-background-color: white;">
          <children>
-            <BarChart fx:id="expenseGraph" layoutX="521.0" layoutY="13.0" prefHeight="453.0" prefWidth="456.0">
-              <xAxis>
-                <CategoryAxis side="BOTTOM" />
-              </xAxis>
-              <yAxis>
-                <NumberAxis side="LEFT" />
-              </yAxis>
-            </BarChart>
-            <Label layoutX="19.0" layoutY="28.0" text="From">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="254.0" layoutY="30.0" text="To">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="18.0" />
-               </font>
-            </Label>
-            <JFXButton fx:id="btnGo" layoutX="472.0" layoutY="29.0" onMouseClicked="#btnGo" style="-fx-background-color: #ff039e;" text="Go" textFill="WHITE">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="14.0" />
-               </font>
-            </JFXButton>
-            <TableView layoutX="73.0" layoutY="85.0" prefHeight="360.0" prefWidth="382.0">
-              <columns>
-                <TableColumn fx:id="date" prefWidth="188.0" text="Date" />
-                <TableColumn fx:id="totalSales" prefWidth="193.0" text="Total Sales" />
-              </columns>
-            </TableView>
-            <JFXDatePicker fx:id="initialDate" layoutX="73.0" layoutY="26.0" prefHeight="27.0" prefWidth="170.0" />
-            <JFXDatePicker fx:id="finalDate" layoutX="289.0" layoutY="27.0" prefHeight="27.0" prefWidth="170.0" />
+            <Text layoutX="274.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This is topup user screen" />
          </children></AnchorPane>
         <JFXButton fx:id="btnTopUpUser" layoutX="640.0" layoutY="-1.0" onMouseClicked="#btnTopUpUser" prefHeight="83.0" prefWidth="146.0" style="-fx-background-color: white;" text="Topup User">
             <font>

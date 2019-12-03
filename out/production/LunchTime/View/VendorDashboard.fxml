@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
@@ -10,7 +12,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="userOrderPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.VendorDashboardController">
+<AnchorPane fx:id="userOrderPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.VendorDashboardController">
    <children>
       <ImageView fitHeight="82.0" fitWidth="193.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -34,32 +36,49 @@
       </JFXButton>
       <AnchorPane layoutY="153.0" prefHeight="449.0" prefWidth="1000.0" style="-fx-background-color: white;">
          <children>
-            <TableView fx:id="orderTable" layoutX="313.0" prefHeight="443.0" prefWidth="1000.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="5.0">
+            <TableView fx:id="orderTable" layoutX="12.0" layoutY="65.0" prefHeight="384.0" prefWidth="970.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="12.0" AnchorPane.rightAnchor="18.0" AnchorPane.topAnchor="65.0">
               <columns>
-                <TableColumn fx:id="order_id" minWidth="-Infinity" prefWidth="93.99999749660492" text="Order ID" />
-                <TableColumn fx:id="date" prefWidth="84.66669464111328" text="Date" />
-                  <TableColumn fx:id="user_id" prefWidth="75.0" text="User ID" />
-                  <TableColumn fx:id="food_id" prefWidth="75.0" text="Food ID" />
-                  <TableColumn fx:id="quantity" prefWidth="75.0" text="Quantity" />
-                  <TableColumn fx:id="total_price" prefWidth="75.0" text="Total Price" />
-                  <TableColumn fx:id="status" prefWidth="75.0" text="Status" />
+                <TableColumn fx:id="order_id" minWidth="-Infinity" text="Order ID" />
+                <TableColumn fx:id="date" prefWidth="178.0" text="Date &amp; Time" />
+                  <TableColumn fx:id="user_name" prefWidth="137.09716796875" text="User Name" />
+                  <TableColumn fx:id="food_name" prefWidth="163.66720581054688" text="Food Name" />
+                  <TableColumn fx:id="quantity" prefWidth="135.55899047851562" text="Quantity" />
+                  <TableColumn fx:id="total_price" prefWidth="157.31524658203125" text="Total Price" />
+                  <TableColumn fx:id="status" prefWidth="140.06683349609375" text="Status" />
               </columns>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
             </TableView>
+            <JFXDatePicker fx:id="initialDate" layoutX="94.0" layoutY="13.0" prefHeight="38.0" prefWidth="266.0" />
+            <Label layoutX="14.0" layoutY="19.0" text="From">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="390.0" layoutY="19.0" text="To">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </Label>
+            <JFXDatePicker fx:id="finalDate" layoutX="446.0" layoutY="13.0" prefHeight="38.0" prefWidth="266.0" />
+            <JFXButton fx:id="btnGo" layoutX="732.0" layoutY="8.0" onMouseClicked="#btnGo" prefHeight="51.0" prefWidth="182.0" style="-fx-background-color: green;" text="Go" textFill="#f8f8f8">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
          </children></AnchorPane>
-      <JFXTextField focusColor="WHITE" layoutX="11.0" layoutY="101.0" prefHeight="51.0" prefWidth="764.0" promptText="Search By Name" style="-fx-border-width: 1px; -fx-border-color: black;" unFocusColor="WHITE">
+      <JFXTextField fx:id="txtSearch" focusColor="WHITE" layoutX="11.0" layoutY="101.0" onKeyReleased="#loadUserOrders" prefHeight="51.0" prefWidth="702.0" promptText="Search By User Name" style="-fx-border-width: 1px; -fx-border-color: black;" unFocusColor="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="14.0" />
          </font>
       </JFXTextField>
-      <JFXButton layoutX="791.0" layoutY="101.0" prefHeight="51.0" prefWidth="185.0" style="-fx-background-color: #d11d53;" text="Search" textAlignment="JUSTIFY" textFill="WHITE">
+      <JFXButton fx:id="btnSearch" layoutX="731.0" layoutY="101.0" onMouseClicked="#btnSearch" prefHeight="51.0" prefWidth="185.0" style="-fx-background-color: #d11d53;" text="Search" textAlignment="JUSTIFY" textFill="WHITE">
          <font>
             <Font name="Arial Rounded MT Bold" size="24.0" />
          </font>
          <graphic>
-            <ImageView fitHeight="28.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="28.0" fitWidth="41.0" onMouseClicked="#btnSearch" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../images/search.png" />
                </image>
@@ -79,6 +98,11 @@
       <ImageView fx:id="myProfile" fitHeight="67.0" fitWidth="74.0" layoutX="909.0" layoutY="8.0" onMouseClicked="#myProfile" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../images/profile.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="btnRefresh" fitHeight="44.0" fitWidth="58.0" layoutX="929.0" layoutY="103.0" onMouseClicked="#btnRefresh" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/refresh.png" />
          </image>
       </ImageView>
    </children>

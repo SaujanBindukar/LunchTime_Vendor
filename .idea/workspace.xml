@@ -2,23 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/images/refresh.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jfoenix_8_0_8.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_5_1_23_bin.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LunchTime.iml" beforeDir="false" afterPath="$PROJECT_DIR$/LunchTime.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/LunchTime/Controller/AddFoodController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/Controller/AddFoodController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LunchTime/Controller/MyProfileController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/Controller/MyProfileController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LunchTime/Controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/Controller/LoginController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LunchTime/Controller/SalesDetailController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/Controller/SalesDetailController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LunchTime/Controller/VendorDashboardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/Controller/VendorDashboardController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/LunchTime/View/VendorDashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/View/VendorDashboard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/LunchTime/View/addFoodItems.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/View/addFoodItems.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LunchTime/View/myProfile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/View/myProfile.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LunchTime/dao/FoodDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/dao/FoodDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LunchTime/View/salesDetail.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/View/salesDetail.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LunchTime/bll/FoodMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/bll/FoodMenu.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LunchTime/bll/UserOrder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/bll/UserOrder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/AddFoodController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AddFoodController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/RegisterController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/RegisterController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/SalesDetailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SalesDetailController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/TopupUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TopupUserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/VendorDashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/VendorDashboardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/VendorDashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/VendorDashboard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/addFoodItems.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/addFoodItems.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/salesDetail.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/salesDetail.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/topupUser.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/topupUser.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/bll/FoodMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bll/FoodMenu.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bll/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bll/Student.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/bll/UserOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bll/UserOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/FoodDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/FoodDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/UserOrderDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/UserOrderDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/StudentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/StudentDao.java" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -93,6 +106,11 @@
   <component name="ProjectReloadState">
     <option name="STATE" value="0" />
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
@@ -106,8 +124,8 @@
     <property name="dynamic.classpath" value="false" />
     <property name="last_opened_file_path" value="$USER_HOME$/Downloads/jfoenix-8.0.8.jar!/" />
     <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
   </component>
   <component name="RecentsManager">
@@ -119,19 +137,13 @@
       <recent name="C:\Users\sauza\Desktop\JavaProject\LunchTime\src\VendorDashboard" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
   <component name="RunManager" selected="Application.Main">
+    <configuration default="true" type="Applet">
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <option name="VMOptions" />
       <option name="arguments" />
@@ -143,12 +155,6 @@
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
       <Port>5050</Port>
-    </configuration>
-    <configuration default="true" type="Applet">
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
     </configuration>
     <configuration name="Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="Main" />
@@ -217,6 +223,18 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -251,6 +269,84 @@
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="533" y="141" key="#com.intellij.ide.util.MemberChooser" timestamp="1575391335491">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="533" y="141" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900@0.0.1440.900" timestamp="1575391335491" />
+    <state x="570" y="346" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1575254860940">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="570" y="346" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.0.1440.900@0.0.1440.900" timestamp="1575254860940" />
+    <state x="609" y="160" key="#xdebugger.evaluate" timestamp="1575255787380">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="609" y="160" key="#xdebugger.evaluate/0.0.1440.900@0.0.1440.900" timestamp="1575255787380" />
+    <state width="1398" height="213" key="GridCell.Tab.0.bottom" timestamp="1575395391678">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="213" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1575395391678" />
+    <state width="1398" height="303" key="GridCell.Tab.0.bottom/0.23.1440.806@0.23.1440.806" timestamp="1575256926265" />
+    <state width="1398" height="213" key="GridCell.Tab.0.bottom/0.23.1440.826@0.23.1440.826" timestamp="1575393723464" />
+    <state width="1398" height="213" key="GridCell.Tab.0.center" timestamp="1575395391677">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="213" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1575395391677" />
+    <state width="1398" height="303" key="GridCell.Tab.0.center/0.23.1440.806@0.23.1440.806" timestamp="1575256926264" />
+    <state width="1398" height="213" key="GridCell.Tab.0.center/0.23.1440.826@0.23.1440.826" timestamp="1575393723463" />
+    <state width="1398" height="213" key="GridCell.Tab.0.left" timestamp="1575395391676">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="213" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1575395391676" />
+    <state width="1398" height="303" key="GridCell.Tab.0.left/0.23.1440.806@0.23.1440.806" timestamp="1575256926264" />
+    <state width="1398" height="213" key="GridCell.Tab.0.left/0.23.1440.826@0.23.1440.826" timestamp="1575393723462" />
+    <state width="1398" height="213" key="GridCell.Tab.0.right" timestamp="1575395391678">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="213" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1575395391678" />
+    <state width="1398" height="303" key="GridCell.Tab.0.right/0.23.1440.806@0.23.1440.806" timestamp="1575256926265" />
+    <state width="1398" height="213" key="GridCell.Tab.0.right/0.23.1440.826@0.23.1440.826" timestamp="1575393723464" />
+    <state width="1398" height="303" key="GridCell.Tab.1.bottom" timestamp="1575346708445">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="303" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1575346708445" />
+    <state width="1398" height="303" key="GridCell.Tab.1.bottom/0.23.1440.806@0.23.1440.806" timestamp="1575256926267" />
+    <state width="1398" height="303" key="GridCell.Tab.1.center" timestamp="1575346708444">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="303" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1575346708444" />
+    <state width="1398" height="303" key="GridCell.Tab.1.center/0.23.1440.806@0.23.1440.806" timestamp="1575256926266" />
+    <state width="1398" height="303" key="GridCell.Tab.1.left" timestamp="1575346708443">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="303" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1575346708443" />
+    <state width="1398" height="303" key="GridCell.Tab.1.left/0.23.1440.806@0.23.1440.806" timestamp="1575256926266" />
+    <state width="1398" height="303" key="GridCell.Tab.1.right" timestamp="1575346708444">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="1398" height="303" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1575346708444" />
+    <state width="1398" height="303" key="GridCell.Tab.1.right/0.23.1440.806@0.23.1440.806" timestamp="1575256926266" />
+    <state x="208" y="31" key="SettingsEditor" timestamp="1575255091228">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="208" y="31" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1575255091228" />
+    <state x="509" y="374" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1575345711456">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="509" y="374" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1440.900@0.0.1440.900" timestamp="1575345711456" />
+    <state x="386" y="212" width="667" height="476" key="find.popup" timestamp="1575256447737">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="386" y="212" width="667" height="476" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1575256447737" />
+    <state width="600" height="424" key="javadoc.popup" timestamp="1575296818089">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state width="600" height="424" key="javadoc.popup/0.0.1440.900@0.0.1440.900" timestamp="1575296818089" />
+    <state x="385" y="173" width="670" height="676" key="search.everywhere.popup" timestamp="1575289820401">
+      <screen x="0" y="23" width="1440" height="826" />
+    </state>
+    <state x="385" y="173" width="670" height="676" key="search.everywhere.popup/0.23.1440.826@0.23.1440.826" timestamp="1575289820401" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

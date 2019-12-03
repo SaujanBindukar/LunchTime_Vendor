@@ -1,22 +1,30 @@
 package bll;
 
-import java.io.Serializable;
+
+
+import java.sql.Timestamp;
 import java.util.Date;
 
-public class UserOrder implements Serializable {
-    public int order_id,user_id,food_id,quantity, total_price;
-    public String status;
+public class UserOrder implements java.io.Serializable {
+    public int order_id,quantity, total_price;
     public Date date;
-    private static final long serialVersionUID =1L;
+    public String user_name, food_name, status;
+    public static final long serialVersionUID =2L;
 
-    public UserOrder(int order_id, int user_id, int food_id, int quantity, int total_price, String status, Date date) {
+    public UserOrder(int order_id,int quantity, int total_price,
+                     String status, Date date, String user_name, String food_name
+    ) {
         this.order_id = order_id;
-        this.user_id = user_id;
-        this.food_id = food_id;
+        this.date = date;
+        this.user_name= user_name;
+        this.food_name= food_name;
         this.quantity = quantity;
         this.total_price = total_price;
         this.status = status;
-        this.date = date;
+
+
+
+
     }
 
     public int getOrder_id() {
@@ -27,21 +35,7 @@ public class UserOrder implements Serializable {
         this.order_id = order_id;
     }
 
-    public int getUser_id() {
-        return user_id;
-    }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
-
-    public int getFood_id() {
-        return food_id;
-    }
-
-    public void setFood_id(int food_id) {
-        this.food_id = food_id;
-    }
 
     public int getQuantity() {
         return quantity;
@@ -59,6 +53,30 @@ public class UserOrder implements Serializable {
         this.total_price = total_price;
     }
 
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getUser_name() {
+        return user_name;
+    }
+
+    public void setUser_name(String user_name) {
+        this.user_name = user_name;
+    }
+
+    public String getFood_name() {
+        return food_name;
+    }
+
+    public void setFood_name(String food_name) {
+        this.food_name = food_name;
+    }
+
     public String getStatus() {
         return status;
     }
@@ -67,11 +85,5 @@ public class UserOrder implements Serializable {
         this.status = status;
     }
 
-    public Date getDate() {
-        return date;
-    }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
 }

@@ -9,6 +9,25 @@ public class Student implements Serializable {
     private String phoneNumber;
     private String email;
     private String password;
+    private int balance;
+
+    public Student(int id, String firstName, String lastName, String phoneNumber, int balance, String email) {
+        this.id= id;
+        this.firstName=firstName;
+        this.lastName=lastName;
+        this.phoneNumber=phoneNumber;
+        this.balance=balance;
+        this.email=email;
+
+    }
+
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
 
     public int getId() {
         return id;
