@@ -5,14 +5,24 @@ import java.io.Serializable;
 public class FoodMenu implements Serializable {
     private int food_id, food_price;
     private String food_name;
+    private String picture;
     public static final long serialVersionUID =1L;
 
 
 
-    public FoodMenu(int food_id, String food_name, int food_price) {
+    public FoodMenu(int food_id, String food_name, int food_price, String picture) {
         this.food_id=food_id;
         this.food_name=food_name;
         this.food_price=food_price;
+        this.picture = picture;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     public FoodMenu() {
@@ -43,4 +53,6 @@ public class FoodMenu implements Serializable {
     public void setFood_name(String food_name) {
         this.food_name = food_name;
     }
+
+
 }

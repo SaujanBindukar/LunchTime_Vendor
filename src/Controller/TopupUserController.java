@@ -90,19 +90,19 @@ public class TopupUserController  implements  Initializable{
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/lunchtime", "root", "");
-            String sql = "select user_id, FirstName, LastName, PhoneNumber, PhoneNumber, Email, Balance from user where FirstName=?";
+            String sql = "select id, first_name,  last_name, phone_number, email, balance from user where first_name=?";
             PreparedStatement ps = cn.prepareStatement(sql);
             ps.setString(1, txtSearch.getText() );
             ResultSet rs = ps.executeQuery();
             userTable.getItems().clear();
             while(rs.next()){
                 oblist.add(new Student(
-                        rs.getInt("user_id"),
-                        rs.getString("FirstName"),
-                        rs.getString("LastName"),
-                        rs.getString("PhoneNumber"),
-                        rs.getInt("Balance"),
-                        rs.getString("Email")
+                        rs.getInt("id"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("phone_number"),
+                        rs.getInt("balance"),
+                        rs.getString("email")
                 ));
             }
             if(txtSearch.getText().isEmpty()){
@@ -226,15 +226,15 @@ public class TopupUserController  implements  Initializable{
 
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/lunchtime", "root", "");
-            ResultSet rs= cn.createStatement().executeQuery("select user_id, FirstName, LastName, PhoneNumber, PhoneNumber, Email, Balance from user");
+            ResultSet rs= cn.createStatement().executeQuery("select id, first_name, last_name, phone_number,  email, balance from user");
             while(rs.next()){
                 oblist.add(new Student(
-                        rs.getInt("user_id"),
-                        rs.getString("FirstName"),
-                        rs.getString("LastName"),
-                        rs.getString("PhoneNumber"),
-                        rs.getInt("Balance"),
-                        rs.getString("Email")
+                        rs.getInt("id"),
+                        rs.getString("first_name"),
+                        rs.getString("last_name"),
+                        rs.getString("phone_number"),
+                        rs.getInt("balance"),
+                        rs.getString("email")
                         ));
             }
             id.setCellValueFactory(new PropertyValueFactory<>("id"));

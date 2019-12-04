@@ -73,6 +73,12 @@ public class AddFoodController implements Initializable {
     @FXML
     private JFXButton btnSearch;
 
+    @FXML
+    private TextArea foodPictureField;
+
+    @FXML
+    private TableColumn<FoodMenu, String> food_picture;
+
     int foodId;
 
 
@@ -86,14 +92,16 @@ public class AddFoodController implements Initializable {
 
         try{
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/lunchtime", "root", "");
-            String sql= "UPDATE menu SET food_name= ?, food_price=? WHERE food_id =?";
-            PreparedStatement ps =cn.prepareStatement(sql);
-            ps.setString(1, food_name.getText());
-            ps.setInt(2, Integer.parseInt(food_price.getText()));
-            ps.setInt(3, foodId);
-            ps.executeUpdate();
+            FoodDao fd= (FoodDao) Naming.lookup("rmi://localhost/HelloFoodMenu");
+            fd.updateMenu(txtFoodName.getText(),Integer.parseInt(txtFoodPrice.getText()), foodId, food_picture.getText());
+
+            MenuTable.getItems().clear();
+            loadData();
+            txtFoodName.clear();
+            txtFoodPrice.clear();
+            foodPictureField.clear();
+            foodPictureField.clear();
+
 
             a.setAlertType(Alert.AlertType.INFORMATION);
             a.setContentText(" Updated Successfully");
@@ -161,6 +169,7 @@ public class AddFoodController implements Initializable {
 
                 FoodDao sd= (FoodDao) Naming.lookup("rmi://localhost/HelloFoodMenu");
                 FoodMenu fm= new FoodMenu();
+                fm.setPicture(foodPictureField.getText());
                 fm.setFood_name(txtFoodName.getText());
                 fm.setFood_price(Integer.parseInt(txtFoodPrice.getText()));
                 sd.addMenu(fm);
@@ -173,6 +182,8 @@ public class AddFoodController implements Initializable {
                 loadData();
                 txtFoodName.clear();
                 txtFoodPrice.clear();
+                foodPictureField.clear();
+                foodPictureField.clear();
 
 
             }catch (Exception e){
@@ -246,7 +257,8 @@ public class AddFoodController implements Initializable {
                 oblist.add(new FoodMenu(
                         rs.getInt("food_id"),
                         rs.getString("food_name"),
-                        rs.getInt("food_price")));
+                        rs.getInt("food_price"),
+                        rs.getString("picture")));
 
             }
 
@@ -274,17 +286,20 @@ public class AddFoodController implements Initializable {
                 oblist.add(new FoodMenu(
                         rs.getInt("food_id"),
                         rs.getString("food_name"),
-                        rs.getInt("food_price")));
+                        rs.getInt("food_price"),
+                        rs.getString("picture")));
             }
             food_id.setCellValueFactory(new PropertyValueFactory<>("food_id"));
             food_name.setCellValueFactory(new PropertyValueFactory<>("food_name"));
             food_price.setCellValueFactory(new PropertyValueFactory<>("food_price"));
+            food_picture.setCellValueFactory(new PropertyValueFactory<>("picture"));
             MenuTable.setItems(oblist);
 
             MenuTable.setOnMouseClicked(e ->{
                 txtFoodName.setText(MenuTable.getSelectionModel().getSelectedItem().getFood_name());
                 txtFoodPrice.setText(String.valueOf(MenuTable.getSelectionModel().getSelectedItem().getFood_price()));
                 foodId= Integer.parseInt(String.valueOf(MenuTable.getSelectionModel().getSelectedItem().getFood_id()));
+                foodPictureField.setText(String.valueOf(MenuTable.getSelectionModel().getSelectedItem().getPicture()));
 
 
 

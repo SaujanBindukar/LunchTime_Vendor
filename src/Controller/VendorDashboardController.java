@@ -1,6 +1,7 @@
 package Controller;
 import bll.UserOrder;
 import com.jfoenix.controls.*;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -108,22 +109,17 @@ public class VendorDashboardController implements Initializable {
         LocalDate initialDateValue= initialDate.getValue();
         LocalDate finalDateValue= finalDate.getValue();
         System.out.println(Date.valueOf(initialDateValue));
-        System.out.println(Date.valueOf(finalDateValue));
+        System.out.println(finalDateValue);
         try {
 
 
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/lunchtime", "root", "");
-            String sql = "select user_order.order_id,user_order.quantity, user_order.total_price,user_order.status,user_order.date, menu.food_name," +
-                    " user.FirstName, user.LastName" +
-                    " FROM user_order " +
-                    "INNER JOIN menu ON user_order.food_id= menu.food_id " +
-                    "INNER JOIN user ON user_order.user_id=user.user_id " +
-                    "where date BETWEEN '2019-11-08' and '2019-12-2' ";
+            String sql = "select user_order.order_id,user_order.quantity, user_order.total_price,user_order.status,user_order.date, menu.food_name, user.first_name FROM user_order INNER JOIN menu ON user_order.food_id= menu.food_id INNER JOIN user ON user_order.id=user.id where date='2019-12-2'";
 
             PreparedStatement ps = cn.prepareStatement(sql);
-            //ps.setDate(1, Date.valueOf(initialDateValue));
-            //ps.setDate(2, Date.valueOf(finalDateValue));
+            //ps.setString(1, String.valueOf(initialDateValue));
+            //ps.setString(2, String.valueOf(finalDateValue));
             ResultSet rs = ps.executeQuery();
             orderTable.getItems().clear();
             while(rs.next()){
@@ -133,7 +129,7 @@ public class VendorDashboardController implements Initializable {
                         rs.getInt("total_price"),
                         rs.getString("status"),
                         rs.getDate("date"),
-                        rs.getString("FirstName"),
+                        rs.getString("first_name"),
                         rs.getString("food_name"))
                 );
 
@@ -162,11 +158,11 @@ public class VendorDashboardController implements Initializable {
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/lunchtime", "root", "");
             String sql = "select user_order.order_id ,user_order.quantity, user_order.total_price," +
                     " user_order.status,user_order.date, menu.food_name," +
-                    " user.FirstName, user.LastName " +
+                    " user.first_name, user.last_name " +
                     "FROM user_order " +
                     "INNER JOIN menu ON user_order.food_id= menu.food_id " +
-                    "INNER JOIN user ON user_order.user_id=user.user_id " +
-                    "where FirstName=?";
+                    "INNER JOIN user ON user_order.id=user.id " +
+                    "where first_name=?";
 
             PreparedStatement ps = cn.prepareStatement(sql);
             ps.setString(1, txtSearch.getText() );
@@ -180,7 +176,7 @@ public class VendorDashboardController implements Initializable {
                         rs.getInt("total_price"),
                         rs.getString("status"),
                         rs.getDate("date"),
-                        rs.getString("FirstName"),
+                        rs.getString("first_name"),
                         rs.getString("food_name"))
                 );
 
@@ -253,7 +249,12 @@ public class VendorDashboardController implements Initializable {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/lunchtime", "root", "");
             ResultSet rs= cn.createStatement().executeQuery(
-                    "select user_order.order_id,user_order.quantity,user_order.date,  user_order.total_price, user_order.status, menu.food_name, user.FirstName, user.LastName FROM user_order INNER JOIN menu ON user_order.food_id= menu.food_id INNER JOIN user ON user_order.user_id=user.user_id where (date= CURRENT_DATE)");
+                    "select user_order.order_id,user_order.quantity,user_order.date, " +
+                            " user_order.total_price, user_order.status, menu.food_name, " +
+                            "user.first_name, user.last_name " +
+                            "FROM user_order " +
+                            "INNER JOIN menu ON user_order.food_id= menu.food_id " +
+                            "INNER JOIN user ON user_order.id=user.id");
             while(rs.next())
             {
                 oblist.add(new UserOrder(
@@ -262,7 +263,7 @@ public class VendorDashboardController implements Initializable {
                         rs.getInt("total_price"),
                         rs.getString("status"),
                         rs.getDate("date"),
-                        rs.getString("FirstName"),
+                        rs.getString("first_name"),
                         rs.getString("food_name"))
                 );
 
@@ -287,7 +288,8 @@ public class VendorDashboardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadOrder(); //load the user_order in the table
+        Platform.runLater(this::loadOrder);
+         //load the user_order in the table
 
     }
 }

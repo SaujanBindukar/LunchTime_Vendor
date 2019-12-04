@@ -51,9 +51,10 @@
          <children>
             <TableView fx:id="MenuTable" layoutX="473.0" layoutY="12.0" prefHeight="495.0" prefWidth="491.0">
               <columns>
-                <TableColumn fx:id="food_id" prefWidth="114.00006103515625" text="Food Id" />
-                <TableColumn fx:id="food_name" minWidth="0.0" prefWidth="264.00006103515625" text="Food Name" />
-                  <TableColumn fx:id="food_price" prefWidth="109.99993896484375" text="Food Price" />
+                <TableColumn fx:id="food_id" prefWidth="57.0" text="Food Id" />
+                <TableColumn fx:id="food_name" minWidth="0.0" prefWidth="143.0" text="Food Name" />
+                  <TableColumn fx:id="food_price" prefWidth="126.0" text="Food Price" />
+                  <TableColumn fx:id="food_picture" prefWidth="163.0" text="Food Picture" />
               </columns>
             </TableView>
             <JFXTextField fx:id="txtSearchFoodName" focusColor="#eb1818" labelFloat="true" layoutX="38.0" layoutY="14.0" onKeyReleased="#loadFoodMenu" prefHeight="41.0" prefWidth="275.0" promptText="Search By Food Name" style="-fx-border-color: black;" unFocusColor="WHITE">
@@ -93,7 +94,7 @@
                         <Font name="Arial Rounded MT Bold" size="14.0" />
                      </font>
                   </JFXButton>
-                  <TextArea layoutX="12.0" layoutY="147.0" prefHeight="191.0" prefWidth="385.0" promptText="Choose Image" style="-fx-border-color: black;">
+                  <TextArea fx:id="foodPictureField" layoutX="12.0" layoutY="147.0" prefHeight="191.0" prefWidth="385.0" promptText="Choose Image" style="-fx-border-color: black;">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="12.0" />
                      </font>
