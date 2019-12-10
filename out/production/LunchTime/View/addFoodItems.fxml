@@ -8,99 +8,106 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="addFoodItemsPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddFoodController">
-    <children>
-        <ImageView fitHeight="82.0" fitWidth="193.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../images/logo.jpg" />
-            </image>
-        </ImageView>
-        <JFXButton fx:id="btnUserOrder" layoutX="146.0" layoutY="-1.0" onAction="#btnUserOrder" prefHeight="83.0" prefWidth="146.0" style="-fx-background-color: white;" text="User Order">
-            <font>
-                <Font name="Arial Rounded MT Bold" size="18.0" />
-            </font>
-        </JFXButton>
-        <JFXButton fx:id="btnAddFood" layoutX="292.0" layoutY="-1.0" onAction="#btnAddFood" prefHeight="83.0" prefWidth="163.0" style="-fx-background-color: white;" text="Add Food Items">
-            <font>
-                <Font name="Arial Rounded MT Bold" size="18.0" />
-            </font>
-        </JFXButton>
-        <JFXButton fx:id="btnSalesDetails" layoutX="455.0" layoutY="-1.0" onMouseClicked="#btnSalesDetails" prefHeight="83.0" prefWidth="185.0" style="-fx-background-color: white;" text="View Sales Details">
-            <font>
-                <Font name="Arial Rounded MT Bold" size="18.0" />
-            </font>
-        </JFXButton>
-        <JFXButton fx:id="btnTopUpUser" layoutX="640.0" layoutY="-1.0" onMouseClicked="#btnTopUpUser" prefHeight="83.0" prefWidth="146.0" style="-fx-background-color: white;" text="Topup User">
-            <font>
-                <Font name="Arial Rounded MT Bold" size="18.0" />
-            </font>
-        </JFXButton>
-        <ImageView fx:id="btnLogout" fitHeight="42.0" fitWidth="38.0" layoutX="854.0" layoutY="23.0" onMouseClicked="#btnLogout" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../images/logout.png" />
-            </image>
-        </ImageView>
-        <ImageView fx:id="myProfile" fitHeight="67.0" fitWidth="74.0" layoutX="909.0" layoutY="8.0" onMouseClicked="#myProfile" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../images/profile.png" />
-            </image>
-        </ImageView>
-        <AnchorPane layoutY="82.0" prefHeight="520.0" prefWidth="1000.0" style="-fx-background-color: white;">
+
+<StackPane fx:id="rootStackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddFoodController">
+   <children>
+      <AnchorPane fx:id="addFoodItemsPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: white;">
          <children>
-            <TableView fx:id="MenuTable" layoutX="473.0" layoutY="12.0" prefHeight="495.0" prefWidth="491.0">
-              <columns>
-                <TableColumn fx:id="food_id" prefWidth="57.0" text="Food Id" />
-                <TableColumn fx:id="food_name" minWidth="0.0" prefWidth="143.0" text="Food Name" />
-                  <TableColumn fx:id="food_price" prefWidth="126.0" text="Food Price" />
-                  <TableColumn fx:id="food_picture" prefWidth="163.0" text="Food Picture" />
-              </columns>
-            </TableView>
-            <JFXTextField fx:id="txtSearchFoodName" focusColor="#eb1818" labelFloat="true" layoutX="38.0" layoutY="14.0" onKeyReleased="#loadFoodMenu" prefHeight="41.0" prefWidth="275.0" promptText="Search By Food Name" style="-fx-border-color: black;" unFocusColor="WHITE">
-               <font>
-                  <Font name="Arial Rounded MT Bold" size="13.0" />
-               </font>
-            </JFXTextField>
-            <JFXButton fx:id="btnSearch" layoutX="319.0" layoutY="14.0" onAction="#btnSearch" prefHeight="41.0" prefWidth="112.0" style="-fx-background-color: #ff039e;" text="Search" textFill="WHITE">
+            <ImageView fitHeight="82.0" fitWidth="193.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/logo.jpg" />
+               </image>
+            </ImageView>
+            <JFXButton fx:id="btnUserOrder" layoutX="146.0" layoutY="-1.0" onAction="#btnUserOrder" prefHeight="83.0" prefWidth="146.0" style="-fx-background-color: white;" text="User Order">
                <font>
                   <Font name="Arial Rounded MT Bold" size="18.0" />
                </font>
             </JFXButton>
-            <AnchorPane layoutX="26.0" layoutY="80.0" prefHeight="427.0" prefWidth="407.0" style="-fx-background-color: white;">
+            <JFXButton fx:id="btnAddFood" layoutX="292.0" layoutY="-1.0" onAction="#btnAddFood" prefHeight="83.0" prefWidth="163.0" style="-fx-background-color: white;" text="Add Food Items">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnSalesDetails" layoutX="455.0" layoutY="-1.0" onMouseClicked="#btnSalesDetails" prefHeight="83.0" prefWidth="185.0" style="-fx-background-color: white;" text="View Sales Details">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btnTopUpUser" layoutX="640.0" layoutY="-1.0" onMouseClicked="#btnTopUpUser" prefHeight="83.0" prefWidth="146.0" style="-fx-background-color: white;" text="Topup User">
+               <font>
+                  <Font name="Arial Rounded MT Bold" size="18.0" />
+               </font>
+            </JFXButton>
+            <ImageView fx:id="btnLogout" fitHeight="42.0" fitWidth="38.0" layoutX="854.0" layoutY="23.0" onMouseClicked="#btnLogout" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/logout.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="myProfile" fitHeight="67.0" fitWidth="74.0" layoutX="909.0" layoutY="8.0" onMouseClicked="#myProfile" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/profile.png" />
+               </image>
+            </ImageView>
+            <AnchorPane layoutY="82.0" prefHeight="520.0" prefWidth="1000.0" style="-fx-background-color: white;">
                <children>
-                  <JFXTextField fx:id="txtFoodName" focusColor="#eb1818" labelFloat="true" layoutX="12.0" layoutY="20.0" prefHeight="41.0" prefWidth="385.0" promptText="Food Name" style="-fx-border-color: black; -fx-background-color: white;" unFocusColor="WHITE">
+                  <TableView fx:id="MenuTable" layoutX="473.0" layoutY="12.0" prefHeight="495.0" prefWidth="491.0">
+                     <columns>
+                        <TableColumn fx:id="food_id" prefWidth="57.0" text="Food Id" />
+                        <TableColumn fx:id="food_name" minWidth="0.0" prefWidth="143.0" text="Food Name" />
+                        <TableColumn fx:id="food_price" prefWidth="126.0" text="Food Price" />
+                        <TableColumn fx:id="food_picture" prefWidth="163.0" text="Food Picture" />
+                     </columns>
+                  </TableView>
+                  <JFXTextField fx:id="txtSearchFoodName" focusColor="#eb1818" labelFloat="true" layoutX="38.0" layoutY="14.0" onKeyReleased="#loadFoodMenu" prefHeight="41.0" prefWidth="275.0" promptText="Search By Food Name" style="-fx-border-color: black;" unFocusColor="WHITE">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="13.0" />
                      </font>
                   </JFXTextField>
-                  <JFXTextField fx:id="txtFoodPrice" focusColor="#eb1818" labelFloat="true" layoutX="12.0" layoutY="90.0" prefHeight="41.0" prefWidth="385.0" promptText="Food Price" style="-fx-border-color: black; -fx-background-color: white;" unFocusColor="WHITE">
+                  <JFXButton fx:id="btnSearch" layoutX="319.0" layoutY="14.0" onAction="#btnSearch" prefHeight="41.0" prefWidth="112.0" style="-fx-background-color: #ff039e;" text="Search" textFill="WHITE">
                      <font>
-                        <Font name="Arial Rounded MT Bold" size="13.0" />
-                     </font>
-                  </JFXTextField>
-                  <JFXButton fx:id="btnSubmitMenu" layoutX="20.0" layoutY="363.0" onAction="#btnSubmitMenu" prefHeight="41.0" prefWidth="96.0" style="-fx-background-color: green;" text="Submit" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="14.0" />
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="btnUpdate" layoutX="145.0" layoutY="363.0" onMouseClicked="#btnUpdate" prefHeight="41.0" prefWidth="112.0" style="-fx-background-color: blue;" text="Update" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="14.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton fx:id="btnDelete" layoutX="281.0" layoutY="363.0" onMouseClicked="#btnDelete" prefHeight="41.0" prefWidth="112.0" style="-fx-background-color: red;" text="Delete" textFill="WHITE">
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="14.0" />
-                     </font>
-                  </JFXButton>
-                  <TextArea fx:id="foodPictureField" layoutX="12.0" layoutY="147.0" prefHeight="191.0" prefWidth="385.0" promptText="Choose Image" style="-fx-border-color: black;">
-                     <font>
-                        <Font name="Arial Rounded MT Bold" size="12.0" />
-                     </font>
-                  </TextArea>
+                  <AnchorPane layoutX="26.0" layoutY="80.0" prefHeight="427.0" prefWidth="407.0" style="-fx-background-color: white;">
+                     <children>
+                        <JFXTextField fx:id="txtFoodName" focusColor="#eb1818" labelFloat="true" layoutX="12.0" layoutY="20.0" prefHeight="41.0" prefWidth="385.0" promptText="Food Name" style="-fx-border-color: black; -fx-background-color: white;" unFocusColor="WHITE">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="13.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField fx:id="txtFoodPrice" focusColor="#eb1818" labelFloat="true" layoutX="12.0" layoutY="90.0" prefHeight="41.0" prefWidth="385.0" promptText="Food Price" style="-fx-border-color: black; -fx-background-color: white;" unFocusColor="WHITE">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="13.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXButton fx:id="btnSubmitMenu" layoutX="20.0" layoutY="363.0" onAction="#btnSubmitMenu" prefHeight="41.0" prefWidth="96.0" style="-fx-background-color: green;" text="Submit" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="14.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btnUpdate" layoutX="145.0" layoutY="363.0" onMouseClicked="#btnUpdate" prefHeight="41.0" prefWidth="112.0" style="-fx-background-color: blue;" text="Update" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="14.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton fx:id="btnDelete" layoutX="281.0" layoutY="363.0" onMouseClicked="#btnDelete" prefHeight="41.0" prefWidth="112.0" style="-fx-background-color: red;" text="Delete" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="14.0" />
+                           </font>
+                        </JFXButton>
+                        <TextArea fx:id="foodPictureField" layoutX="12.0" layoutY="147.0" prefHeight="191.0" prefWidth="385.0" promptText="Choose Image" style="-fx-border-color: black;">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="12.0" />
+                           </font>
+                        </TextArea>
+                     </children>
+                  </AnchorPane>
                </children>
             </AnchorPane>
-         </children></AnchorPane>
-    </children>
-</AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

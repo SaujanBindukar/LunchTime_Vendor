@@ -15,6 +15,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.event.ActionEvent;
+import javafx.scene.layout.StackPane;
 
 import javax.sql.RowSet;
 import java.io.IOException;
@@ -27,6 +28,9 @@ import java.sql.*;
 import java.util.ResourceBundle;
 
 public class AddFoodController implements Initializable {
+
+    @FXML
+    private StackPane rootStackPane;
 
     @FXML
     private AnchorPane addFoodItemsPane;
@@ -74,6 +78,9 @@ public class AddFoodController implements Initializable {
     private JFXButton btnSearch;
 
     @FXML
+    private JFXButton btnGo;
+
+    @FXML
     private TextArea foodPictureField;
 
     @FXML
@@ -85,23 +92,24 @@ public class AddFoodController implements Initializable {
     ObservableList<FoodMenu> oblist = FXCollections.observableArrayList();
 
     Alert a = new Alert(Alert.AlertType.NONE);
+    FoodDao fd= (FoodDao) Naming.lookup("rmi://localhost/HelloFoodMenu");
+
+    public AddFoodController() throws RemoteException, NotBoundException, MalformedURLException {
+    }
 
 
     @FXML
     void btnUpdate(MouseEvent event) throws IOException, ClassNotFoundException {
 
         try{
-
-            FoodDao fd= (FoodDao) Naming.lookup("rmi://localhost/HelloFoodMenu");
             fd.updateMenu(txtFoodName.getText(),Integer.parseInt(txtFoodPrice.getText()), foodId, food_picture.getText());
-
             MenuTable.getItems().clear();
             loadData();
+
             txtFoodName.clear();
             txtFoodPrice.clear();
             foodPictureField.clear();
             foodPictureField.clear();
-
 
             a.setAlertType(Alert.AlertType.INFORMATION);
             a.setContentText(" Updated Successfully");
@@ -120,29 +128,28 @@ public class AddFoodController implements Initializable {
 
     @FXML
     void btnLogout(MouseEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("../View/Login.fxml"));
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/Login.fxml"));
         addFoodItemsPane.getChildren().setAll(pane);
 
     }
 
     @FXML
     void btnSalesDetails(MouseEvent event) throws IOException {
-
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("../View/salesDetail.fxml"));
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/salesDetail.fxml"));
         addFoodItemsPane.getChildren().setAll(pane);
 
     }
 
     @FXML
     void myProfile(MouseEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("../View/myProfile.fxml"));
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/myProfile.fxml"));
         addFoodItemsPane.getChildren().setAll(pane);
 
     }
 
     @FXML
     void btnTopUpUser(MouseEvent event) throws IOException {
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("../View/topupUser.fxml"));
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/topupUser.fxml"));
         addFoodItemsPane.getChildren().setAll(pane);
 
 
@@ -167,13 +174,14 @@ public class AddFoodController implements Initializable {
         else{
             try{
 
-                FoodDao sd= (FoodDao) Naming.lookup("rmi://localhost/HelloFoodMenu");
+                //FoodDao sd= (FoodDao) Naming.lookup("rmi://localhost/HelloFoodMenu");
                 FoodMenu fm= new FoodMenu();
+
                 fm.setPicture(foodPictureField.getText());
                 fm.setFood_name(txtFoodName.getText());
                 fm.setFood_price(Integer.parseInt(txtFoodPrice.getText()));
-                sd.addMenu(fm);
 
+                fd.addMenu(fm);
 
                 a.setAlertType(Alert.AlertType.INFORMATION);
                 a.setContentText("Successfully Added");
@@ -184,15 +192,10 @@ public class AddFoodController implements Initializable {
                 txtFoodPrice.clear();
                 foodPictureField.clear();
                 foodPictureField.clear();
-
-
             }catch (Exception e){
                 System.out.print(e);
-
             }
-
         }
-
     }
     @FXML
     void loadFoodMenu(KeyEvent event) {
@@ -213,8 +216,9 @@ public class AddFoodController implements Initializable {
                 a.show();
             }
             else{
-                FoodDao fd= (FoodDao) Naming.lookup("rmi://localhost/HelloFoodMenu");
+                //FoodDao fd= (FoodDao) Naming.lookup("rmi://localhost/HelloFoodMenu");
                 fd.deleteMenu(txtFoodName.getText());
+
                 a.setAlertType(Alert.AlertType.INFORMATION);
                 a.setContentText("Delete Successfully");
                 a.show();
@@ -222,35 +226,20 @@ public class AddFoodController implements Initializable {
                 txtFoodPrice.clear();
                 MenuTable.getItems().clear();
                 loadData();
-
             }
-
-        } catch (NotBoundException e) {
-
         } catch (RemoteException e) {
             e.printStackTrace();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
         }
-
-
     }
 
 
     @FXML
     void btnSearch(ActionEvent event) {
-
         try{
 
-//            FoodDao sd= (FoodDao) Naming.lookup("rmi://localhost/HelloFoodMenu");
-//            ResultSet rs= sd.getFoodByName(Integer.parseInt(txtSearch.getText()));
+            FoodDao sd= (FoodDao) Naming.lookup("rmi://localhost/HelloFoodMenu");
+            ResultSet rs= sd.getFoodByName(txtSearchFoodName.getText());
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/lunchtime", "root", "");
-            String sql = "SELECT * FROM menu WHERE food_name=?";
-            PreparedStatement ps = cn.prepareStatement(sql);
-            ps.setString(1, txtSearchFoodName.getText() );
-            ResultSet rs = ps.executeQuery();
             MenuTable.getItems().clear();
             while(rs.next()){
                 System.out.print(rs.getString("food_name"));
@@ -277,11 +266,8 @@ public class AddFoodController implements Initializable {
     }
     void loadData(){
         try {
-           //FoodDao fd= (FoodDao) Naming.lookup("rmi://localhost/HelloFoodMenu");
-           //ResultSet rs=  fd.showMenu();
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/lunchtime", "root", "");
-            ResultSet rs= cn.createStatement().executeQuery("select * from menu");
+           FoodDao fd= (FoodDao) Naming.lookup("rmi://localhost/HelloFoodMenu");
+           ResultSet rs=  fd.showMenu();
             while(rs.next()){
                 oblist.add(new FoodMenu(
                         rs.getInt("food_id"),
@@ -306,7 +292,11 @@ public class AddFoodController implements Initializable {
             });
         } catch (SQLException e) {
             e.printStackTrace();
-        } catch (ClassNotFoundException e) {
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (NotBoundException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
             e.printStackTrace();
         }
 
@@ -315,16 +305,14 @@ public class AddFoodController implements Initializable {
 
     @FXML
     void btnAddFood(ActionEvent event) throws IOException {
-        System.out.print("Add food button is pressed");
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("../View/addFoodItems.fxml"));
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/addFoodItems.fxml"));
         addFoodItemsPane.getChildren().setAll(pane);
 
     }
 
     @FXML
     void btnUserOrder(ActionEvent event) throws IOException {
-        System.out.print("Add food button is pressed");
-        AnchorPane pane = FXMLLoader.load(getClass().getResource("../View/VendorDashboard.fxml"));
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/VendorDashboard.fxml"));
         addFoodItemsPane.getChildren().setAll(pane);
 
     }
@@ -335,4 +323,5 @@ public class AddFoodController implements Initializable {
 
 
     }
+
 }
