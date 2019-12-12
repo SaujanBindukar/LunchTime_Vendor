@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="jfoenix-8.0.7">
+  <library name="gson-2.8.6">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/libs/jfoenix-8.0.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/libs/gson-2.8.6.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

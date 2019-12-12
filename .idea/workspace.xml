@@ -2,40 +2,50 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/bll/Vendor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/jfoenix_8_0_8.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/converter-gson-2.6.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/gson-2.8.6.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/jfoenix-8.0.8.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/okhttp-2.3.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/libs/okio-1.0.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/bll/Eager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/bll/UploadResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/dao/UploadAPI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/images/momo.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/images/saujan.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/jfoenix_8_0_7.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LunchTime.iml" beforeDir="false" afterPath="$PROJECT_DIR$/LunchTime.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/jfoenix-8.0.7.jar" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/LunchTime/Controller/AddFoodController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/Controller/AddFoodController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/LunchTime/Controller/LoginController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/Controller/LoginController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/LunchTime/Controller/MyProfileController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/Controller/MyProfileController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/LunchTime/Controller/SalesDetailController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/Controller/SalesDetailController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/LunchTime/Controller/TopupUserController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/Controller/TopupUserController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/LunchTime/Controller/VendorDashboardController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/Controller/VendorDashboardController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LunchTime/META-INF/LunchTime.kotlin_module" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/META-INF/LunchTime.kotlin_module" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/LunchTime/View/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/View/Login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LunchTime/View/Register.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/View/Register.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/LunchTime/View/VendorDashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/View/VendorDashboard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/LunchTime/View/addFoodItems.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/View/addFoodItems.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/LunchTime/View/myProfile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/View/myProfile.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/LunchTime/View/salesDetail.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/View/salesDetail.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/LunchTime/View/topupUser.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/View/topupUser.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LunchTime/bll/UserOrder.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/bll/UserOrder.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/LunchTime/dao/UserOrderDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/dao/UserOrderDao.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/LunchTime/bll/Vendor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/bll/Vendor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/LunchTime/dao/VendorDao.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/LunchTime/dao/VendorDao.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/AddFoodController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/AddFoodController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/MyProfileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/MyProfileController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/RegisterController.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/SalesDetailController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SalesDetailController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/TopupUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TopupUserController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/VendorDashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/VendorDashboardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/Login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/Login.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/Register.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/Register.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/VendorDashboard.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/VendorDashboard.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/addFoodItems.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/addFoodItems.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/myProfile.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/myProfile.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/salesDetail.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/salesDetail.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/topupUser.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/topupUser.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bll/UserOrder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bll/UserOrder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/StudentDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/StudentDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/dao/UserOrderDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/UserOrderDao.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/bll/Vendor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/bll/Vendor.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/dao/VendorDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/VendorDao.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -90,9 +100,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="FxmlFile" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
@@ -119,6 +129,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="GoToFile.includeJavaFiles" value="false" />
@@ -126,9 +137,13 @@
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="OverrideImplement.combined" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="dynamic.classpath" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/jfoenix-8.0.8.jar!/" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/bll" />
     <property name="project.structure.last.edited" value="Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -137,6 +152,10 @@
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="dao" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/bll" />
+      <recent name="$PROJECT_DIR$/libs" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\sauza\Desktop\JavaProject\LunchTime\src\View" />
@@ -277,14 +296,14 @@
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="458" y="212" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog" timestamp="1575970005008">
+    <state x="458" y="212" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog" timestamp="1576131706887">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="458" y="212" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.0.1440.900@0.0.1440.900" timestamp="1575970005008" />
-    <state x="533" y="152" key="#com.intellij.ide.util.MemberChooser" timestamp="1575823718152">
-      <screen x="0" y="23" width="1440" height="826" />
+    <state x="458" y="212" key="#com.intellij.codeInsight.editorActions.RestoreReferencesDialog/0.0.1440.900@0.0.1440.900" timestamp="1576131706887" />
+    <state x="533" y="141" key="#com.intellij.ide.util.MemberChooser" timestamp="1576128292447">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="533" y="141" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900@0.0.1440.900" timestamp="1575809538964" />
+    <state x="533" y="141" key="#com.intellij.ide.util.MemberChooser/0.0.1440.900@0.0.1440.900" timestamp="1576128292447" />
     <state x="533" y="152" key="#com.intellij.ide.util.MemberChooser/0.23.1440.826@0.23.1440.826" timestamp="1575823718152" />
     <state x="570" y="346" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1575254860940">
       <screen x="0" y="0" width="1440" height="900" />
@@ -294,78 +313,88 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="609" y="160" key="#xdebugger.evaluate/0.0.1440.900@0.0.1440.900" timestamp="1575255787380" />
-    <state width="1398" height="243" key="GridCell.Tab.0.bottom" timestamp="1575992185849">
+    <state width="1398" height="241" key="GridCell.Tab.0.bottom" timestamp="1576165899099">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="243" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1575992185849" />
+    <state width="1398" height="241" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1576165899099" />
     <state width="1878" height="213" key="GridCell.Tab.0.bottom/0.0.1920.1080@0.0.1920.1080" timestamp="1575439536884" />
     <state width="1398" height="303" key="GridCell.Tab.0.bottom/0.23.1440.806@0.23.1440.806" timestamp="1575256926265" />
-    <state width="1398" height="243" key="GridCell.Tab.0.bottom/0.23.1440.826@0.23.1440.826" timestamp="1575981768071" />
-    <state width="1398" height="243" key="GridCell.Tab.0.center" timestamp="1575992185848">
+    <state width="1398" height="241" key="GridCell.Tab.0.bottom/0.23.1440.826@0.23.1440.826" timestamp="1576122408391" />
+    <state width="1398" height="241" key="GridCell.Tab.0.center" timestamp="1576165899097">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="243" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1575992185848" />
+    <state width="1398" height="241" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1576165899097" />
     <state width="1878" height="213" key="GridCell.Tab.0.center/0.0.1920.1080@0.0.1920.1080" timestamp="1575439536883" />
     <state width="1398" height="303" key="GridCell.Tab.0.center/0.23.1440.806@0.23.1440.806" timestamp="1575256926264" />
-    <state width="1398" height="243" key="GridCell.Tab.0.center/0.23.1440.826@0.23.1440.826" timestamp="1575981768070" />
-    <state width="1398" height="243" key="GridCell.Tab.0.left" timestamp="1575992185847">
+    <state width="1398" height="241" key="GridCell.Tab.0.center/0.23.1440.826@0.23.1440.826" timestamp="1576122408389" />
+    <state width="1398" height="241" key="GridCell.Tab.0.left" timestamp="1576165899096">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="243" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1575992185847" />
+    <state width="1398" height="241" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1576165899096" />
     <state width="1878" height="213" key="GridCell.Tab.0.left/0.0.1920.1080@0.0.1920.1080" timestamp="1575439536882" />
     <state width="1398" height="303" key="GridCell.Tab.0.left/0.23.1440.806@0.23.1440.806" timestamp="1575256926264" />
-    <state width="1398" height="243" key="GridCell.Tab.0.left/0.23.1440.826@0.23.1440.826" timestamp="1575981768069" />
-    <state width="1398" height="243" key="GridCell.Tab.0.right" timestamp="1575992185848">
+    <state width="1398" height="241" key="GridCell.Tab.0.left/0.23.1440.826@0.23.1440.826" timestamp="1576122408389" />
+    <state width="1398" height="241" key="GridCell.Tab.0.right" timestamp="1576165899098">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1398" height="243" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1575992185848" />
+    <state width="1398" height="241" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1576165899098" />
     <state width="1878" height="213" key="GridCell.Tab.0.right/0.0.1920.1080@0.0.1920.1080" timestamp="1575439536884" />
     <state width="1398" height="303" key="GridCell.Tab.0.right/0.23.1440.806@0.23.1440.806" timestamp="1575256926265" />
-    <state width="1398" height="243" key="GridCell.Tab.0.right/0.23.1440.826@0.23.1440.826" timestamp="1575981768070" />
-    <state width="1398" height="264" key="GridCell.Tab.1.bottom" timestamp="1575979722686">
+    <state width="1398" height="241" key="GridCell.Tab.0.right/0.23.1440.826@0.23.1440.826" timestamp="1576122408390" />
+    <state width="1398" height="264" key="GridCell.Tab.1.bottom" timestamp="1575996090058">
       <screen x="0" y="23" width="1440" height="826" />
     </state>
     <state width="1398" height="303" key="GridCell.Tab.1.bottom/0.0.1440.900@0.0.1440.900" timestamp="1575346708445" />
     <state width="1398" height="303" key="GridCell.Tab.1.bottom/0.23.1440.806@0.23.1440.806" timestamp="1575256926267" />
-    <state width="1398" height="264" key="GridCell.Tab.1.bottom/0.23.1440.826@0.23.1440.826" timestamp="1575979722686" />
-    <state width="1398" height="264" key="GridCell.Tab.1.center" timestamp="1575979722685">
+    <state width="1398" height="264" key="GridCell.Tab.1.bottom/0.23.1440.826@0.23.1440.826" timestamp="1575996090058" />
+    <state width="1398" height="264" key="GridCell.Tab.1.center" timestamp="1575996090057">
       <screen x="0" y="23" width="1440" height="826" />
     </state>
     <state width="1398" height="303" key="GridCell.Tab.1.center/0.0.1440.900@0.0.1440.900" timestamp="1575346708444" />
     <state width="1398" height="303" key="GridCell.Tab.1.center/0.23.1440.806@0.23.1440.806" timestamp="1575256926266" />
-    <state width="1398" height="264" key="GridCell.Tab.1.center/0.23.1440.826@0.23.1440.826" timestamp="1575979722685" />
-    <state width="1398" height="264" key="GridCell.Tab.1.left" timestamp="1575979722684">
+    <state width="1398" height="264" key="GridCell.Tab.1.center/0.23.1440.826@0.23.1440.826" timestamp="1575996090057" />
+    <state width="1398" height="264" key="GridCell.Tab.1.left" timestamp="1575996090057">
       <screen x="0" y="23" width="1440" height="826" />
     </state>
     <state width="1398" height="303" key="GridCell.Tab.1.left/0.0.1440.900@0.0.1440.900" timestamp="1575346708443" />
     <state width="1398" height="303" key="GridCell.Tab.1.left/0.23.1440.806@0.23.1440.806" timestamp="1575256926266" />
-    <state width="1398" height="264" key="GridCell.Tab.1.left/0.23.1440.826@0.23.1440.826" timestamp="1575979722684" />
-    <state width="1398" height="264" key="GridCell.Tab.1.right" timestamp="1575979722685">
+    <state width="1398" height="264" key="GridCell.Tab.1.left/0.23.1440.826@0.23.1440.826" timestamp="1575996090057" />
+    <state width="1398" height="264" key="GridCell.Tab.1.right" timestamp="1575996090057">
       <screen x="0" y="23" width="1440" height="826" />
     </state>
     <state width="1398" height="303" key="GridCell.Tab.1.right/0.0.1440.900@0.0.1440.900" timestamp="1575346708444" />
     <state width="1398" height="303" key="GridCell.Tab.1.right/0.23.1440.806@0.23.1440.806" timestamp="1575256926266" />
-    <state width="1398" height="264" key="GridCell.Tab.1.right/0.23.1440.826@0.23.1440.826" timestamp="1575979722685" />
-    <state x="208" y="31" key="SettingsEditor" timestamp="1575426148115">
+    <state width="1398" height="264" key="GridCell.Tab.1.right/0.23.1440.826@0.23.1440.826" timestamp="1575996090057" />
+    <state x="356" y="28" width="1024" height="826" key="SettingsEditor" timestamp="1576037861139">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="208" y="31" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1575426148115" />
+    <state x="356" y="28" width="1024" height="826" key="SettingsEditor/0.0.1440.900@0.0.1440.900" timestamp="1576037861139" />
+    <state x="432" y="337" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1576037705200">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="432" y="337" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1440.900@0.0.1440.900" timestamp="1576037705200" />
     <state x="509" y="374" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1575985706006">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="509" y="374" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1440.900@0.0.1440.900" timestamp="1575985706006" />
-    <state x="386" y="212" width="667" height="476" key="find.popup" timestamp="1575518712513">
+    <state x="386" y="212" width="667" height="476" key="find.popup" timestamp="1576141583855">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="386" y="212" width="667" height="476" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1575518712513" />
+    <state x="386" y="212" width="667" height="476" key="find.popup/0.0.1440.900@0.0.1440.900" timestamp="1576141583855" />
+    <state x="386" y="218" width="667" height="476" key="find.popup/0.23.1440.826@0.23.1440.826" timestamp="1575994933202" />
     <state width="600" height="390" key="javadoc.popup" timestamp="1575908544003">
       <screen x="0" y="23" width="1440" height="826" />
     </state>
     <state width="600" height="424" key="javadoc.popup/0.0.1440.900@0.0.1440.900" timestamp="1575795424075" />
     <state width="600" height="390" key="javadoc.popup/0.23.1440.826@0.23.1440.826" timestamp="1575908544003" />
-    <state x="385" y="173" width="670" height="676" key="search.everywhere.popup" timestamp="1575289820401">
-      <screen x="0" y="23" width="1440" height="826" />
+    <state x="385" y="210" key="run.anything.popup" timestamp="1576158722812">
+      <screen x="0" y="0" width="1440" height="900" />
     </state>
+    <state x="385" y="210" key="run.anything.popup/0.0.1440.900@0.0.1440.900" timestamp="1576158722812" />
+    <state x="385" y="163" width="670" height="737" key="search.everywhere.popup" timestamp="1576137101868">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="385" y="163" width="670" height="737" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1576137101868" />
     <state x="385" y="173" width="670" height="676" key="search.everywhere.popup/0.23.1440.826@0.23.1440.826" timestamp="1575289820401" />
   </component>
   <component name="XDebuggerManager">

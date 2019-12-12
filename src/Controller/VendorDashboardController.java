@@ -1,9 +1,11 @@
 package Controller;
 import bll.UserOrder;
 import com.jfoenix.controls.*;
+import com.jfoenix.validation.RequiredFieldValidator;
 import com.sun.rowset.CachedRowSetImpl;
 import dao.FoodDao;
 import dao.UserOrderDao;
+import dao.VendorDao;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,10 +17,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
 
 import javax.sql.rowset.CachedRowSet;
@@ -68,13 +73,14 @@ public class VendorDashboardController implements Initializable {
     @FXML
     private JFXDatePicker finalDate;
 
-
-
+    @FXML
+    private Circle profilePictureView;
 
     @FXML
     private StackPane rootStackPane;
 
     ObservableList<UserOrder> oblist = FXCollections.observableArrayList();
+
 
 
     @FXML
@@ -90,12 +96,11 @@ public class VendorDashboardController implements Initializable {
     void btnGo(MouseEvent event) {
         LocalDate initialDateValue= initialDate.getValue();
         LocalDate finalDateValue= finalDate.getValue();
+
         try {
             UserOrderDao ud= (UserOrderDao) Naming.lookup("rmi://localhost/HelloUserOrder");
             ResultSet rs= ud.getUserOrderByDate(initialDateValue, finalDateValue);
-
             orderTable.getItems().clear();
-
             while(rs.next()){
                 oblist.add(new UserOrder(
                         rs.getInt("order_id"),
@@ -141,6 +146,7 @@ public class VendorDashboardController implements Initializable {
     @FXML
     void btnSearch(MouseEvent event) { // Search the user order by its First Name
         try {
+
 //            Class.forName("com.mysql.cj.jdbc.Driver");
 //            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/lunchtime", "root", "");
 //            String sql = "select user_order.order_id ,user_order.quantity, user_order.total_price," +
@@ -260,9 +266,7 @@ public class VendorDashboardController implements Initializable {
                         rs.getString("first_name"),
                         rs.getString("food_name"))
                 );
-
             }
-
             order_id.setCellValueFactory(new PropertyValueFactory<>("order_id"));
             date.setCellValueFactory(new PropertyValueFactory<>("date"));
             user_name.setCellValueFactory(new PropertyValueFactory<>("user_name"));
@@ -270,7 +274,6 @@ public class VendorDashboardController implements Initializable {
             quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
             total_price.setCellValueFactory(new PropertyValueFactory<>("total_price"));
             status.setCellValueFactory(new PropertyValueFactory<>("status"));
-
             orderTable.setItems(oblist);
 
 
@@ -309,14 +312,8 @@ public class VendorDashboardController implements Initializable {
                             });
                             System.out.println("Received order pending");
                             break;
-
                     }
-
                 }
-
-
-
-
             });
         } catch (SQLException e) {
             e.printStackTrace();
@@ -330,12 +327,30 @@ public class VendorDashboardController implements Initializable {
 
     }
 
+    void getVendorInfo(){
+        try{
+            VendorDao vd= (VendorDao) Naming.lookup("rmi://localhost/HelloServer");
+            ResultSet getInfo=vd.getInfo(LoginController.id);
+            while(getInfo.next()){
+                try{
+                    String imagePath= getInfo.getString("picture");
+                    profilePictureView.setFill(new ImagePattern(new Image(imagePath)));
+
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+        }catch(Exception e){
+            System.out.println("Exception: "+e);
+        }
+    }
+
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Platform.runLater(this::loadOrder);
-         //load the user_order in the table
+                loadOrder();
+                getVendorInfo();
 
 
     }

@@ -1,6 +1,7 @@
 package Controller;
 
 import com.jfoenix.controls.*;
+import com.jfoenix.validation.RegexValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
 import dao.VendorDao;
 import javafx.application.Platform;
@@ -34,10 +35,7 @@ public class LoginController implements Initializable {
     @FXML
     private JFXPasswordField txtPassword;
 
-    Alert a = new Alert(Alert.AlertType.NONE);
-
     public static int id;
-
     private boolean emailIsValid = false;
     private boolean emailIsEmpty = true;
 
@@ -58,7 +56,6 @@ public class LoginController implements Initializable {
                     System.out.println("Email empty");
                     emailIsEmpty = true;
                 }
-
             }
         });
         txtEmail.textProperty().addListener((observable, oldValue, newValue) -> txtEmail.validate());
@@ -84,61 +81,48 @@ public class LoginController implements Initializable {
 
 
        // Email Validator
-//      RegexValidator emailValidator = new RegexValidator();
-//        emailValidator.setRegexPattern("^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@"
-//                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-//        email_field.setValidators(emailValidator);
-//        emailValidator.setMessage("Email is invalid!");
-//        email_field.focusedProperty().addListener((observable, oldValue, newValue) -> {
-//            if (!newValue) {
-//                if (email_field.validate()) {
-//                    System.out.println("Email valid");
-//                    emailIsValid = true;
-//                } else {
-//                    System.out.println("Email not valid");
-//                    emailIsValid = false;
-//                }
-//            }
-//        });
-//        email_field.textProperty().addListener((observable, oldValue, newValue) -> email_field.validate());
-//
-//
-//        //Password Validator
-//        RegexValidator passwordValidator = new RegexValidator();
-//        passwordValidator.setRegexPattern("^.{8,}$");
-//        password_field.setValidators(passwordValidator);
-//        passwordValidator.setMessage("Password should be atleast 8 characters long!");
-//        password_field.focusedProperty().addListener((observable, oldValue, newValue) -> {
-//            if (!newValue) {
-//                if (password_field.validate()) {
-//                    System.out.println("Password valid");
-//                    passwordIsValid = true;
-//                } else {
-//                    System.out.println("Password not valid");
-//                    passwordIsValid = false;
-//                }
-//            }
-//        });
-//        password_field.textProperty().addListener((observable, oldValue, newValue) -> password_field.validate());
+      RegexValidator emailValidator = new RegexValidator();
+        emailValidator.setRegexPattern("^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        txtEmail.setValidators(emailValidator);
+        emailValidator.setMessage("Email is invalid!");
+        txtEmail.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                if (txtEmail.validate()) {
+                    System.out.println("Email valid");
+                    emailIsValid = true;
+                } else {
+                    System.out.println("Email not valid");
+                    emailIsValid = false;
+                }
+            }
+        });
+        txtEmail.textProperty().addListener((observable, oldValue, newValue) -> txtEmail.validate());
+
+
+        //Password Validator
+        RegexValidator passwordValidator = new RegexValidator();
+        passwordValidator.setRegexPattern("^.{8,}$");
+        txtPassword.setValidators(passwordValidator);
+        passwordValidator.setMessage("Password should be at least 8 characters long!");
+        txtPassword.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                if (txtPassword.validate()) {
+                    System.out.println("Password valid");
+                    passwordIsValid = true;
+                } else {
+                    System.out.println("Password not valid");
+                    passwordIsValid = false;
+                }
+            }
+        });
+        txtPassword.textProperty().addListener((observable, oldValue, newValue) -> txtPassword.validate());
 
     }
 
     public void checkUser() {
-        System.out.println("Login Button Pressed");
-        String emailText = txtEmail.getText();
-        String passwordText = txtPassword.getText();
-        System.out.println(emailText);
-        System.out.println(passwordText);
-
-        if(emailText.isEmpty() || passwordText.isEmpty()){
-            a.setAlertType(Alert.AlertType.ERROR);
-            a.setContentText("Please enter all the fields");
-            a.show();
-
-
-        }else{
+        if (!emailIsEmpty && !passwordIsEmpty && emailIsValid && passwordIsValid ){
             try {
-
                 VendorDao vd= (VendorDao) Naming.lookup("rmi://localhost/HelloServer");
                 Boolean rs = vd.checkVendor(txtEmail.getText(), txtPassword.getText());
                 try {
@@ -153,8 +137,6 @@ public class LoginController implements Initializable {
                         System.out.print("Moved to next page");
                         login_pane.getChildren().setAll(pane);
                     } else {
-
-
                         Platform.runLater(() -> {
                             JFXDialogLayout content = new JFXDialogLayout();
                             content.setHeading(new Text("Error"));
@@ -167,22 +149,17 @@ public class LoginController implements Initializable {
                             content.setActions(yesButton);
                             dialog.show();
                         });
-
                     }
                 } catch (IOException ex) {
                     System.out.print(ex);
-
                 }
-
-
             } catch (RemoteException re) {
                 System.out.println();
                 System.out.println("RemoteException");
                 System.out.println(re);
             } catch (ArithmeticException ae) {
                 System.out.println();
-                System.out.println(
-                        "java.lang.ArithmeticException");
+                System.out.println("java.lang.ArithmeticException");
                 System.out.println(ae);
             } catch (NotBoundException e) {
                 e.printStackTrace();
@@ -194,9 +171,6 @@ public class LoginController implements Initializable {
             }
 
         }
-
-
-
     }
 
 

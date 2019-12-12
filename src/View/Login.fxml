@@ -41,12 +41,12 @@
                         <Font name="Arial Rounded MT Bold" size="14.0" />
                      </font>
                   </JFXTextField>
-                  <JFXPasswordField fx:id="txtPassword" focusColor="RED" labelFloat="true" layoutX="72.0" layoutY="308.0" prefHeight="56.0" prefWidth="373.0" promptText="Password" style="-fx-border-color: black;" unFocusColor="#fffcfc">
+                  <JFXPasswordField fx:id="txtPassword" focusColor="RED" labelFloat="true" layoutX="72.0" layoutY="325.0" prefHeight="56.0" prefWidth="373.0" promptText="Password" style="-fx-border-color: black;" unFocusColor="#fffcfc">
                      <font>
                         <Font size="14.0" />
                      </font>
                   </JFXPasswordField>
-                  <Button fx:id="btnSignin" layoutX="72.0" layoutY="382.0" mnemonicParsing="false" onAction="#checkUser" prefHeight="56.0" prefWidth="373.0" style="-fx-background-color: #ff1f46;" text="SIGNIN" textFill="WHITE">
+                  <Button fx:id="btnSignin" layoutX="72.0" layoutY="415.0" mnemonicParsing="false" onAction="#checkUser" prefHeight="56.0" prefWidth="373.0" style="-fx-background-color: #ff1f46;" text="SIGNIN" textFill="WHITE">
                      <font>
                         <Font name="Arial Rounded MT Bold" size="24.0" />
                      </font>

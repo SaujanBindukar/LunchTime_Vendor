@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import dao.FoodDao;
 import dao.UserOrderDao;
+import dao.VendorDao;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,10 +17,13 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.Circle;
 
 import java.io.IOException;
 import java.net.URL;
@@ -87,6 +91,9 @@ public class SalesDetailController implements Initializable {
     @FXML
     private TableColumn<UserOrder, Integer> total_price;
 
+    @FXML
+    private Circle profilePictureView;
+
 
     ObservableList<UserOrder> oblist = FXCollections.observableArrayList();
 
@@ -117,9 +124,6 @@ public class SalesDetailController implements Initializable {
                 series.getData().add(new XYChart.Data<>(rs.getString(1), rs.getInt(2)));
             }
             salesChart.getData().addAll(series);
-
-
-
 
         }catch(Exception e){
             System.out.println("Exception:"+e);
@@ -161,7 +165,6 @@ public class SalesDetailController implements Initializable {
 
     @FXML
     void btnAddFood(ActionEvent event) throws IOException {
-        System.out.println("Add food button is pressed");
         StackPane pane = FXMLLoader.load(getClass().getResource("../View/addFoodItems.fxml"));
         userOrderPane.getChildren().setAll(pane);
 
@@ -170,7 +173,6 @@ public class SalesDetailController implements Initializable {
 
     @FXML
     void btnUserOrder(ActionEvent event) throws IOException {
-        System.out.println("User Order Button is pressed.");
         StackPane pane = FXMLLoader.load(getClass().getResource("../View/VendorDashboard.fxml"));
         userOrderPane.getChildren().setAll(pane);
     }
@@ -199,12 +201,31 @@ public class SalesDetailController implements Initializable {
 
         }
     }
+    void getVendorInfo(){
+        try{
+            VendorDao vd= (VendorDao) Naming.lookup("rmi://localhost/HelloServer");
+            ResultSet getInfo=vd.getInfo(LoginController.id);
+            while(getInfo.next()){
+                try{
+                    String imagePath= getInfo.getString("picture");
+                    profilePictureView.setFill(new ImagePattern(new Image(imagePath)));
+
+                }catch(Exception e){
+                    System.out.println(e);
+                }
+            }
+        }catch(Exception e){
+            System.out.println("Exception: "+e);
+        }
+    }
 
 
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+       getVendorInfo();
         loadSalesDetails();
     }
 }

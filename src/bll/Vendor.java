@@ -6,6 +6,24 @@ public class Vendor  implements Serializable {
     private  int vendor_id;
     private String vendor_email;
     private String vendor_name;
+    private String picture;
+    private String vendor_number;
+
+    public String getVendor_number() {
+        return vendor_number;
+    }
+
+    public void setVendor_number(String vendor_number) {
+        this.vendor_number = vendor_number;
+    }
+
+    public String getPicture() {
+        return picture;
+    }
+
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
 
     public int getVendor_id() {
         return vendor_id;
