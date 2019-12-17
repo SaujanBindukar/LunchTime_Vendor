@@ -1,7 +1,4 @@
 package dao;
-
-import bll.Student;
-
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.sql.ResultSet;
@@ -12,6 +9,7 @@ public interface StudentDao extends Remote {
                     int currentBalance, int addBalance, int userId) throws RemoteException;
     ResultSet getAllUser() throws RemoteException;
     ResultSet searchUser(String userName) throws  RemoteException;
+    ResultSet getTotalStudent() throws RemoteException;
 
 
 }

@@ -133,7 +133,7 @@ public class LoginController implements Initializable {
                             System.out.println("Vendor_id is:"+id);
 
                         }
-                        StackPane pane = FXMLLoader.load(getClass().getResource("../View/VendorDashboard.fxml"));
+                        StackPane pane = FXMLLoader.load(getClass().getResource("../View/Dashboard.fxml"));
                         System.out.print("Moved to next page");
                         login_pane.getChildren().setAll(pane);
                     } else {

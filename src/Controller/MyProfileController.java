@@ -8,10 +8,7 @@ import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.NumberValidator;
 import com.jfoenix.validation.RegexValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
-import dao.FoodDao;
-import dao.UploadAPI;
-import dao.UserOrderDao;
-import dao.VendorDao;
+import dao.*;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -36,11 +33,13 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import sun.awt.geom.AreaOp;
 
 import javax.xml.bind.DatatypeConverter;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.Socket;
 import java.net.URL;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
@@ -69,7 +68,6 @@ public class MyProfileController implements Initializable {
 
     @FXML
     private JFXButton btnSalesDetails;
-
 
     @FXML
     private JFXButton btnTopUpUser;
@@ -103,6 +101,7 @@ public class MyProfileController implements Initializable {
     private Circle profilePictureView1;
 
     public static String image;
+    public static  String email;
 
     private boolean nameIsEmpty = false;
     private boolean nameIsValid= true;
@@ -117,9 +116,46 @@ public class MyProfileController implements Initializable {
     File file;
 
     @FXML
+    private JFXButton btnDashboard;
+
+    @FXML
+    void btnDashboard(MouseEvent event) throws IOException {
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/Dashboard.fxml"));
+        rootStackPane.getChildren().setAll(pane);
+    }
+
+    @FXML
     void btnLogout(MouseEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/Login.fxml"));
-        myProfilePane.getChildren().setAll(pane);
+        try{
+            JFXDialogLayout content = new JFXDialogLayout();
+            content.setHeading(new Text("Confirmation"));
+            content.setBody(new Text("Do you really want to logout?"));
+            JFXButton okButton = new JFXButton("Yes");
+            JFXButton cancelButton = new JFXButton("Cancel");
+            JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
+
+            okButton.setOnAction(e->{
+                try{
+                    dialog.close();
+                    StackPane pane = FXMLLoader.load(getClass().getResource("../View/Login.fxml"));
+                    myProfilePane.getChildren().setAll(pane);
+
+                }catch(Exception ex){
+                    System.out.println(ex);
+                }
+                cancelButton.setOnAction(ex->dialog.close());
+
+
+            });
+
+            content.setActions(cancelButton,okButton);
+            dialog.show();
+
+        }catch(Exception e){
+            System.out.println(e);
+
+        }
+
     }
 
     @FXML
@@ -143,7 +179,6 @@ public class MyProfileController implements Initializable {
 
     @FXML
     void btnAddFood(ActionEvent event) throws IOException {
-        System.out.println("Add food button is pressed");
         StackPane pane = FXMLLoader.load(getClass().getResource("../View/addFoodItems.fxml"));
         myProfilePane.getChildren().setAll(pane);
 
@@ -152,7 +187,6 @@ public class MyProfileController implements Initializable {
 
     @FXML
     void btnUserOrder(ActionEvent event) throws IOException {
-        System.out.println("User Order Button is pressed.");
         StackPane pane = FXMLLoader.load(getClass().getResource("../View/VendorDashboard.fxml"));
         myProfilePane.getChildren().setAll(pane);
     }
@@ -178,8 +212,25 @@ public class MyProfileController implements Initializable {
     @FXML
     void btnUpdate(MouseEvent event) {
         if(!nameIsEmpty && nameIsValid && !emailIsEmpty && emailIsValid && !phoneIsEmpty && phoneIsValid){
+//            System.out.println("vendor_email:"+vendorEmail.getText());
+//            System.out.println(dt);
+//            if(vendorEmail.getText().equals(email)){
+//                JFXDialogLayout content = new JFXDialogLayout();
+//                content.setHeading(new Text("Error"));
+//                content.setBody(new Text("Email already exist!"));
+//                JFXButton okButton = new JFXButton("OK");
+//                JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
+//                okButton.setOnAction(e->{
+//                    dialog.close();
+//                });
+//                content.setActions(okButton);
+//                dialog.show();
+//
+//
+//            }
 
-            if(file==null){
+            //else
+                if(file==null){
                 System.out.println("File is null");
                 try{
                     Platform.runLater(() -> {
@@ -305,9 +356,7 @@ public class MyProfileController implements Initializable {
                                                 System.out.println(ex);
                                             }
                                         });
-
                                     }
-
                                     @Override
                                     public void onFailure(Call<UploadResponse> call, Throwable throwable) {
                                         System.out.println("Cannot upload image");
@@ -402,7 +451,7 @@ public class MyProfileController implements Initializable {
 
         // food nameValidator
         RegexValidator name = new RegexValidator();
-        name.setRegexPattern("[a-zA-Z]+");
+        name.setRegexPattern("[a-zA-Z ]+");
         vendorName.setValidators(name);
         name.setMessage("Name is invalid!");
         vendorName.focusedProperty().addListener((observable, oldValue, newValue) -> {
@@ -518,7 +567,22 @@ public class MyProfileController implements Initializable {
             }
         });
         vendorNumber.textProperty().addListener((observable, oldValue, newValue) -> vendorNumber.validate());
+    }
 
+
+    void checkEmail(){
+        try{
+            VendorDao vd= (VendorDao) Naming.lookup("rmi://localhost/HelloServer");
+            ResultSet  rs= vd.getAllVendorInfo();
+            while (rs.next()) {
+                email=rs.getString("vendor_email");
+                System.out.println(email);
+            }
+
+        }catch(Exception e){
+            System.out.println(e);
+
+        }
     }
 
 
@@ -530,6 +594,7 @@ public class MyProfileController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         getVendorInfo();
         fieldValidators();
+        checkEmail();
         try{
             String image= "https://d2gg9evh47fn9z.cloudfront.net/800px_COLOURBOX5697410.jpg";
             addPictureView.setFill(new ImagePattern(new Image(image)));
@@ -537,6 +602,7 @@ public class MyProfileController implements Initializable {
             System.out.println(e);
         }
         btnUpdate.setDisable(true);
+
 
     }
 }

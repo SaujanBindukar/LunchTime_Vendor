@@ -89,6 +89,9 @@ public class TopupUserController  implements  Initializable{
     private JFXTextField txtSearch;
 
     @FXML
+     private  JFXButton btnTopUpUser;
+
+    @FXML
     private JFXTextField txtCurrentBalance;
 
     @FXML
@@ -112,6 +115,16 @@ public class TopupUserController  implements  Initializable{
 
     boolean addBalanceIsEmpty=false;
      boolean addBalanceIsValid=true;
+
+
+    @FXML
+    private JFXButton btnDashboard;
+
+    @FXML
+    void btnDashboard(MouseEvent event) throws IOException {
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/Dashboard.fxml"));
+        rootStackPane.getChildren().setAll(pane);
+    }
 
     @FXML
     void loadAllUsers(KeyEvent event) {
@@ -561,6 +574,7 @@ public class TopupUserController  implements  Initializable{
 
         });
         fieldValidators();
+        btnTopUpUser.setStyle("-fx-background-color: #bb346f");
 
 
         loadUser();

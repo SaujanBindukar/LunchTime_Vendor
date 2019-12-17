@@ -22,6 +22,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -127,6 +128,9 @@ public class AddFoodController implements Initializable {
     @FXML
     private TableColumn<FoodMenu, String> food_picture;
 
+    @FXML
+    private ImageView btnChoosePicture;
+
     int foodId;
     String imagePath;
 
@@ -148,7 +152,14 @@ public class AddFoodController implements Initializable {
         txtFoodName.clear();
         txtFoodPrice.clear();
     }
+    @FXML
+    private JFXButton btnDashboard;
 
+    @FXML
+    void btnDashboard(MouseEvent event) throws IOException {
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/Dashboard.fxml"));
+        rootStackPane.getChildren().setAll(pane);
+    }
 
     @FXML
     void btnUpdate(MouseEvent event) throws IOException, ClassNotFoundException {
@@ -183,7 +194,7 @@ public class AddFoodController implements Initializable {
                             try {
                                 StackPane pane;
                                 pane = FXMLLoader.load(getClass().getResource("../View/addFoodItems.fxml"));
-                                addFoodItemsPane.getChildren().setAll(pane);
+                                rootStackPane.getChildren().setAll(pane);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -237,7 +248,7 @@ public class AddFoodController implements Initializable {
                             try {
                                 StackPane pane;
                                 pane = FXMLLoader.load(getClass().getResource("../View/addFoodItems.fxml"));
-                                addFoodItemsPane.getChildren().setAll(pane);
+                                rootStackPane.getChildren().setAll(pane);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -313,33 +324,37 @@ public class AddFoodController implements Initializable {
     @FXML
     void btnLogout(MouseEvent event) throws IOException {
         StackPane pane = FXMLLoader.load(getClass().getResource("../View/Login.fxml"));
-        addFoodItemsPane.getChildren().setAll(pane);
+        rootStackPane.getChildren().setAll(pane);
     }
 
     @FXML
-    void btnSalesDetails(MouseEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/salesDetail.fxml"));
-        addFoodItemsPane.getChildren().setAll(pane);
+    void btnSalesDetails(ActionEvent event) throws IOException {
+            System.out.println("Sales Detail Button is pressed");
+            StackPane pane = FXMLLoader.load(getClass().getResource("../View/salesDetail.fxml"));
+            rootStackPane.getChildren().setAll(pane);
 
     }
+
+
+
 
     @FXML
     void myProfile(MouseEvent event) throws IOException {
         StackPane pane = FXMLLoader.load(getClass().getResource("../View/myProfile.fxml"));
-        addFoodItemsPane.getChildren().setAll(pane);
+        rootStackPane.getChildren().setAll(pane);
 
     }
     @FXML
     void btnClear(MouseEvent event) throws IOException {
         StackPane pane = FXMLLoader.load(getClass().getResource("../View/addFoodItems.fxml"));
-        addFoodItemsPane.getChildren().setAll(pane);
+        rootStackPane.getChildren().setAll(pane);
 
     }
 
     @FXML
     void btnTopUpUser(MouseEvent event) throws IOException {
         StackPane pane = FXMLLoader.load(getClass().getResource("../View/topupUser.fxml"));
-        addFoodItemsPane.getChildren().setAll(pane);
+        rootStackPane.getChildren().setAll(pane);
     }
 
     @FXML
@@ -348,7 +363,7 @@ public class AddFoodController implements Initializable {
         String foodPrice=txtFoodPrice.getText();
         System.out.println(foodName);
         System.out.println(foodPrice);
-        if (foodNameIsEmpty || priceIsEmpty || file==null|| priceIsEmpty || priceIsValid || foodIsEmpty) {
+        if (txtFoodName.getText().isEmpty() || txtFoodPrice.getText().isEmpty() || file==null) {
             Platform.runLater(() -> {
                 JFXDialogLayout content = new JFXDialogLayout();
                 content.setHeading(new Text("Error"));
@@ -378,7 +393,10 @@ public class AddFoodController implements Initializable {
                     content1.setBody(new Text("New food Added Successfully"));
                     JFXButton yesButton1 = new JFXButton("OK");
                     JFXDialog dialog1 = new JFXDialog(rootStackPane, content1, JFXDialog.DialogTransition.CENTER);
-                    yesButton1.setOnAction(event1 -> dialog1.close());
+                    yesButton1.setOnAction(event1 ->{
+                        dialog1.close();
+
+                    });
                     content1.setActions(yesButton1);
 
                     okButton.setOnAction(e ->{
@@ -456,23 +474,23 @@ public class AddFoodController implements Initializable {
     @FXML
     void btnDelete(MouseEvent event) {
 
-        if(txtFoodName.getText().isEmpty() || txtFoodPrice.getText().isEmpty() || file==null){
-            Platform.runLater(() -> {
-                JFXDialogLayout content = new JFXDialogLayout();
-                content.setHeading(new Text("Error"));
-                content.setBody(new Text("No items to delete"));
-                JFXButton yesButton = new JFXButton("OK");
-                JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
-
-                yesButton.setOnAction(e ->{
-                    dialog.close();
-                });
-                content.setActions(yesButton);
-                dialog.show();
-            });
-
-        }
-        else{
+//        if(txtFoodName.getText().isEmpty() || txtFoodPrice.getText().isEmpty() || file==null){
+//            Platform.runLater(() -> {
+//                JFXDialogLayout content = new JFXDialogLayout();
+//                content.setHeading(new Text("Error"));
+//                content.setBody(new Text("No items to delete"));
+//                JFXButton yesButton = new JFXButton("OK");
+//                JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
+//
+//                yesButton.setOnAction(e ->{
+//                    dialog.close();
+//                });
+//                content.setActions(yesButton);
+//                dialog.show();
+//            });
+//
+//        }
+//        else{
 
 
             Platform.runLater(() -> {
@@ -488,7 +506,19 @@ public class AddFoodController implements Initializable {
                 content1.setBody(new Text("Item deleted successfully."));
                 JFXButton yesButton1 = new JFXButton("OK");
                 JFXDialog dialog1 = new JFXDialog(rootStackPane, content1, JFXDialog.DialogTransition.CENTER);
-                yesButton1.setOnAction(event1 -> dialog1.close());
+                yesButton1.setOnAction(event1 -> {
+                    dialog1.close();
+                    try{
+                        StackPane pane = FXMLLoader.load(getClass().getResource("../View/Login.fxml"));
+                        rootStackPane.getChildren().setAll(pane);
+
+                    } catch(Exception e){
+                        System.out.print(e);
+
+                    }
+
+
+                });
                 content1.setActions(yesButton1);
 
                 cancelButton.setOnAction(eventClose -> dialog.close());
@@ -515,7 +545,7 @@ public class AddFoodController implements Initializable {
 
 
 
-        }
+      //  }
     }
 
 
@@ -565,7 +595,6 @@ public class AddFoodController implements Initializable {
             MenuTable.setOnMouseClicked(e ->{
                 btnDelete.setDisable(false);
                 btnUpdate.setDisable(true);
-
                 imagePath = MenuTable.getSelectionModel().getSelectedItem().getPicture();
                 foodPictureView.setStyle("-fx-background-size: cover; -fx-background-radius: 5 5 0 0;" + " -fx-background-color: grey; -fx-background-image: url( " + imagePath + ");");
                 txtFoodName.setText(MenuTable.getSelectionModel().getSelectedItem().getFood_name());
@@ -588,14 +617,14 @@ public class AddFoodController implements Initializable {
     @FXML
     void btnAddFood(ActionEvent event) throws IOException {
         StackPane pane = FXMLLoader.load(getClass().getResource("../View/addFoodItems.fxml"));
-        addFoodItemsPane.getChildren().setAll(pane);
+        rootStackPane.getChildren().setAll(pane);
 
     }
 
     @FXML
     void btnUserOrder(ActionEvent event) throws IOException {
         StackPane pane = FXMLLoader.load(getClass().getResource("../View/VendorDashboard.fxml"));
-        addFoodItemsPane.getChildren().setAll(pane);
+        rootStackPane.getChildren().setAll(pane);
 
     }
     @FXML
@@ -620,17 +649,24 @@ public class AddFoodController implements Initializable {
     }
 
     @FXML
-    void btnChoosePicture(ActionEvent event) throws MalformedURLException {
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Image Files",
-                        "*.png", "*.jpg"));
-        file = fileChooser.showOpenDialog(new Stage());
-        if (file != null) {
-            String imagePath = file.toURI().toURL().toString();
-              foodPictureView.setStyle("-fx-background-size: cover; -fx-background-radius: 5 5 0 0;" + " -fx-background-color: grey; -fx-background-image: url( " + imagePath + ");");
-        } else {
-            System.out.println("Error");
+    void btnChoosePicture(MouseEvent event) {
+        try{
+            new FileChooser.ExtensionFilter("Image Files",
+                    "*.png", "*.jpg", "*.jpeg");
+            file = fileChooser.showOpenDialog(new Stage());
+            if (file != null) {
+                String imagePath = file.toURI().toURL().toString();
+                foodPictureView.setStyle("-fx-background-size: cover; -fx-background-radius: 5 5 0 0;" + " -fx-background-color: grey; -fx-background-image: url( " + imagePath + ");");
+            } else {
+                System.out.println("Error");
+            }
+
+        }catch(Exception e){
+            System.out.println(e);
+
         }
+
+
 
     }
     void getVendorInfo(){
@@ -672,7 +708,7 @@ public class AddFoodController implements Initializable {
 
         // food nameValidator
         RegexValidator foodName = new RegexValidator();
-        foodName.setRegexPattern("[a-zA-Z]+");
+        foodName.setRegexPattern("[a-zA-Z ]+");
         txtFoodName.setValidators(foodName);
         foodName.setMessage("Name is invalid!");
         txtFoodName.focusedProperty().addListener((observable, oldValue, newValue) -> {
@@ -735,6 +771,7 @@ public class AddFoodController implements Initializable {
         fieldValidators();
         btnUpdate.setDisable(true);
         btnDelete.setDisable(true);
+        btnAddFood.setStyle("-fx-background-color: #bb346f");
 
 
 

@@ -64,8 +64,11 @@ public class SalesDetailController implements Initializable {
     @FXML
     private ImageView myProfile;
 
+//    @FXML
+//    private AreaChart<String, Integer> salesChart;
+
     @FXML
-    private AreaChart<String, Integer> salesChart;
+    private LineChart<String, Integer> salesChart;
 
     @FXML
     private CategoryAxis x;
@@ -98,23 +101,39 @@ public class SalesDetailController implements Initializable {
     ObservableList<UserOrder> oblist = FXCollections.observableArrayList();
 
     @FXML
+    private JFXButton btnDashboard;
+
+    @FXML
+    void btnDashboard(MouseEvent event) throws IOException {
+        try{
+            StackPane pane = FXMLLoader.load(getClass().getResource("../View/Dashboard.fxml"));
+            userOrderPane.getChildren().setAll(pane);
+
+        }catch (Exception e){
+            System.out.println("Exception:"+e);
+        }
+
+
+    }
+
+    @FXML
     void btnGo(MouseEvent event) {
         LocalDate initialDateValue= initialDate.getValue();
         LocalDate finalDateValue= finalDate.getValue();
 
         try {
             XYChart.Series<String, Integer> series= new XYChart.Series<>();
-            UserOrderDao ud= (UserOrderDao) Naming.lookup("rmi://localhost/HelloUserOrder");
-            ResultSet rs= ud.getUserOrderByDate(initialDateValue, finalDateValue);
+            //UserOrderDao ud= (UserOrderDao) Naming.lookup("rmi://localhost/HelloUserOrder");
+            //ResultSet rs= ud.getUserOrderByDate(initialDateValue, finalDateValue);
 
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-//            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/lunchtime", "root", "");
-//            String sql = "SELECT date, sum(total_price) total_price " +
-//                    "FROM user_order  " +
-//                    "where status='Received' and date between '"+initialDateValue+"' and '"+finalDateValue+"' group by date ";
-//
-//            PreparedStatement ps = cn.prepareStatement(sql);
-            //ResultSet rs = ps.executeQuery();
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/lunchtime", "root", "");
+            String sql = "SELECT date, sum(total_price) total_price " +
+                    "FROM user_order  " +
+                    "where status='Received' and date between '"+initialDateValue+"' and '"+finalDateValue+"' group by date ";
+
+            PreparedStatement ps = cn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
             salesTable.getItems().clear();
             salesChart.getData().clear();
             while(rs.next()){
@@ -167,8 +186,6 @@ public class SalesDetailController implements Initializable {
     void btnAddFood(ActionEvent event) throws IOException {
         StackPane pane = FXMLLoader.load(getClass().getResource("../View/addFoodItems.fxml"));
         userOrderPane.getChildren().setAll(pane);
-
-
     }
 
     @FXML
@@ -224,8 +241,8 @@ public class SalesDetailController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
-       getVendorInfo();
+        btnSalesDetails.setStyle("-fx-background-color: #bb346f");
+        getVendorInfo();
         loadSalesDetails();
     }
 }

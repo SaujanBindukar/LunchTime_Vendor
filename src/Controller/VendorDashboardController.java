@@ -79,6 +79,12 @@ public class VendorDashboardController implements Initializable {
     @FXML
     private StackPane rootStackPane;
 
+    @FXML
+    private JFXButton btnUserOrder;
+
+    @FXML
+    private JFXButton btnDashboard;
+
     ObservableList<UserOrder> oblist = FXCollections.observableArrayList();
 
 
@@ -214,6 +220,13 @@ public class VendorDashboardController implements Initializable {
     }
 
     @FXML
+    void btnDashboard(MouseEvent event) throws IOException {
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/Dashboard.fxml"));
+        rootStackPane.getChildren().setAll(pane);
+
+    }
+
+    @FXML
     void btnSalesDetails(ActionEvent event) throws IOException {
         StackPane pane = FXMLLoader.load(getClass().getResource("../View/salesDetail.fxml"));
         rootStackPane.getChildren().setAll(pane);
@@ -255,6 +268,7 @@ public class VendorDashboardController implements Initializable {
         try {
             UserOrderDao ud= (UserOrderDao) Naming.lookup("rmi://localhost/HelloUserOrder");
             ResultSet rs=ud.getUserOrder();
+
             while(rs.next())
             {
                 oblist.add(new UserOrder(
@@ -274,7 +288,9 @@ public class VendorDashboardController implements Initializable {
             quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
             total_price.setCellValueFactory(new PropertyValueFactory<>("total_price"));
             status.setCellValueFactory(new PropertyValueFactory<>("status"));
+
             orderTable.setItems(oblist);
+
 
 
             orderTable.setOnMouseClicked(e ->{
@@ -349,6 +365,7 @@ public class VendorDashboardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+                btnUserOrder.setStyle("-fx-background-color: #bb346f");
                 loadOrder();
                 getVendorInfo();
 
