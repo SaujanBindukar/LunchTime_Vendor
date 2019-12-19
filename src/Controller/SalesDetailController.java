@@ -3,6 +3,8 @@ import bll.FoodMenu;
 import bll.UserOrder;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import dao.FoodDao;
 import dao.UserOrderDao;
 import dao.VendorDao;
@@ -24,6 +26,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
@@ -153,9 +156,37 @@ public class SalesDetailController implements Initializable {
     }
 
     @FXML
-    void btnLogout(MouseEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/Login.fxml"));
-        userOrderPane.getChildren().setAll(pane);
+    void btnLogout(MouseEvent event){
+        try{
+            JFXDialogLayout content = new JFXDialogLayout();
+            content.setHeading(new Text("Confirmation"));
+            content.setBody(new Text("Do you really want to logout?"));
+            JFXButton okButton = new JFXButton("Yes");
+            JFXButton cancelButton = new JFXButton("Cancel");
+            JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
+
+            okButton.setOnAction(e->{
+                try{
+                    dialog.close();
+                    StackPane pane = FXMLLoader.load(getClass().getResource("../View/Login.fxml"));
+                    userOrderPane.getChildren().setAll(pane);
+
+                }catch(Exception ex){
+                    System.out.println(ex);
+                }
+
+
+
+            });
+            cancelButton.setOnAction(ex->dialog.close());
+
+            content.setActions(cancelButton,okButton);
+            dialog.show();
+
+        }catch(Exception e){
+            System.out.println(e);
+
+        }
 
     }
 
@@ -241,7 +272,7 @@ public class SalesDetailController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        btnSalesDetails.setStyle("-fx-background-color: #bb346f");
+        btnSalesDetails.setStyle("-fx-background-color: #c92052");
         getVendorInfo();
         loadSalesDetails();
     }

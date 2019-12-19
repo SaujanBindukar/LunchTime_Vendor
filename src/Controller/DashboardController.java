@@ -1,6 +1,8 @@
 package Controller;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
 import dao.FoodDao;
 import dao.StudentDao;
 import dao.UserOrderDao;
@@ -21,6 +23,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -90,8 +93,36 @@ public class DashboardController implements Initializable {
 
     @FXML
     void btnLogout(MouseEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/Login.fxml"));
-        rootStackPane.getChildren().setAll(pane);
+        try{
+            JFXDialogLayout content = new JFXDialogLayout();
+            content.setHeading(new Text("Confirmation"));
+            content.setBody(new Text("Do you really want to logout?"));
+            JFXButton okButton = new JFXButton("Yes");
+            JFXButton cancelButton = new JFXButton("Cancel");
+            JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
+
+            okButton.setOnAction(e->{
+                try{
+                    dialog.close();
+                    StackPane pane = FXMLLoader.load(getClass().getResource("../View/Login.fxml"));
+                    rootStackPane.getChildren().setAll(pane);
+
+                }catch(Exception ex){
+                    System.out.println(ex);
+                }
+
+
+
+            });
+            cancelButton.setOnAction(ex->dialog.close());
+
+            content.setActions(cancelButton,okButton);
+            dialog.show();
+
+        }catch(Exception e){
+            System.out.println(e);
+
+        }
     }
 
     @FXML
@@ -119,6 +150,9 @@ public class DashboardController implements Initializable {
         StackPane pane = FXMLLoader.load(getClass().getResource("../View/addFoodItems.fxml"));
         rootStackPane.getChildren().setAll(pane);
     }
+
+
+
 
     @FXML
     void btnStudents(MouseEvent event) throws IOException {
@@ -251,7 +285,7 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        btnDashboard.setStyle("-fx-background-color: #bb346f");
+        btnDashboard.setStyle("-fx-background-color: #c92052");
         getVendorInfo();
         getTotalStudents();
         getTotalSales();

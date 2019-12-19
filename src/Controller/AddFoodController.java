@@ -1,3 +1,9 @@
+/**
+ * @Author Saujan Bindukar
+ * @since 2019-
+ *
+ * */
+
 package Controller;
 import bll.FoodMenu;
 import bll.UploadResponse;
@@ -61,25 +67,13 @@ public class AddFoodController implements Initializable {
     private StackPane rootStackPane;
 
     @FXML
-    private AnchorPane addFoodItemsPane;
-
-    @FXML
-    private JFXButton btnUserOrder;
-
-    @FXML
     private JFXButton btnAddFood;
-
-    @FXML
-    private JFXButton btnSalesDetails;
 
     @FXML
     private JFXTextField txtFoodName;
 
     @FXML
     private JFXTextField txtFoodPrice;
-
-    @FXML
-    private Button btnSubmitMenu;
 
     @FXML
     private TableView<FoodMenu> MenuTable;
@@ -97,24 +91,10 @@ public class AddFoodController implements Initializable {
     private TextField txtSearchFoodName;
 
     @FXML
-    private TextField txtSearch;
-
-    @FXML
     private JFXButton btnUpdate;
 
     @FXML
-    private JFXButton btnSearch;
-
-    @FXML
     private JFXButton btnDelete;
-
-    @FXML
-    private JFXButton btnGo;
-
-
-    final FileChooser fileChooser = new FileChooser();
-    File file;
-
 
     @FXML
     private Pane foodPictureView;
@@ -123,16 +103,14 @@ public class AddFoodController implements Initializable {
     private Circle profilePictureView;
 
     @FXML
-    private JFXButton btnClear;
-
-    @FXML
     private TableColumn<FoodMenu, String> food_picture;
 
-    @FXML
-    private ImageView btnChoosePicture;
 
     int foodId;
     String imagePath;
+    final FileChooser fileChooser = new FileChooser();
+    File file;
+
 
     private boolean foodNameIsEmpty = true;
     private boolean priceIsEmpty = true;
@@ -152,8 +130,6 @@ public class AddFoodController implements Initializable {
         txtFoodName.clear();
         txtFoodPrice.clear();
     }
-    @FXML
-    private JFXButton btnDashboard;
 
     @FXML
     void btnDashboard(MouseEvent event) throws IOException {
@@ -175,6 +151,7 @@ public class AddFoodController implements Initializable {
 
         }else{
             if(file==null){
+                System.out.println("File is null");
                 try{
                     Platform.runLater(() -> {
                         JFXDialogLayout content = new JFXDialogLayout();
@@ -229,6 +206,7 @@ public class AddFoodController implements Initializable {
                 }
             }
             else{
+                System.out.println("File is not null");
                 try{
                     Platform.runLater(() -> {
                         JFXDialogLayout content = new JFXDialogLayout();
@@ -314,29 +292,44 @@ public class AddFoodController implements Initializable {
                 }
 
             }
-
         }
-
-
     }
 
 
     @FXML
     void btnLogout(MouseEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/Login.fxml"));
-        rootStackPane.getChildren().setAll(pane);
+        try{
+            JFXDialogLayout content = new JFXDialogLayout();
+            content.setHeading(new Text("Confirmation"));
+            content.setBody(new Text("Do you really want to logout?"));
+            JFXButton okButton = new JFXButton("Yes");
+            JFXButton cancelButton = new JFXButton("Cancel");
+            JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
+
+            okButton.setOnAction(e->{
+                try{
+                    dialog.close();
+                    StackPane pane = FXMLLoader.load(getClass().getResource("../View/Login.fxml"));
+                    rootStackPane.getChildren().setAll(pane);
+                }catch(Exception ex){
+                    System.out.println(ex);
+                }
+            });
+            cancelButton.setOnAction(ex->dialog.close());
+            content.setActions(cancelButton,okButton);
+            dialog.show();
+
+        }catch(Exception e){
+            System.out.println(e);
+
+        }
     }
 
     @FXML
     void btnSalesDetails(ActionEvent event) throws IOException {
-            System.out.println("Sales Detail Button is pressed");
             StackPane pane = FXMLLoader.load(getClass().getResource("../View/salesDetail.fxml"));
             rootStackPane.getChildren().setAll(pane);
-
     }
-
-
-
 
     @FXML
     void myProfile(MouseEvent event) throws IOException {
@@ -344,6 +337,7 @@ public class AddFoodController implements Initializable {
         rootStackPane.getChildren().setAll(pane);
 
     }
+
     @FXML
     void btnClear(MouseEvent event) throws IOException {
         StackPane pane = FXMLLoader.load(getClass().getResource("../View/addFoodItems.fxml"));
@@ -363,7 +357,8 @@ public class AddFoodController implements Initializable {
         String foodPrice=txtFoodPrice.getText();
         System.out.println(foodName);
         System.out.println(foodPrice);
-        if (txtFoodName.getText().isEmpty() || txtFoodPrice.getText().isEmpty() || file==null) {
+
+        if (txtFoodName.getText().isEmpty() || txtFoodPrice.getText().isEmpty()) {
             Platform.runLater(() -> {
                 JFXDialogLayout content = new JFXDialogLayout();
                 content.setHeading(new Text("Error"));
@@ -378,89 +373,215 @@ public class AddFoodController implements Initializable {
             });
         }
         else{
-            try{
+            if(file==null){
+                System.out.println("File is null");
+                try{
+                    Platform.runLater(() -> {
+                        JFXDialogLayout content = new JFXDialogLayout();
+                        content.setHeading(new Text("Confirmation"));
+                        content.setBody(new Text("Do you really want to add new food?"));
+                        JFXButton okButton = new JFXButton("Yes");
+                        JFXButton cancelButton = new JFXButton("Cancel");
+                        JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
 
-                Platform.runLater(() -> {
-                    JFXDialogLayout content = new JFXDialogLayout();
-                    content.setHeading(new Text("Confirmation"));
-                    content.setBody(new Text("Do you really want to add new food?"));
-                    JFXButton okButton = new JFXButton("Yes");
-                    JFXButton cancelButton = new JFXButton("Cancel");
-                    JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
-
-                    JFXDialogLayout content1 = new JFXDialogLayout();
-                    content1.setHeading(new Text("Successfull"));
-                    content1.setBody(new Text("New food Added Successfully"));
-                    JFXButton yesButton1 = new JFXButton("OK");
-                    JFXDialog dialog1 = new JFXDialog(rootStackPane, content1, JFXDialog.DialogTransition.CENTER);
-                    yesButton1.setOnAction(event1 ->{
-                        dialog1.close();
-
-                    });
-                    content1.setActions(yesButton1);
-
-                    okButton.setOnAction(e ->{
-                        try{
-                            long timestamp = System.currentTimeMillis();
-                            String apiKey = "588753441842251";
-                            String eager = "w_400,h_400,c_pad";
-                            String publicId = String.valueOf(UUID.randomUUID());
-                            MessageDigest messageDigest = MessageDigest.getInstance("SHA-1");
-                            messageDigest.update(("eager=w_400,h_400,c_pad&public_id=" + publicId + "&timestamp=" + timestamp + "oWEOZ2sxuB2cpixDPaa6XhLS23E").getBytes());
-                            String signature = DatatypeConverter.printHexBinary(messageDigest.digest());
+                        JFXDialogLayout content1 = new JFXDialogLayout();
+                        content1.setHeading(new Text("Successfull"));
+                        content1.setBody(new Text("New food Added Successfully"));
+                        JFXButton yesButton1 = new JFXButton("OK");
+                        JFXDialog dialog1 = new JFXDialog(rootStackPane, content1, JFXDialog.DialogTransition.CENTER);
+                        yesButton1.setOnAction(event1 ->{
+                            loadData();
+                            dialog1.close();
+                            try {
+                                StackPane pane;
+                                pane = FXMLLoader.load(getClass().getResource("../View/addFoodItems.fxml"));
+                                rootStackPane.getChildren().setAll(pane);
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
 
 
-                            MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
-                            builder.addFormDataPart("timestamp", String.valueOf(timestamp))
-                                    .addFormDataPart("public_id", publicId)
-                                    .addFormDataPart("api_key", apiKey)
-                                    .addFormDataPart("eager", eager)
-                                    .addFormDataPart("signature", signature)
-                                    .addFormDataPart("file", file.getName(), RequestBody.create(MultipartBody.FORM, file));
+                        });
+                        content1.setActions(yesButton1);
 
-                            RequestBody requestBody = builder.build();
+                        okButton.setOnAction(e ->{
+                            try{
+                                Platform.runLater(()->{
+                                    FoodMenu fm= new FoodMenu();
+                                    fm.setPicture(imagePath);
+                                    fm.setFood_name(txtFoodName.getText());
+                                    fm.setFood_price(Integer.parseInt(txtFoodPrice.getText()));
+                                    try {
+                                        String message = fd.addMenu(fm);
+                                        System.out.println(message);
+                                        if (message.equals("Duplicate")){
+                                            System.out.println(message);
+                                            Platform.runLater(()->{
+                                                System.out.println(message);
+                                                JFXDialogLayout content2 = new JFXDialogLayout();
+                                                content2.setHeading(new Text("Error"));
+                                                content2.setBody(new Text("Food Name already exist!"));
+                                                JFXButton okButton1 = new JFXButton("Ok");
+                                                JFXDialog dialog2 = new JFXDialog(rootStackPane, content2, JFXDialog.DialogTransition.CENTER);
 
+                                                okButton1.setOnAction(event1 ->{
+                                                    dialog2.close();
 
-                            Call<UploadResponse> call = UploadAPI.apiService.upload(requestBody);
-                            call.enqueue(new Callback<UploadResponse>() {
-                                @Override
-                                public void onResponse(Call<UploadResponse> call, Response<UploadResponse> response) {
-
-                                    Platform.runLater(()->{
-                                        FoodMenu fm= new FoodMenu();
-                                        fm.setPicture(response.body().getEager().get(0).getSecureUrl());
-                                        fm.setFood_name(txtFoodName.getText());
-                                        fm.setFood_price(Integer.parseInt(txtFoodPrice.getText()));
-                                        try {
-                                            fd.addMenu(fm);
-                                        } catch (RemoteException ex) {
-                                            ex.printStackTrace();
+                                                });
+                                                content2.setActions(okButton1);
+                                                dialog2.show();
+                                            });
                                         }
-                                        MenuTable.getItems().clear();
-                                        loadData();
-                                        clearFields();
-                                        dialog1.show();
-                                    });
-                                }
+                                        else if(message=="Success"){
+                                            Platform.runLater(()->{
+                                                dialog1.show();
 
-                                @Override
-                                public void onFailure(Call<UploadResponse> call, Throwable throwable) {
+                                            });
 
-                                }
-                            });
-                        }catch(Exception ex){
-                            System.out.println(ex);
-                        }
-                        dialog.close();
+
+                                        }
+
+                                    } catch (RemoteException ex) {
+                                        ex.printStackTrace();
+                                    }
+
+                                });
+                            }catch(Exception ex){
+                                System.out.println(ex);
+                            }
+                            dialog.close();
+                        });
+
+                        cancelButton.setOnAction(e-> dialog.close());
+                        content.setActions(cancelButton,okButton);
+                        dialog.show();
                     });
-                    cancelButton.setOnAction(e-> dialog.close());
-                    content.setActions(cancelButton,okButton);
-                    dialog.show();
-                });
-            }catch (Exception e){
-                System.out.print(e);
+                }catch (Exception e){
+                    System.out.print(e);
+                }
+            }
+
+            else{
+                System.out.println("File is not null");
+                try{
+                    Platform.runLater(() -> {
+                        JFXDialogLayout content = new JFXDialogLayout();
+                        content.setHeading(new Text("Confirmation"));
+                        content.setBody(new Text("Do you really want to add new food?"));
+                        JFXButton okButton = new JFXButton("Yes");
+                        JFXButton cancelButton = new JFXButton("Cancel");
+                        JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
+
+                        JFXDialogLayout content1 = new JFXDialogLayout();
+                        content1.setHeading(new Text("Successfull"));
+                        content1.setBody(new Text("New food Added Successfully"));
+                        JFXButton yesButton1 = new JFXButton("OK");
+                        JFXDialog dialog1 = new JFXDialog(rootStackPane, content1, JFXDialog.DialogTransition.CENTER);
+                        yesButton1.setOnAction(event1 ->{
+                            loadData();
+                            dialog1.close();
+                            try{
+                                StackPane pane = FXMLLoader.load(getClass().getResource("../View/addFoodItems.fxml"));
+                                rootStackPane.getChildren().setAll(pane);
+                            }catch (Exception e){
+                                System.out.println(e);
+                            }
+                        });
+                        content1.setActions(yesButton1);
+                        dialog1.show();
+
+                        okButton.setOnAction(e ->{
+                            try{
+                                long timestamp = System.currentTimeMillis();
+                                String apiKey = "588753441842251";
+                                String eager = "w_400,h_400,c_pad";
+                                String publicId = String.valueOf(UUID.randomUUID());
+                                MessageDigest messageDigest = MessageDigest.getInstance("SHA-1");
+                                messageDigest.update(("eager=w_400,h_400,c_pad&public_id=" + publicId + "&timestamp=" + timestamp + "oWEOZ2sxuB2cpixDPaa6XhLS23E").getBytes());
+                                String signature = DatatypeConverter.printHexBinary(messageDigest.digest());
+
+
+                                MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+                                builder.addFormDataPart("timestamp", String.valueOf(timestamp))
+                                        .addFormDataPart("public_id", publicId)
+                                        .addFormDataPart("api_key", apiKey)
+                                        .addFormDataPart("eager", eager)
+                                        .addFormDataPart("signature", signature)
+                                        .addFormDataPart("file", file.getName(), RequestBody.create(MultipartBody.FORM, file));
+                                RequestBody requestBody = builder.build();
+
+
+                                Call<UploadResponse> call = UploadAPI.apiService.upload(requestBody);
+                                call.enqueue(new Callback<UploadResponse>() {
+                                    @Override
+                                    public void onResponse(Call<UploadResponse> call, Response<UploadResponse> response) {
+
+                                        Platform.runLater(()->{
+                                            FoodMenu fm= new FoodMenu();
+                                            fm.setPicture(response.body().getEager().get(0).getSecureUrl());
+                                            fm.setFood_name(txtFoodName.getText());
+                                            fm.setFood_price(Integer.parseInt(txtFoodPrice.getText()));
+                                            try {
+                                                String message = fd.addMenu(fm);
+                                                System.out.println(message);
+
+                                                if (message.equals("Duplicate")){
+                                                    System.out.println(message);
+                                                    Platform.runLater(()->{
+                                                        System.out.println(message);
+                                                        JFXDialogLayout content2 = new JFXDialogLayout();
+                                                        content2.setHeading(new Text("Error"));
+                                                        content2.setBody(new Text("Food Name already exist!"));
+                                                        JFXButton okButton = new JFXButton("Ok");
+                                                        JFXDialog dialog2 = new JFXDialog(rootStackPane, content2, JFXDialog.DialogTransition.CENTER);
+
+                                                        okButton.setOnAction(event1 ->{
+                                                            dialog2.close();
+                                                        });
+                                                        content2.setActions(okButton);
+                                                        dialog2.show();
+                                                    });
+                                                }
+                                                else if(message=="Success"){
+                                                    dialog1.show();
+//                                                    try{
+//                                                        StackPane pane = FXMLLoader.load(getClass().getResource("../View/addFoodItems.fxml"));
+//                                                        rootStackPane.getChildren().setAll(pane);
+//                                                    }catch (Exception e){
+//                                                        System.out.println(e);
+//                                                    }
+
+                                                }
+
+                                            } catch (RemoteException ex) {
+                                                ex.printStackTrace();
+                                            }
+                                            MenuTable.getItems().clear();
+                                            loadData();
+                                            clearFields();
+                                        });
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<UploadResponse> call, Throwable throwable) {
+
+                                    }
+                                });
+                            }catch(Exception ex){
+                                System.out.println(ex);
+                            }
+                            dialog.close();
+                        });
+                        cancelButton.setOnAction(e-> dialog.close());
+                        content.setActions(cancelButton,okButton);
+                        dialog.show();
+                    });
+                }catch (Exception e){
+                    System.out.print(e);
+                }
             }
         }
+
     }
     @FXML
     void loadFoodMenu(KeyEvent event) {
@@ -473,26 +594,6 @@ public class AddFoodController implements Initializable {
 
     @FXML
     void btnDelete(MouseEvent event) {
-
-//        if(txtFoodName.getText().isEmpty() || txtFoodPrice.getText().isEmpty() || file==null){
-//            Platform.runLater(() -> {
-//                JFXDialogLayout content = new JFXDialogLayout();
-//                content.setHeading(new Text("Error"));
-//                content.setBody(new Text("No items to delete"));
-//                JFXButton yesButton = new JFXButton("OK");
-//                JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
-//
-//                yesButton.setOnAction(e ->{
-//                    dialog.close();
-//                });
-//                content.setActions(yesButton);
-//                dialog.show();
-//            });
-//
-//        }
-//        else{
-
-
             Platform.runLater(() -> {
                 JFXDialogLayout content = new JFXDialogLayout();
                 content.setHeading(new Text("Confirmation"));
@@ -509,7 +610,7 @@ public class AddFoodController implements Initializable {
                 yesButton1.setOnAction(event1 -> {
                     dialog1.close();
                     try{
-                        StackPane pane = FXMLLoader.load(getClass().getResource("../View/Login.fxml"));
+                        StackPane pane = FXMLLoader.load(getClass().getResource("../View/addFoodItems.fxml"));
                         rootStackPane.getChildren().setAll(pane);
 
                     } catch(Exception e){
@@ -627,12 +728,7 @@ public class AddFoodController implements Initializable {
         rootStackPane.getChildren().setAll(pane);
 
     }
-    @FXML
-    void changeFoodImage(KeyEvent event) {
-        btnUpdate.setDisable(false);
-        btnDelete.setDisable(true);
 
-    }
 
     @FXML
     void changeFoodName(KeyEvent event) {
@@ -764,14 +860,11 @@ public class AddFoodController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
             getVendorInfo();
-            //String imagePath = "http://view.dreamstalk.ca/breeze5/images/no-photo.png";
-            //foodPictureView.setStyle(imagePath);
-            //foodPictureView.setStyle("-fx-background-size: cover; -fx-background-radius: 5 5 0 0;" + " -fx-background-color: grey; -fx-background-image: url( " + imagePath + ");");
             loadData();
         fieldValidators();
         btnUpdate.setDisable(true);
         btnDelete.setDisable(true);
-        btnAddFood.setStyle("-fx-background-color: #bb346f");
+        btnAddFood.setStyle("-fx-background-color: #c92052");
 
 
 

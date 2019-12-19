@@ -17,5 +17,9 @@ public interface UserOrderDao extends Remote{
     ResultSet getTotalSales() throws  RemoteException;
     ResultSet getFoodPreference() throws  RemoteException;
     ResultSet getTopUser() throws RemoteException;
+    ResultSet getPendingOrder() throws RemoteException;
+    ResultSet getTodaysOrder() throws  RemoteException;
+
+
 
 }

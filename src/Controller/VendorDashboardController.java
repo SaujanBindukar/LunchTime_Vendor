@@ -85,6 +85,13 @@ public class VendorDashboardController implements Initializable {
     @FXML
     private JFXButton btnDashboard;
 
+
+    @FXML
+    private JFXButton showTodaysOrder;
+
+    @FXML
+    private JFXButton showPendingOrder;
+
     ObservableList<UserOrder> oblist = FXCollections.observableArrayList();
 
 
@@ -115,11 +122,10 @@ public class VendorDashboardController implements Initializable {
                         rs.getString("status"),
                         rs.getDate("date"),
                         rs.getString("first_name"),
-                        rs.getString("food_name"))
+                        rs.getString("food_name")
+                        )
                 );
-
             }
-
             order_id.setCellValueFactory(new PropertyValueFactory<>("order_id"));
             date.setCellValueFactory(new PropertyValueFactory<>("date"));
             user_name.setCellValueFactory(new PropertyValueFactory<>("user_name"));
@@ -152,23 +158,10 @@ public class VendorDashboardController implements Initializable {
     @FXML
     void btnSearch(MouseEvent event) { // Search the user order by its First Name
         try {
-
-//            Class.forName("com.mysql.cj.jdbc.Driver");
-//            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/lunchtime", "root", "");
-//            String sql = "select user_order.order_id ,user_order.quantity, user_order.total_price," +
-//                    " user_order.status,user_order.date, menu.food_name," +
-//                    " user.first_name, user.last_name " +
-//                    "FROM user_order " +
-//                    "INNER JOIN menu ON user_order.food_id= menu.food_id " +
-//                    "INNER JOIN user ON user_order.id=user.id " +
-//                    "where first_name=?";
-//
-//            PreparedStatement ps = cn.prepareStatement(sql);
-//            ps.setString(1, txtSearch.getText() );
-//            ResultSet rs = ps.executeQuery();
             UserOrderDao ud= (UserOrderDao) Naming.lookup("rmi://localhost/HelloUserOrder");
             ResultSet rs= ud.getUserOrderByName(txtSearch.getText());
             orderTable.getItems().clear();
+            oblist.clear();
             System.out.println(rs);
 
             while(rs.next()){
@@ -214,8 +207,36 @@ public class VendorDashboardController implements Initializable {
 
     @FXML
     void btnLogout(MouseEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/Login.fxml"));
-        rootStackPane.getChildren().setAll(pane);
+        try{
+            JFXDialogLayout content = new JFXDialogLayout();
+            content.setHeading(new Text("Confirmation"));
+            content.setBody(new Text("Do you really want to logout?"));
+            JFXButton okButton = new JFXButton("Yes");
+            JFXButton cancelButton = new JFXButton("Cancel");
+            JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
+
+            okButton.setOnAction(e->{
+                try{
+                    dialog.close();
+                    StackPane pane = FXMLLoader.load(getClass().getResource("../View/Login.fxml"));
+                    rootStackPane .getChildren().setAll(pane);
+
+                }catch(Exception ex){
+                    System.out.println(ex);
+                }
+
+
+
+            });
+            cancelButton.setOnAction(ex->dialog.close());
+
+            content.setActions(cancelButton,okButton);
+            dialog.show();
+
+        }catch(Exception e){
+            System.out.println(e);
+
+        }
 
     }
 
@@ -363,9 +384,101 @@ public class VendorDashboardController implements Initializable {
 
 
 
+    @FXML
+    void showPendingOrder(MouseEvent event) {
+        try {
+            UserOrderDao ud= (UserOrderDao) Naming.lookup("rmi://localhost/HelloUserOrder");
+            ResultSet rs= ud.getPendingOrder();
+
+            orderTable.getItems().clear();
+            oblist.clear();
+
+            while(rs.next()){
+                oblist.add(new UserOrder(
+                        rs.getInt("order_id"),
+                        rs.getInt("quantity"),
+                        rs.getInt("total_price"),
+                        rs.getString("status"),
+                        rs.getDate("date"),
+                        rs.getString("first_name"),
+                        rs.getString("food_name"))
+                );
+            }
+            order_id.setCellValueFactory(new PropertyValueFactory<>("order_id"));
+            date.setCellValueFactory(new PropertyValueFactory<>("date"));
+            user_name.setCellValueFactory(new PropertyValueFactory<>("user_name"));
+            food_name.setCellValueFactory(new PropertyValueFactory<>("food_name"));
+            quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+            total_price.setCellValueFactory(new PropertyValueFactory<>("total_price"));
+            status.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+            orderTable.setItems(oblist);
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (NotBoundException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+
+    @FXML
+    void showTodaysOrder(MouseEvent event) {
+        orderTable.getItems().clear();
+        try {
+            UserOrderDao ud= (UserOrderDao) Naming.lookup("rmi://localhost/HelloUserOrder");
+            ResultSet rs= ud.getTodaysOrder();
+
+            while(rs.next()){
+                oblist.add(new UserOrder(
+                        rs.getInt("order_id"),
+                        rs.getInt("quantity"),
+                        rs.getInt("total_price"),
+                        rs.getString("status"),
+                        rs.getDate("date"),
+                        rs.getString("first_name"),
+                        rs.getString("food_name"))
+                );
+
+            }
+
+            order_id.setCellValueFactory(new PropertyValueFactory<>("order_id"));
+            date.setCellValueFactory(new PropertyValueFactory<>("date"));
+            user_name.setCellValueFactory(new PropertyValueFactory<>("user_name"));
+            food_name.setCellValueFactory(new PropertyValueFactory<>("food_name"));
+            quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+            total_price.setCellValueFactory(new PropertyValueFactory<>("total_price"));
+            status.setCellValueFactory(new PropertyValueFactory<>("status"));
+            orderTable.setItems(oblist);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (RemoteException e) {
+            e.printStackTrace();
+        } catch (NotBoundException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+
+
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-                btnUserOrder.setStyle("-fx-background-color: #bb346f");
+                btnUserOrder.setStyle("-fx-background-color: #c92052");
                 loadOrder();
                 getVendorInfo();
 

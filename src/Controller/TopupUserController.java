@@ -248,8 +248,36 @@ public class TopupUserController  implements  Initializable{
 
     @FXML
     void btnLogout(MouseEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/Login.fxml"));
-        userOrderPane.getChildren().setAll(pane);
+        try{
+            JFXDialogLayout content = new JFXDialogLayout();
+            content.setHeading(new Text("Confirmation"));
+            content.setBody(new Text("Do you really want to logout?"));
+            JFXButton okButton = new JFXButton("Yes");
+            JFXButton cancelButton = new JFXButton("Cancel");
+            JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
+
+            okButton.setOnAction(e->{
+                try{
+                    dialog.close();
+                    StackPane pane = FXMLLoader.load(getClass().getResource("../View/Login.fxml"));
+                    rootStackPane.getChildren().setAll(pane);
+
+                }catch(Exception ex){
+                    System.out.println(ex);
+                }
+
+
+
+            });
+            cancelButton.setOnAction(ex->dialog.close());
+
+            content.setActions(cancelButton,okButton);
+            dialog.show();
+
+        }catch(Exception e){
+            System.out.println(e);
+
+        }
 
     }
 
@@ -559,11 +587,6 @@ public class TopupUserController  implements  Initializable{
             }
         });
         txtAddBalance.textProperty().addListener((observable, oldValue, newValue) -> txtAddBalance.validate());
-
-
-
-
-
     }
 
 
@@ -574,7 +597,7 @@ public class TopupUserController  implements  Initializable{
 
         });
         fieldValidators();
-        btnTopUpUser.setStyle("-fx-background-color: #bb346f");
+        btnTopUpUser.setStyle("-fx-background-color: #c92052");
 
 
         loadUser();

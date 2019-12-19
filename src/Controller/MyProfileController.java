@@ -143,10 +143,11 @@ public class MyProfileController implements Initializable {
                 }catch(Exception ex){
                     System.out.println(ex);
                 }
-                cancelButton.setOnAction(ex->dialog.close());
+
 
 
             });
+            cancelButton.setOnAction(ex->dialog.close());
 
             content.setActions(cancelButton,okButton);
             dialog.show();

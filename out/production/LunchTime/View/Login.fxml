@@ -23,7 +23,7 @@
             </ImageView>
             <AnchorPane fx:id="loginPane" layoutX="484.0" prefHeight="600.0" prefWidth="517.0" style="-fx-background-color: #f0f5fb;">
                <children>
-                  <Pane layoutX="53.0" layoutY="46.0" prefHeight="506.0" prefWidth="412.0" style="-fx-background-color: white;">
+                  <Pane fx:id="progressPane" layoutX="53.0" layoutY="46.0" prefHeight="506.0" prefWidth="412.0" style="-fx-background-color: white;">
                      <effect>
                         <DropShadow color="#aba0a0" />
                      </effect>
