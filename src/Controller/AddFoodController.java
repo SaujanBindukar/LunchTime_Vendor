@@ -18,8 +18,6 @@ import dao.FoodDao;
 import dao.UploadAPI;
 import dao.VendorDao;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -28,16 +26,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.event.ActionEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -47,7 +42,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import javax.sql.RowSet;
 import javax.xml.bind.DatatypeConverter;
 import java.io.File;
 import java.io.IOException;
@@ -133,7 +127,7 @@ public class AddFoodController implements Initializable {
 
     @FXML
     void btnDashboard(MouseEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/Dashboard.fxml"));
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/dashboard.fxml"));
         rootStackPane.getChildren().setAll(pane);
     }
 
@@ -309,7 +303,7 @@ public class AddFoodController implements Initializable {
             okButton.setOnAction(e->{
                 try{
                     dialog.close();
-                    StackPane pane = FXMLLoader.load(getClass().getResource("../View/Login.fxml"));
+                    StackPane pane = FXMLLoader.load(getClass().getResource("../View/login.fxml"));
                     rootStackPane.getChildren().setAll(pane);
                 }catch(Exception ex){
                     System.out.println(ex);
@@ -724,7 +718,7 @@ public class AddFoodController implements Initializable {
 
     @FXML
     void btnUserOrder(ActionEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/VendorDashboard.fxml"));
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/userOrder.fxml"));
         rootStackPane.getChildren().setAll(pane);
 
     }

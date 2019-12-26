@@ -7,9 +7,7 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import java.io.IOException;
@@ -125,7 +123,6 @@ public class LoginController implements Initializable {
             try {
                 VendorDao vd= (VendorDao) Naming.lookup("rmi://localhost/HelloServer");
                 Boolean rs = vd.checkVendor(txtEmail.getText(), txtPassword.getText());
-                //Boolean rs = vd.checkVendor("sauzanbindukar@gmail.com", "saujan123");
                 try {
                     if (rs) {
                         ResultSet rs1= vd.getVendorInfo(txtEmail.getText());
@@ -133,7 +130,7 @@ public class LoginController implements Initializable {
                             id = rs1.getInt("vendor_id");
                             System.out.println("Vendor_id is:"+id);
                         }
-                        StackPane pane = FXMLLoader.load(getClass().getResource("../View/Dashboard.fxml"));
+                        StackPane pane = FXMLLoader.load(getClass().getResource("../View/dashboard.fxml"));
                         System.out.print("Moved to next page");
                         login_pane.getChildren().setAll(pane);
                     } else {

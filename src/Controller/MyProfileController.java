@@ -1,5 +1,4 @@
 package Controller;
-import bll.FoodMenu;
 import bll.UploadResponse;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
@@ -10,15 +9,12 @@ import com.jfoenix.validation.RegexValidator;
 import com.jfoenix.validation.RequiredFieldValidator;
 import dao.*;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -33,22 +29,17 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import sun.awt.geom.AreaOp;
 
 import javax.xml.bind.DatatypeConverter;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.net.Socket;
 import java.net.URL;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.security.MessageDigest;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
@@ -120,7 +111,7 @@ public class MyProfileController implements Initializable {
 
     @FXML
     void btnDashboard(MouseEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/Dashboard.fxml"));
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/dashboard.fxml"));
         rootStackPane.getChildren().setAll(pane);
     }
 
@@ -137,7 +128,7 @@ public class MyProfileController implements Initializable {
             okButton.setOnAction(e->{
                 try{
                     dialog.close();
-                    StackPane pane = FXMLLoader.load(getClass().getResource("../View/Login.fxml"));
+                    StackPane pane = FXMLLoader.load(getClass().getResource("../View/login.fxml"));
                     myProfilePane.getChildren().setAll(pane);
 
                 }catch(Exception ex){
@@ -188,7 +179,7 @@ public class MyProfileController implements Initializable {
 
     @FXML
     void btnUserOrder(ActionEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/VendorDashboard.fxml"));
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/userOrder.fxml"));
         myProfilePane.getChildren().setAll(pane);
     }
 

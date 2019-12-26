@@ -122,7 +122,7 @@ public class TopupUserController  implements  Initializable{
 
     @FXML
     void btnDashboard(MouseEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/Dashboard.fxml"));
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/dashboard.fxml"));
         rootStackPane.getChildren().setAll(pane);
     }
 
@@ -259,7 +259,7 @@ public class TopupUserController  implements  Initializable{
             okButton.setOnAction(e->{
                 try{
                     dialog.close();
-                    StackPane pane = FXMLLoader.load(getClass().getResource("../View/Login.fxml"));
+                    StackPane pane = FXMLLoader.load(getClass().getResource("../View/login.fxml"));
                     rootStackPane.getChildren().setAll(pane);
 
                 }catch(Exception ex){
@@ -315,7 +315,7 @@ public class TopupUserController  implements  Initializable{
     @FXML
     void btnUserOrder(ActionEvent event) throws IOException {
         System.out.println("User Order Button is pressed.");
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/VendorDashboard.fxml"));
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/userOrder.fxml"));
         userOrderPane.getChildren().setAll(pane);
     }
 

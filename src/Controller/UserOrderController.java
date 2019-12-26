@@ -1,15 +1,11 @@
 package Controller;
 import bll.UserOrder;
 import com.jfoenix.controls.*;
-import com.jfoenix.validation.RequiredFieldValidator;
-import com.sun.rowset.CachedRowSetImpl;
-import dao.FoodDao;
 import dao.UserOrderDao;
 import dao.VendorDao;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -18,16 +14,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-
-import javax.sql.rowset.CachedRowSet;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -38,7 +30,7 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
-public class VendorDashboardController implements Initializable {
+public class UserOrderController implements Initializable {
 
     @FXML
     private TableView<UserOrder> orderTable;
@@ -82,19 +74,7 @@ public class VendorDashboardController implements Initializable {
     @FXML
     private JFXButton btnUserOrder;
 
-    @FXML
-    private JFXButton btnDashboard;
-
-
-    @FXML
-    private JFXButton showTodaysOrder;
-
-    @FXML
-    private JFXButton showPendingOrder;
-
     ObservableList<UserOrder> oblist = FXCollections.observableArrayList();
-
-
 
     @FXML
     void loadUserOrders(KeyEvent event) {
@@ -218,7 +198,7 @@ public class VendorDashboardController implements Initializable {
             okButton.setOnAction(e->{
                 try{
                     dialog.close();
-                    StackPane pane = FXMLLoader.load(getClass().getResource("../View/Login.fxml"));
+                    StackPane pane = FXMLLoader.load(getClass().getResource("../View/login.fxml"));
                     rootStackPane .getChildren().setAll(pane);
 
                 }catch(Exception ex){
@@ -242,7 +222,7 @@ public class VendorDashboardController implements Initializable {
 
     @FXML
     void btnDashboard(MouseEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/Dashboard.fxml"));
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/dashboard.fxml"));
         rootStackPane.getChildren().setAll(pane);
 
     }
@@ -282,7 +262,7 @@ public class VendorDashboardController implements Initializable {
     @FXML
     void btnUserOrder(ActionEvent event) throws IOException {
         System.out.println("User Order Button is pressed.");
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/VendorDashboard.fxml"));
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/userOrder.fxml"));
         rootStackPane.getChildren().setAll(pane);
     }
     void loadOrder(){
@@ -317,39 +297,105 @@ public class VendorDashboardController implements Initializable {
             orderTable.setOnMouseClicked(e ->{
                 String orderStatus=orderTable.getSelectionModel().getSelectedItem().getStatus();
                 System.out.println("OrderStatus:"+ orderStatus);
-                if (e.getClickCount()==2){
-                    switch(orderStatus){
-                        case "Received":
-                            System.out.println("Received order status");
-                            break;
-                        case "Pending":
-                            Platform.runLater(() -> {
-                                JFXDialogLayout content = new JFXDialogLayout();
-                                content.setHeading(new Text("Confirmation"));
-                                content.setBody(new Text("Are you sure the user has received the order?"));
-                                JFXButton yesButton = new JFXButton("Yes");
-                                JFXButton cancelButton = new JFXButton("Cancel");
-                                JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
-                                cancelButton.setOnAction(event -> dialog.close());
-                                yesButton.setOnAction(event ->{
-                                    try{
-                                        //UserOrderDao ud= (UserOrderDao) Naming.lookup("rmi://localhost/HelloUserOrder");
-                                        ud.updateStatus(orderTable.getSelectionModel().getSelectedItem().getOrder_id());
-                                        orderTable.getItems().clear();
-                                        loadOrder();
-                                        dialog.close();
-                                    }catch(Exception ex){
-                                        System.out.println(ex);
 
-                                    }
-                                    dialog.close();
-                                });
-                                content.setActions(cancelButton, yesButton);
-                                dialog.show();
-                            });
-                            System.out.println("Received order pending");
-                            break;
-                    }
+                if (e.getClickCount()==2){
+                    Platform.runLater(() -> {
+                        JFXDialogLayout content = new JFXDialogLayout();
+                        content.setHeading(new Text("Food Status"));
+                        content.setBody(new Text("What's the food status?"));
+
+                        JFXButton pendingButton = new JFXButton("Pending");
+                        JFXButton processingButton = new JFXButton("Processing");
+                        JFXButton readyButton = new JFXButton("Ready");
+                        JFXButton receivedButton = new JFXButton("Received");
+                        JFXButton cancelButton = new JFXButton("Cancel");
+
+
+                        JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
+
+                        switch (orderStatus){
+                            case "Pending":
+                                pendingButton.setStyle("-fx-background-color: yellow");
+                                break;
+                            case "Processing":
+                                processingButton.setStyle("-fx-background-color: yellow");
+                                break;
+                            case "Ready":
+                                readyButton.setStyle("-fx-background-color: yellow");
+                                break;
+                            case "Received":
+                                receivedButton.setStyle("-fx-background-color: yellow");
+                                break;
+                            case "Cancel":
+                                cancelButton.setStyle("-fx-background-color: yellow");
+                                break;
+                        }
+
+                        cancelButton.setOnAction(event -> {
+                            try{
+                                ud.updateStatus(orderTable.getSelectionModel().getSelectedItem().getOrder_id(), "Cancel");
+                                orderTable.getItems().clear();
+                                loadOrder();
+                                dialog.close();
+                            }catch(Exception ex){
+                                System.out.println(ex);
+
+                            }
+
+                            dialog.close();
+                        });
+                        pendingButton.setOnAction(event ->{
+                            try{
+                                ud.updateStatus(orderTable.getSelectionModel().getSelectedItem().getOrder_id(), "Pending");
+                                orderTable.getItems().clear();
+                                loadOrder();
+                                dialog.close();
+                            }catch(Exception ex){
+                                System.out.println(ex);
+
+                            }
+                            dialog.close();
+                        });
+                        processingButton.setOnAction(event ->{
+                            try{
+                                ud.updateStatus(orderTable.getSelectionModel().getSelectedItem().getOrder_id(), "Processing");
+                                orderTable.getItems().clear();
+                                loadOrder();
+                                dialog.close();
+                            }catch(Exception ex){
+                                System.out.println(ex);
+
+                            }
+                            dialog.close();
+                        });
+                        readyButton.setOnAction(event ->{
+                            try{
+                                ud.updateStatus(orderTable.getSelectionModel().getSelectedItem().getOrder_id(), "Ready");
+                                orderTable.getItems().clear();
+                                loadOrder();
+                                dialog.close();
+                            }catch(Exception ex){
+                                System.out.println(ex);
+
+                            }
+                            dialog.close();
+                        });
+                        receivedButton.setOnAction(event ->{
+                            try{
+                                ud.updateStatus(orderTable.getSelectionModel().getSelectedItem().getOrder_id(), "Received");
+                                orderTable.getItems().clear();
+                                loadOrder();
+                                dialog.close();
+                            }catch(Exception ex){
+                                System.out.println(ex);
+
+                            }
+                            dialog.close();
+                        });
+                        content.setActions(pendingButton,processingButton,readyButton,receivedButton,cancelButton);
+                        dialog.show();
+                    });
+
                 }
             });
         } catch (SQLException e) {
@@ -447,9 +493,7 @@ public class VendorDashboardController implements Initializable {
                         rs.getString("first_name"),
                         rs.getString("food_name"))
                 );
-
             }
-
             order_id.setCellValueFactory(new PropertyValueFactory<>("order_id"));
             date.setCellValueFactory(new PropertyValueFactory<>("date"));
             user_name.setCellValueFactory(new PropertyValueFactory<>("user_name"));
@@ -468,13 +512,7 @@ public class VendorDashboardController implements Initializable {
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
-
-
     }
-
-
-
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

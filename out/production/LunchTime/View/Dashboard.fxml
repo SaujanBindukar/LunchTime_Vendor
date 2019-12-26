@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -61,7 +62,7 @@
             </Pane>
             <AnchorPane layoutY="83.0" prefHeight="518.0" prefWidth="1000.0" style="-fx-background-color: #f0f5fb;">
                <children>
-                  <Pane fx:id="btnStudents" layoutX="57.0" layoutY="14.0" onMouseClicked="#btnStudents" prefHeight="146.0" prefWidth="185.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                  <Pane fx:id="btnStudents" layoutX="57.0" layoutY="14.0" onMouseClicked="#btnStudents" prefHeight="134.0" prefWidth="169.0" style="-fx-background-color: white; -fx-background-radius: 10;">
                      <effect>
                         <DropShadow color="#aba0a0" />
                      </effect>
@@ -71,100 +72,104 @@
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelStudentNumber" layoutX="79.0" layoutY="110.0" text="10" textAlignment="CENTER">
+                        <Label fx:id="labelStudentNumber" layoutX="79.0" layoutY="110.0" text="0" textAlignment="CENTER">
                            <font>
                               <Font name="Arial Rounded MT Bold" size="18.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="73.0" fitWidth="94.0" layoutX="55.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="73.0" fitWidth="94.0" layoutX="49.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/useravatar.png" />
                            </image>
                         </ImageView>
                      </children>
                   </Pane>
-                  <Pane fx:id="btnCanteenCoins" layoutX="511.0" layoutY="14.0" onMouseClicked="#btnCanteenCoins" prefHeight="146.0" prefWidth="185.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                  <Pane fx:id="btnCanteenCoins" layoutX="558.0" layoutY="14.0" onMouseClicked="#btnCanteenCoins" prefHeight="134.0" prefWidth="185.0" style="-fx-background-color: white; -fx-background-radius: 10;">
                      <effect>
                         <DropShadow color="#aba0a0" />
                      </effect>
                      <children>
-                        <Label layoutX="6.0" layoutY="80.0" text="Total Canteen Coins">
+                        <Label layoutX="16.0" layoutY="80.0" text="Total Canteen Coins">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelCanteenCoins" layoutX="75.0" layoutY="110.0" text="100" textAlignment="CENTER">
+                        <Label fx:id="labelCanteenCoins" layoutX="90.0" layoutY="110.0" text="0" textAlignment="CENTER">
                            <font>
                               <Font name="Arial Rounded MT Bold" size="18.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="73.0" fitWidth="94.0" layoutX="55.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="73.0" fitWidth="94.0" layoutX="58.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/deposit.png" />
                            </image>
                         </ImageView>
                      </children>
                   </Pane>
-                  <Pane fx:id="btnSales" layoutX="749.0" layoutY="14.0" onMouseClicked="#btnSales" prefHeight="146.0" prefWidth="185.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                  <Pane fx:id="btnSales" layoutX="787.0" layoutY="14.0" onMouseClicked="#btnSales" prefHeight="134.0" prefWidth="185.0" style="-fx-background-color: white; -fx-background-radius: 10;">
                      <effect>
                         <DropShadow color="#aba0a0" />
                      </effect>
                      <children>
-                        <Label layoutX="42.0" layoutY="80.0" text="Total Sales">
+                        <Label layoutX="57.0" layoutY="80.0" text="Total Sales">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelSales" layoutX="75.0" layoutY="110.0" text="100" textAlignment="CENTER">
+                        <Label fx:id="labelSales" layoutX="92.0" layoutY="110.0" text="0" textAlignment="CENTER">
                            <font>
                               <Font name="Arial Rounded MT Bold" size="18.0" />
                            </font>
                         </Label>
-                        <ImageView fitHeight="73.0" fitWidth="94.0" layoutX="55.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="73.0" fitWidth="94.0" layoutX="59.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@../images/sales.png" />
                            </image>
                         </ImageView>
                      </children>
                   </Pane>
-                  <Pane layoutX="57.0" layoutY="184.0" prefHeight="326.0" prefWidth="414.0" style="-fx-background-color: white;">
+                  <Pane layoutX="57.0" layoutY="161.0" prefHeight="349.0" prefWidth="414.0" style="-fx-background-color: white;">
                      <effect>
                         <DropShadow color="#aba0a0" />
                      </effect>
                      <children>
                         <Label layoutX="107.0" layoutY="304.0" text="PieChart showing top food sold" />
-                        <PieChart fx:id="foodPreferenceChart" layoutX="13.0" layoutY="14.0" prefHeight="285.0" prefWidth="389.0" />
+                        <PieChart fx:id="foodPreferenceChart" layoutX="13.0" layoutY="43.0" prefHeight="256.0" prefWidth="389.0" />
+                        <JFXDatePicker fx:id="foodInitialDate" layoutX="14.0" layoutY="16.0" prefHeight="27.0" prefWidth="153.0" promptText="From" />
+                        <JFXDatePicker fx:id="foodFinalDate" layoutX="192.0" layoutY="14.0" prefHeight="27.0" prefWidth="153.0" promptText="To" />
+                        <JFXButton fx:id="btnFoodPreference" buttonType="RAISED" layoutX="356.0" layoutY="14.0" onMouseClicked="#btnFoodPreference" style="-fx-background-color: yellow;" text="Go" />
                      </children>
                   </Pane>
-                  <Pane layoutX="558.0" layoutY="184.0" prefHeight="326.0" prefWidth="414.0" style="-fx-background-color: white;">
+                  <Pane layoutX="558.0" layoutY="161.0" prefHeight="349.0" prefWidth="414.0" style="-fx-background-color: white;">
                      <effect>
                         <DropShadow color="#aba0a0" />
                      </effect>
                      <children>
-                        <BarChart fx:id="topUserChart" layoutX="25.0" layoutY="14.0" prefHeight="285.0" prefWidth="372.0">
+                        <BarChart fx:id="topUserChart" layoutX="25.0" layoutY="43.0" prefHeight="256.0" prefWidth="372.0">
                           <xAxis>
-                            <CategoryAxis side="BOTTOM" />
+                            <CategoryAxis side="BOTTOM" fx:id="xAxis" />
                           </xAxis>
                           <yAxis>
-                            <NumberAxis side="LEFT" />
+                            <NumberAxis fx:id="yAxis" side="LEFT" />
                           </yAxis>
                         </BarChart>
-                        <Label layoutX="-49.0" layoutY="130.0" rotate="-90.0" text="Canteen Coins Spend" />
-                        <Label layoutX="296.0" layoutY="273.0" text="Student ID" />
                         <Label layoutX="49.0" layoutY="304.0" text="Graph showing students spending highest canteen coins" />
+                        <JFXDatePicker fx:id="userFinalDate" layoutX="190.0" layoutY="14.0" prefHeight="27.0" prefWidth="153.0" promptText="To" />
+                        <JFXDatePicker fx:id="userInitialDate" layoutX="25.0" layoutY="16.0" prefHeight="27.0" prefWidth="153.0" promptText="From" />
+                        <JFXButton fx:id="btnTopUser" buttonType="RAISED" layoutX="356.0" layoutY="13.0" onMouseClicked="#btnTopUser" style="-fx-background-color: yellow;" text="Go" />
                      </children>
                   </Pane>
-                  <Pane fx:id="btnFood" layoutX="277.0" layoutY="14.0" onMouseClicked="#btnFood" prefHeight="146.0" prefWidth="185.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                  <Pane fx:id="btnFood" layoutX="277.0" layoutY="14.0" onMouseClicked="#btnFood" prefHeight="134.0" prefWidth="185.0" style="-fx-background-color: white; -fx-background-radius: 10;">
                      <effect>
                         <DropShadow color="#aba0a0" />
                      </effect>
                      <children>
-                        <Label layoutX="46.0" layoutY="80.0" text="Total Food" textAlignment="CENTER">
+                        <Label layoutX="52.0" layoutY="80.0" text="Total Food" textAlignment="CENTER">
                            <font>
                               <Font size="18.0" />
                            </font>
                         </Label>
-                        <Label fx:id="labelTotalFood" layoutX="79.0" layoutY="110.0" text="10" textAlignment="CENTER">
+                        <Label fx:id="labelTotalFood" layoutX="89.0" layoutY="110.0" text="0" textAlignment="CENTER">
                            <font>
                               <Font name="Arial Rounded MT Bold" size="18.0" />
                            </font>

@@ -1,11 +1,9 @@
 package Controller;
-import bll.FoodMenu;
 import bll.UserOrder;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
-import dao.FoodDao;
 import dao.UserOrderDao;
 import dao.VendorDao;
 import javafx.collections.FXCollections;
@@ -15,7 +13,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -31,9 +28,6 @@ import javafx.scene.text.Text;
 import java.io.IOException;
 import java.net.URL;
 import java.rmi.Naming;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.Date;
@@ -67,8 +61,6 @@ public class SalesDetailController implements Initializable {
     @FXML
     private ImageView myProfile;
 
-//    @FXML
-//    private AreaChart<String, Integer> salesChart;
 
     @FXML
     private LineChart<String, Integer> salesChart;
@@ -101,6 +93,7 @@ public class SalesDetailController implements Initializable {
     private Circle profilePictureView;
 
 
+
     ObservableList<UserOrder> oblist = FXCollections.observableArrayList();
 
     @FXML
@@ -109,7 +102,7 @@ public class SalesDetailController implements Initializable {
     @FXML
     void btnDashboard(MouseEvent event) throws IOException {
         try{
-            StackPane pane = FXMLLoader.load(getClass().getResource("../View/Dashboard.fxml"));
+            StackPane pane = FXMLLoader.load(getClass().getResource("../View/dashboard.fxml"));
             userOrderPane.getChildren().setAll(pane);
 
         }catch (Exception e){
@@ -126,17 +119,8 @@ public class SalesDetailController implements Initializable {
 
         try {
             XYChart.Series<String, Integer> series= new XYChart.Series<>();
-            //UserOrderDao ud= (UserOrderDao) Naming.lookup("rmi://localhost/HelloUserOrder");
-            //ResultSet rs= ud.getUserOrderByDate(initialDateValue, finalDateValue);
-
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection cn = DriverManager.getConnection("jdbc:mysql://localhost/lunchtime", "root", "");
-            String sql = "SELECT date, sum(total_price) total_price " +
-                    "FROM user_order  " +
-                    "where status='Received' and date between '"+initialDateValue+"' and '"+finalDateValue+"' group by date ";
-
-            PreparedStatement ps = cn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+            UserOrderDao ud= (UserOrderDao) Naming.lookup("rmi://localhost/HelloUserOrder");
+            ResultSet rs= ud.getSalesDetailByDate(initialDateValue,finalDateValue);
             salesTable.getItems().clear();
             salesChart.getData().clear();
             while(rs.next()){
@@ -168,7 +152,7 @@ public class SalesDetailController implements Initializable {
             okButton.setOnAction(e->{
                 try{
                     dialog.close();
-                    StackPane pane = FXMLLoader.load(getClass().getResource("../View/Login.fxml"));
+                    StackPane pane = FXMLLoader.load(getClass().getResource("../View/login.fxml"));
                     userOrderPane.getChildren().setAll(pane);
 
                 }catch(Exception ex){
@@ -208,10 +192,7 @@ public class SalesDetailController implements Initializable {
     void btnTopUpUser(MouseEvent event) throws IOException {
         StackPane pane = FXMLLoader.load(getClass().getResource("../View/topupUser.fxml"));
         userOrderPane.getChildren().setAll(pane);
-
-
     }
-
 
     @FXML
     void btnAddFood(ActionEvent event) throws IOException {
@@ -221,7 +202,7 @@ public class SalesDetailController implements Initializable {
 
     @FXML
     void btnUserOrder(ActionEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/VendorDashboard.fxml"));
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/userOrder.fxml"));
         userOrderPane.getChildren().setAll(pane);
     }
 
