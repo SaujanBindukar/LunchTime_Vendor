@@ -1,3 +1,9 @@
+/**
+ * @author Saujan Bindukar
+ * This control fetches the sales detail of food till date and also represent them in line chart.
+ * The sales detail can be customized by using dates.
+ */
+
 package Controller;
 import bll.UserOrder;
 import com.jfoenix.controls.JFXButton;
@@ -17,14 +23,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-
 import java.io.IOException;
 import java.net.URL;
 import java.rmi.Naming;
@@ -43,24 +47,7 @@ public class SalesDetailController implements Initializable {
     private AnchorPane userOrderPane;
 
     @FXML
-    private JFXButton btnUserOrder;
-
-    @FXML
-    private JFXButton btnAddFood;
-
-    @FXML
     private JFXButton btnSalesDetails;
-
-
-    @FXML
-    private JFXButton btnTopUpUser;
-
-    @FXML
-    private ImageView btnLogout;
-
-    @FXML
-    private ImageView myProfile;
-
 
     @FXML
     private LineChart<String, Integer> salesChart;
@@ -78,9 +65,6 @@ public class SalesDetailController implements Initializable {
     private JFXDatePicker finalDate;
 
     @FXML
-    private JFXButton btnGo;
-
-    @FXML
     private TableView<UserOrder> salesTable;
 
     @FXML
@@ -92,31 +76,57 @@ public class SalesDetailController implements Initializable {
     @FXML
     private Circle profilePictureView;
 
-
-
     ObservableList<UserOrder> oblist = FXCollections.observableArrayList();
 
-    @FXML
-    private JFXButton btnDashboard;
-
+    /** Navigation to dashboard page */
     @FXML
     void btnDashboard(MouseEvent event) throws IOException {
-        try{
             StackPane pane = FXMLLoader.load(getClass().getResource("../View/dashboard.fxml"));
             userOrderPane.getChildren().setAll(pane);
-
-        }catch (Exception e){
-            System.out.println("Exception:"+e);
-        }
-
-
     }
+    /** Navigation to Sales Detail page */
+    @FXML
+    void btnSalesDetails(ActionEvent event) throws IOException {
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/salesDetail.fxml"));
+        userOrderPane.getChildren().setAll(pane);
+    }
+    /** Navigation to My Profile page */
+    @FXML
+    void myProfile(MouseEvent event) throws IOException {
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/myProfile.fxml"));
+        userOrderPane.getChildren().setAll(pane);
+    }
+
+    /** Navigation to Top Up user page */
+    @FXML
+    void btnTopUpUser(MouseEvent event) throws IOException {
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/topupUser.fxml"));
+        userOrderPane.getChildren().setAll(pane);
+    }
+
+    /** Navigation to Add Food page */
+    @FXML
+    void btnAddFood(ActionEvent event) throws IOException {
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/addFoodItems.fxml"));
+        userOrderPane.getChildren().setAll(pane);
+    }
+    /** Navigation to User Order page */
+    @FXML
+    void btnUserOrder(ActionEvent event) throws IOException {
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/userOrder.fxml"));
+        userOrderPane.getChildren().setAll(pane);
+    }
+
+    /**
+     * Fetch the sales detail using dates by sending request the RMI Server.
+     * The data are set to the sales detail page and also represented in line graph.
+     * @param event
+     */
 
     @FXML
     void btnGo(MouseEvent event) {
         LocalDate initialDateValue= initialDate.getValue();
         LocalDate finalDateValue= finalDate.getValue();
-
         try {
             XYChart.Series<String, Integer> series= new XYChart.Series<>();
             UserOrderDao ud= (UserOrderDao) Naming.lookup("rmi://localhost/HelloUserOrder");
@@ -134,11 +144,12 @@ public class SalesDetailController implements Initializable {
         }catch(Exception e){
             System.out.println("Exception:"+e);
         }
-
-
-
     }
 
+    /**
+     *Confirmation dialog appears when the user press the logout button.
+     * After confirmation page navigate to login screen, otherwise remains in same page.
+     */
     @FXML
     void btnLogout(MouseEvent event){
         try{
@@ -154,59 +165,23 @@ public class SalesDetailController implements Initializable {
                     dialog.close();
                     StackPane pane = FXMLLoader.load(getClass().getResource("../View/login.fxml"));
                     userOrderPane.getChildren().setAll(pane);
-
                 }catch(Exception ex){
                     System.out.println(ex);
                 }
-
-
-
             });
             cancelButton.setOnAction(ex->dialog.close());
-
             content.setActions(cancelButton,okButton);
             dialog.show();
-
         }catch(Exception e){
             System.out.println(e);
-
         }
-
-    }
-
-    @FXML
-    void btnSalesDetails(ActionEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/salesDetail.fxml"));
-        userOrderPane.getChildren().setAll(pane);
-
-    }
-
-    @FXML
-    void myProfile(MouseEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/myProfile.fxml"));
-        userOrderPane.getChildren().setAll(pane);
-
-    }
-
-    @FXML
-    void btnTopUpUser(MouseEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/topupUser.fxml"));
-        userOrderPane.getChildren().setAll(pane);
-    }
-
-    @FXML
-    void btnAddFood(ActionEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/addFoodItems.fxml"));
-        userOrderPane.getChildren().setAll(pane);
-    }
-
-    @FXML
-    void btnUserOrder(ActionEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/userOrder.fxml"));
-        userOrderPane.getChildren().setAll(pane);
     }
 
 
+    /**
+     * Fetch the sales detail from database by sending request to RMI Server.
+     * The data are set to the sales deatil page and represented in line graph.
+     */
     void loadSalesDetails(){
         XYChart.Series<String, Integer> series= new XYChart.Series<>();
         try{
@@ -217,8 +192,6 @@ public class SalesDetailController implements Initializable {
                         rs.getDate("date"),
                         rs.getInt("total_price")));
                series.getData().add(new XYChart.Data<>(rs.getString(1), rs.getInt(2)));
-
-
             }
             salesChart.getData().addAll(series);
             date.setCellValueFactory(new PropertyValueFactory<>("date"));
@@ -230,6 +203,10 @@ public class SalesDetailController implements Initializable {
 
         }
     }
+    /**
+     * Fetch the information of vendor using the id they is fetched after successfull login.
+     * imagepath variable stores the profile picture of the vendor.
+     */
     void getVendorInfo(){
         try{
             VendorDao vd= (VendorDao) Naming.lookup("rmi://localhost/HelloServer");
@@ -247,10 +224,7 @@ public class SalesDetailController implements Initializable {
             System.out.println("Exception: "+e);
         }
     }
-
-
-
-
+    /** Initialization of methods */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         btnSalesDetails.setStyle("-fx-background-color: #c92052");

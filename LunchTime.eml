@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inherit-compiler-output="true" inheritJdk="true">
+	<output-test url="file://$MODULE_DIR$/out/test/LunchTime"/>
+	<exclude-output/>
+	<contentEntry url="file://$MODULE_DIR$"/>
+	<levels>
+		<level name="mysql-connector-java-8.0.18" value="project"/>
+		<level name="jfoenix-8.0.8" value="project"/>
+		<level name="com.cloudinary:cloudinary:1.0.14" value="project"/>
+		<level name="com.squareup.retrofit2:retrofit:2.6.2" value="project"/>
+		<level name="converter-gson-2.6.2" value="project"/>
+		<level name="gson-2.8.6" value="project"/>
+		<level name="okhttp-2.3.0" value="project"/>
+		<level name="okio-1.0.0" value="project"/>
+	</levels>
+</component>

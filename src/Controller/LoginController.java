@@ -1,3 +1,9 @@
+/**
+ * @author Saujan Binduakar
+ * This controller check the validation of email and password and navigate to the dashboard
+ * if correct emnail and password are entered.
+ */
+
 package Controller;
 import com.jfoenix.controls.*;
 import com.jfoenix.validation.RegexValidator;
@@ -31,17 +37,16 @@ public class LoginController implements Initializable {
 
     @FXML
     private JFXPasswordField txtPassword;
-
     public static int id;
 
+    /** boolean variable for validation*/
     private boolean emailIsValid = false;
     private boolean emailIsEmpty = true;
     private boolean passwordIsValid = false;
     private boolean passwordIsEmpty = true;
 
-
+    /** Field required validator  for email*/
     private void fieldValidators(){
-        //Field Required validator for email
         RequiredFieldValidator emailRequiredFieldValidator = new RequiredFieldValidator();
         txtEmail.getValidators().add(emailRequiredFieldValidator);
         emailRequiredFieldValidator.setMessage("Please enter an email!");
@@ -59,8 +64,7 @@ public class LoginController implements Initializable {
         txtEmail.textProperty().addListener((observable, oldValue, newValue) -> txtEmail.validate());
 
 
-
-        //Field Required validator for password
+        /** Field required validator for password*/
         RequiredFieldValidator passwordRequiredFieldValidator = new RequiredFieldValidator();
         txtPassword.getValidators().add(passwordRequiredFieldValidator);
         passwordRequiredFieldValidator.setMessage("Please enter a password!");
@@ -78,7 +82,7 @@ public class LoginController implements Initializable {
         txtPassword.textProperty().addListener((observable, oldValue, newValue) -> txtPassword.validate());
 
 
-       // Email Validator
+      /** Regex validator for email*/
       RegexValidator emailValidator = new RegexValidator();
         emailValidator.setRegexPattern("^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@"
                 + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
@@ -98,7 +102,7 @@ public class LoginController implements Initializable {
         txtEmail.textProperty().addListener((observable, oldValue, newValue) -> txtEmail.validate());
 
 
-        //Password Validator
+        /** Regex validator for password*/
         RegexValidator passwordValidator = new RegexValidator();
         passwordValidator.setRegexPattern("^.{8,}$");
         txtPassword.setValidators(passwordValidator);
@@ -115,9 +119,13 @@ public class LoginController implements Initializable {
             }
         });
         txtPassword.textProperty().addListener((observable, oldValue, newValue) -> txtPassword.validate());
-
     }
 
+    /**
+     * Checks the validation of both email and password.
+     * The page is navigated to the dashboard if correct email and password is entered.
+     * vendor id is set to the variable id, after successful login.
+     */
     public void checkUser() {
         if (!emailIsEmpty && !passwordIsEmpty && emailIsValid && passwordIsValid ){
             try {
@@ -125,6 +133,7 @@ public class LoginController implements Initializable {
                 Boolean rs = vd.checkVendor(txtEmail.getText(), txtPassword.getText());
                 try {
                     if (rs) {
+                        
                         ResultSet rs1= vd.getVendorInfo(txtEmail.getText());
                         while (rs1.next()) {
                             id = rs1.getInt("vendor_id");
@@ -134,10 +143,13 @@ public class LoginController implements Initializable {
                         System.out.print("Moved to next page");
                         login_pane.getChildren().setAll(pane);
                     } else {
+                        /**
+                         * Error handling for incorrect email and password
+                         */
                         Platform.runLater(() -> {
                             JFXDialogLayout content = new JFXDialogLayout();
                             content.setHeading(new Text("Error"));
-                            content.setBody(new Text("Invalid Username or Password."));
+                            content.setBody(new Text("Invalid Email or Password."));
                             JFXButton yesButton = new JFXButton("OK");
                             JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.RIGHT);
                             yesButton.setOnAction(event ->{
@@ -170,7 +182,7 @@ public class LoginController implements Initializable {
        }
     }
 
-
+    /** Initialization of fieldValidators. */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         fieldValidators();

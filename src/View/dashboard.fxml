@@ -62,7 +62,7 @@
             </Pane>
             <AnchorPane layoutY="83.0" prefHeight="518.0" prefWidth="1000.0" style="-fx-background-color: #f0f5fb;">
                <children>
-                  <Pane fx:id="btnStudents" layoutX="57.0" layoutY="14.0" onMouseClicked="#btnStudents" prefHeight="134.0" prefWidth="169.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                  <Pane fx:id="btnStudents" layoutX="57.0" layoutY="14.0" prefHeight="134.0" prefWidth="169.0" style="-fx-background-color: white; -fx-background-radius: 10;">
                      <effect>
                         <DropShadow color="#aba0a0" />
                      </effect>
@@ -84,7 +84,7 @@
                         </ImageView>
                      </children>
                   </Pane>
-                  <Pane fx:id="btnCanteenCoins" layoutX="558.0" layoutY="14.0" onMouseClicked="#btnCanteenCoins" prefHeight="134.0" prefWidth="185.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                  <Pane fx:id="btnCanteenCoins" layoutX="558.0" layoutY="14.0" prefHeight="134.0" prefWidth="185.0" style="-fx-background-color: white; -fx-background-radius: 10;">
                      <effect>
                         <DropShadow color="#aba0a0" />
                      </effect>
@@ -106,7 +106,7 @@
                         </ImageView>
                      </children>
                   </Pane>
-                  <Pane fx:id="btnSales" layoutX="787.0" layoutY="14.0" onMouseClicked="#btnSales" prefHeight="134.0" prefWidth="185.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                  <Pane fx:id="btnSales" layoutX="787.0" layoutY="14.0" prefHeight="134.0" prefWidth="185.0" style="-fx-background-color: white; -fx-background-radius: 10;">
                      <effect>
                         <DropShadow color="#aba0a0" />
                      </effect>
@@ -159,7 +159,7 @@
                         <JFXButton fx:id="btnTopUser" buttonType="RAISED" layoutX="356.0" layoutY="13.0" onMouseClicked="#btnTopUser" style="-fx-background-color: yellow;" text="Go" />
                      </children>
                   </Pane>
-                  <Pane fx:id="btnFood" layoutX="277.0" layoutY="14.0" onMouseClicked="#btnFood" prefHeight="134.0" prefWidth="185.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                  <Pane fx:id="btnFood" layoutX="277.0" layoutY="14.0" prefHeight="134.0" prefWidth="185.0" style="-fx-background-color: white; -fx-background-radius: 10;">
                      <effect>
                         <DropShadow color="#aba0a0" />
                      </effect>

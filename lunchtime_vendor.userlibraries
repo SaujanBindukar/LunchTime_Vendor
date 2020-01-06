@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eclipse-userlibraries>
+  <library name="com.cloudinary:cloudinary:1.0.14">
+    <archive path="/Users/saujanbindukar/.m2/repository/com/cloudinary/cloudinary/1.0.14/cloudinary-1.0.14.jar" />
+    <archive path="/Users/saujanbindukar/.m2/repository/commons-lang/commons-lang/2.6/commons-lang-2.6.jar" />
+    <archive path="/Users/saujanbindukar/.m2/repository/commons-codec/commons-codec/1.6/commons-codec-1.6.jar" />
+    <archive path="/Users/saujanbindukar/.m2/repository/commons-collections/commons-collections/3.2.1/commons-collections-3.2.1.jar" />
+    <archive path="/Users/saujanbindukar/.m2/repository/commons-logging/commons-logging/1.1.1/commons-logging-1.1.1.jar" />
+    <archive path="/Users/saujanbindukar/.m2/repository/org/apache/httpcomponents/httpclient/4.2.1/httpclient-4.2.1.jar" />
+    <archive path="/Users/saujanbindukar/.m2/repository/org/apache/httpcomponents/httpmime/4.2.1/httpmime-4.2.1.jar" />
+    <archive path="/Users/saujanbindukar/.m2/repository/org/apache/httpcomponents/httpcore/4.2.1/httpcore-4.2.1.jar" />
+    <archive path="/Users/saujanbindukar/.m2/repository/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar" />
+    <archive path="/Users/saujanbindukar/.m2/repository/junit/junit/4.10/junit-4.10.jar" />
+    <archive path="/Users/saujanbindukar/.m2/repository/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar" />
+  </library>
+  <library name="com.squareup.retrofit2:retrofit:2.6.2">
+    <archive path="/Users/saujanbindukar/.m2/repository/com/squareup/retrofit2/retrofit/2.6.2/retrofit-2.6.2.jar" />
+    <archive path="/Users/saujanbindukar/.m2/repository/com/squareup/okhttp3/okhttp/3.12.0/okhttp-3.12.0.jar" />
+    <archive path="/Users/saujanbindukar/.m2/repository/com/squareup/okio/okio/1.15.0/okio-1.15.0.jar" />
+  </library>
+  <library name="converter-gson-2.6.2">
+    <archive path="/Users/saujanbindukar/Desktop/lunchtime_vendor/libs/converter-gson-2.6.2.jar" />
+  </library>
+  <library name="gson-2.8.6">
+    <archive path="/Users/saujanbindukar/Desktop/lunchtime_vendor/libs/gson-2.8.6.jar" />
+  </library>
+  <library name="jfoenix-8.0.8">
+    <archive path="/Users/saujanbindukar/Desktop/lunchtime_vendor/libs/jfoenix-8.0.8.jar" />
+  </library>
+  <library name="mysql-connector-java-8.0.18">
+    <archive path="/Users/saujanbindukar/Desktop/lunchtime_vendor/libs/mysql-connector-java-8.0.18.jar" />
+  </library>
+  <library name="okhttp-2.3.0">
+    <archive path="/Users/saujanbindukar/Desktop/lunchtime_vendor/libs/okhttp-2.3.0.jar" />
+  </library>
+  <library name="okio-1.0.0">
+    <archive path="/Users/saujanbindukar/Desktop/lunchtime_vendor/libs/okio-1.0.0.jar" />
+  </library>
+</eclipse-userlibraries>
+

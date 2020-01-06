@@ -8,7 +8,9 @@ public class FoodMenu implements Serializable {
     private String picture;
     public static final long serialVersionUID =1L;
 
+    public FoodMenu() {
 
+    }
 
     public FoodMenu(int food_id, String food_name, int food_price, String picture) {
         this.food_id=food_id;
@@ -24,11 +26,6 @@ public class FoodMenu implements Serializable {
     public void setPicture(String picture) {
         this.picture = picture;
     }
-
-    public FoodMenu() {
-
-    }
-
 
     public int getFood_id() {
         return food_id;

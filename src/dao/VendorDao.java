@@ -1,12 +1,13 @@
+/**
+ * @author Saujan Bindukar
+ * This is interface of the Vendor which is used to check the vandor, fetch all the information of the vendor,
+ * update the profile of vendor using the vendor id.
+ */
+
 package dao;
-
-import bll.Student;
-
-import java.io.Serializable;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.sql.ResultSet;
-import java.util.Date;
 
 public interface VendorDao extends Remote{
     Boolean checkVendor(String vendor_email, String password) throws RemoteException;

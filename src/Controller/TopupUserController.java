@@ -1,3 +1,8 @@
+/**
+ * @author Saujan Bindukar
+ * This controller fetch the user detail and set it to the table.
+ * The detail of user can also be updated which is handled by sending request to RMI Server.
+ */
 package Controller;
 import bll.Student;
 import com.jfoenix.controls.JFXButton;
@@ -16,7 +21,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -28,7 +32,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -39,9 +42,6 @@ import java.sql.*;
 import java.util.ResourceBundle;
 
 public class TopupUserController  implements  Initializable{
-
-    Alert a = new Alert(Alert.AlertType.NONE);
-
 
     @FXML
     private StackPane rootStackPane;
@@ -111,21 +111,52 @@ public class TopupUserController  implements  Initializable{
      boolean emailIsValid=true;
 
      boolean phoneIsEmpty=false;
-   boolean phoneIsValid=true;
+     boolean phoneIsValid=true;
 
-    boolean addBalanceIsEmpty=false;
+     boolean addBalanceIsEmpty=false;
      boolean addBalanceIsValid=true;
 
-
-    @FXML
-    private JFXButton btnDashboard;
-
+    /** Navigation to Dashboard page */
     @FXML
     void btnDashboard(MouseEvent event) throws IOException {
         StackPane pane = FXMLLoader.load(getClass().getResource("../View/dashboard.fxml"));
         rootStackPane.getChildren().setAll(pane);
     }
+    /** Navigation to Sales Detail page */
+    @FXML
+    void btnSalesDetails(ActionEvent event) throws IOException {
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/salesDetail.fxml"));
+        userOrderPane.getChildren().setAll(pane);
+    }
+    /** Navigation to My Profile page */
+    @FXML
+    void myProfile(MouseEvent event) throws IOException {
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/myProfile.fxml"));
+        userOrderPane.getChildren().setAll(pane);
+    }
+    /** Navigation to Topup User page */
+    @FXML
+    void btnTopUpUser(MouseEvent event) throws IOException {
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/topupUser.fxml"));
+        userOrderPane.getChildren().setAll(pane);
+    }
+    /** Navigation to Add Food page */
+    @FXML
+    void btnAddFood(ActionEvent event) throws IOException {
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/addFoodItems.fxml"));
+        userOrderPane.getChildren().setAll(pane);
+    }
+    /** Navigation to User Order page */
+    @FXML
+    void btnUserOrder(ActionEvent event) throws IOException {
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/userOrder.fxml"));
+        userOrderPane.getChildren().setAll(pane);
+    }
 
+    /**
+     * Load the detail of the user when the text field is empty using Key Event.
+     * @param event
+     */
     @FXML
     void loadAllUsers(KeyEvent event) {
         if (txtSearch.getText().isEmpty()) {
@@ -134,8 +165,10 @@ public class TopupUserController  implements  Initializable{
         }
     }
 
-
-
+    /**
+     * Search the user by using the first name from the table by sending request to RMI Server.
+     * @param event
+     */
     @FXML
     void btnSearch(MouseEvent event) {
         try {
@@ -167,6 +200,9 @@ public class TopupUserController  implements  Initializable{
         }
     }
 
+    /**
+     * Empty all the textfields.
+     */
     void clearAllField(){
         txtFirstName.clear();
         txtLastName.clear();
@@ -177,17 +213,19 @@ public class TopupUserController  implements  Initializable{
     }
 
 
-    @FXML
-    void btnClear(MouseEvent event) {
-        clearAllField();
-    }
-
+    /**
+     * Check the validation of the textfield.
+     * The detail of the user are updated by sending request to RMI Server.
+     * @param event
+     */
     @FXML
     void btnUpdate(MouseEvent event) {
         if(!firstNameIsEmpty && firstNameIsValid && !lastNameIsEmpty && lastNameIsValid &&
             !phoneIsEmpty && phoneIsValid && !emailIsEmpty && emailIsValid &&
                 !addBalanceIsEmpty && addBalanceIsValid){
-
+            /**
+             * Opens the dialog box.
+             */
             Platform.runLater(() -> {
                 JFXDialogLayout content = new JFXDialogLayout();
                 content.setHeading(new Text("Confirmation"));
@@ -203,20 +241,15 @@ public class TopupUserController  implements  Initializable{
                 JFXDialog dialog1 = new JFXDialog(rootStackPane, content1, JFXDialog.DialogTransition.CENTER);
                 yesButton1.setOnAction(event1 -> {
                     dialog1.close();
-
                     try {
                         StackPane pane = FXMLLoader.load(getClass().getResource("../View/topupUser.fxml"));
                         userOrderPane.getChildren().setAll(pane);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
-
                 });
                 content1.setActions(yesButton1);
-
                 cancelButton.setOnAction(eventClose -> dialog.close());
-
                 yesButton.setOnAction(eventConfirm ->{
                     try{
                         StudentDao sd= (StudentDao) Naming.lookup("rmi://localhost/HelloStudent");
@@ -231,8 +264,6 @@ public class TopupUserController  implements  Initializable{
                         userTable.getItems().clear();
                         loadUser();
                         dialog1.show();
-                        //clearAllField();
-
                     }catch(Exception e){
                         System.out.println(e);
                     }
@@ -245,7 +276,10 @@ public class TopupUserController  implements  Initializable{
     }
 
 
-
+    /**
+     *Confirmation dialog appears when the user press the logout button.
+     * After confirmation page navigate to login screen, otherwise remains in same page.
+     */
     @FXML
     void btnLogout(MouseEvent event) throws IOException {
         try{
@@ -261,13 +295,9 @@ public class TopupUserController  implements  Initializable{
                     dialog.close();
                     StackPane pane = FXMLLoader.load(getClass().getResource("../View/login.fxml"));
                     rootStackPane.getChildren().setAll(pane);
-
                 }catch(Exception ex){
                     System.out.println(ex);
                 }
-
-
-
             });
             cancelButton.setOnAction(ex->dialog.close());
 
@@ -276,49 +306,13 @@ public class TopupUserController  implements  Initializable{
 
         }catch(Exception e){
             System.out.println(e);
-
         }
-
     }
 
-    @FXML
-    void btnSalesDetails(ActionEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/salesDetail.fxml"));
-        userOrderPane.getChildren().setAll(pane);
-
-    }
-
-    @FXML
-    void myProfile(MouseEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/myProfile.fxml"));
-        userOrderPane.getChildren().setAll(pane);
-
-    }
-
-    @FXML
-    void btnTopUpUser(MouseEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/topupUser.fxml"));
-        userOrderPane.getChildren().setAll(pane);
-
-    }
-
-
-    @FXML
-    void btnAddFood(ActionEvent event) throws IOException {
-        System.out.println("Add food button is pressed");
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/addFoodItems.fxml"));
-        userOrderPane.getChildren().setAll(pane);
-
-
-    }
-
-    @FXML
-    void btnUserOrder(ActionEvent event) throws IOException {
-        System.out.println("User Order Button is pressed.");
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/userOrder.fxml"));
-        userOrderPane.getChildren().setAll(pane);
-    }
-
+    /**
+     * Fetch all the detail of user from database by sending request to RMI Server.
+     * The data are set to the table User Detail.
+     */
     void loadUser(){
         try{
             StudentDao sd= (StudentDao) Naming.lookup("rmi://localhost/HelloStudent");
@@ -341,6 +335,7 @@ public class TopupUserController  implements  Initializable{
             email.setCellValueFactory(new PropertyValueFactory<>("email"));
             userTable.setItems(oblist);
 
+            /** When the cell value of the table is clicked, it is set to its repective textfield. **/
             userTable.setOnMouseClicked(e ->{
                 Platform.runLater(()->{
                     txtFirstName.requestFocus();
@@ -358,6 +353,11 @@ public class TopupUserController  implements  Initializable{
             System.out.println(e);
         }
     }
+
+    /**
+     * Fetch the information of vendor using the id they is fetched after successfull login.
+     * imagepath variable stores the profile picture of the vendor.
+     */
     void getVendorInfo(){
         try{
             VendorDao vd= (VendorDao) Naming.lookup("rmi://localhost/HelloServer");
@@ -378,7 +378,7 @@ public class TopupUserController  implements  Initializable{
 
     private void fieldValidators(){
 
-        //Field Required validator for firstName
+        /** Field Required validator for lastName */
         RequiredFieldValidator firstNameRequiredFieldValidator = new RequiredFieldValidator();
         txtFirstName.getValidators().add(firstNameRequiredFieldValidator);
         firstNameRequiredFieldValidator.setMessage("Please enter firstName!");
@@ -396,10 +396,10 @@ public class TopupUserController  implements  Initializable{
         });
         txtFirstName.textProperty().addListener((observable, oldValue, newValue) -> txtFirstName.validate());
 
-        //Field Required validator for lastName
+        /** Field Required validator for lastName */
         RequiredFieldValidator lastNameRequiredFieldValidator = new RequiredFieldValidator();
-        txtLastName.getValidators().add(firstNameRequiredFieldValidator);
-        firstNameRequiredFieldValidator.setMessage("Please enter firstName!");
+        txtLastName.getValidators().add(lastNameRequiredFieldValidator);
+        lastNameRequiredFieldValidator.setMessage("Please enter firstName!");
         txtLastName.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (!newValue) {
                 if (txtLastName.validate()) {
@@ -415,7 +415,7 @@ public class TopupUserController  implements  Initializable{
         txtFirstName.textProperty().addListener((observable, oldValue, newValue) -> txtFirstName.validate());
 
 
-        // firstnameValidator
+        /** Regex Validator for first Name */
         RegexValidator firstName = new RegexValidator();
         firstName.setRegexPattern("[a-zA-Z]+");
         txtFirstName.setValidators(firstName);
@@ -434,7 +434,7 @@ public class TopupUserController  implements  Initializable{
         txtFirstName.textProperty().addListener((observable, oldValue, newValue) -> txtFirstName.validate());
 
 
-        // lastameValidator
+        /**  regex Validator for last Name **/
         RegexValidator lastName = new RegexValidator();
         lastName.setRegexPattern("[a-zA-Z]+");
         txtLastName.setValidators(lastName);
@@ -455,7 +455,7 @@ public class TopupUserController  implements  Initializable{
 
 
 
-        //Field Required validator for email
+        /** Field Required validator for email */
         RequiredFieldValidator emailRequiredFieldValidator = new RequiredFieldValidator();
         txtEmail.getValidators().add(emailRequiredFieldValidator);
         emailRequiredFieldValidator.setMessage("Please enter an email!");
@@ -474,7 +474,7 @@ public class TopupUserController  implements  Initializable{
         });
         txtEmail.textProperty().addListener((observable, oldValue, newValue) -> txtEmail.validate());
 
-        //Field Required validator for phone
+        /** Field Required validator for phone */
         RequiredFieldValidator phoneRequiredFieldValidator = new RequiredFieldValidator();
         txtphoneNumber.getValidators().add(phoneRequiredFieldValidator);
         phoneRequiredFieldValidator.setMessage("Please enter a phone!");
@@ -494,7 +494,7 @@ public class TopupUserController  implements  Initializable{
         txtphoneNumber.textProperty().addListener((observable, oldValue, newValue) -> txtphoneNumber.validate());
 
 
-        //Field Required validator for add balance
+        /** Field Required validator for add balance */
         RequiredFieldValidator addBalanceRequiredFieldValidator = new RequiredFieldValidator();
         txtAddBalance.getValidators().add(addBalanceRequiredFieldValidator);
         addBalanceRequiredFieldValidator.setMessage("Please enter a balance!");
@@ -513,10 +513,7 @@ public class TopupUserController  implements  Initializable{
         });
         txtAddBalance.textProperty().addListener((observable, oldValue, newValue) -> txtAddBalance.validate());
 
-
-//----------------------------------------------------------------------------------------------------------------------------------//
-
-//        //Email Validator
+        /** Email Validator */
         RegexValidator emailValidator = new RegexValidator();
         emailValidator.setRegexPattern("^[_A-Za-z0-9-+]+(\\.[_A-Za-z0-9-]+)*@"
                 + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
@@ -536,7 +533,7 @@ public class TopupUserController  implements  Initializable{
         txtEmail.textProperty().addListener((observable, oldValue, newValue) -> txtEmail.validate());
 
 
-        //        //Phone length Validator
+        /** Phone length Validator */
         RegexValidator phoneLengthValidator = new RegexValidator();
         phoneLengthValidator.setRegexPattern("^.{10}$");
         txtphoneNumber.setValidators(phoneLengthValidator);
@@ -554,7 +551,7 @@ public class TopupUserController  implements  Initializable{
         });
         txtphoneNumber.textProperty().addListener((observable, oldValue, newValue) -> txtphoneNumber.validate());
 
-//        //Field Required validator for phone
+       /** Field Required validator for phone */
         NumberValidator phoneFieldValidator = new NumberValidator();
         txtphoneNumber.getValidators().add(phoneFieldValidator);
         phoneFieldValidator.setMessage("Only numbers accepted!");
@@ -571,7 +568,7 @@ public class TopupUserController  implements  Initializable{
         });
         txtphoneNumber.textProperty().addListener((observable, oldValue, newValue) -> txtphoneNumber.validate());
 
-        //        //Field Required validator for add balance
+        /** Field Required validator for add balance */
         NumberValidator addBalanceFieldValidator = new NumberValidator();
         txtAddBalance.getValidators().add(addBalanceFieldValidator);
         addBalanceFieldValidator.setMessage("Only numbers accepted!");
@@ -588,18 +585,21 @@ public class TopupUserController  implements  Initializable{
         });
         txtAddBalance.textProperty().addListener((observable, oldValue, newValue) -> txtAddBalance.validate());
     }
+    /** Clears all the textfiells */
+    @FXML
+    void btnClear(MouseEvent event) {
+        clearAllField();
+    }
 
-
+    /**  Initialization of methods */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         Platform.runLater(()->{
+            /** Focus on the textfield First Name */
             txtFirstName.requestFocus();
-
         });
         fieldValidators();
         btnTopUpUser.setStyle("-fx-background-color: #c92052");
-
-
         loadUser();
         getVendorInfo();
 

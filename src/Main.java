@@ -1,3 +1,7 @@
+/**
+ * This class loads the login page initially.
+ */
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

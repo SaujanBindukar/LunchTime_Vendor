@@ -1,7 +1,11 @@
+/**
+ * @author Saujan Bindukar
+ * Interface for fetching the food menu, add new food menu,
+ * deleting and updating the food menu and
+ * counting the number of food.
+ */
 package dao;
-
 import bll.FoodMenu;
-
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.sql.ResultSet;

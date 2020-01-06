@@ -1,6 +1,16 @@
+/**
+ * @author Saujan Bindukar
+ * This controller fetch the user order of food by sending the request to RMI server and sets the value in the table.
+ * Also the vendor can search the user order by their name, search the order by the data, current date and also filters
+ * the pending order. Order status can be changed by double clicking on the table values.
+ */
 package Controller;
 import bll.UserOrder;
-import com.jfoenix.controls.*;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
+import com.jfoenix.controls.JFXTextField;
 import dao.UserOrderDao;
 import dao.VendorDao;
 import javafx.application.Platform;
@@ -76,20 +86,22 @@ public class UserOrderController implements Initializable {
 
     ObservableList<UserOrder> oblist = FXCollections.observableArrayList();
 
+    /**
+     * load is user order if the textfield for search is cleared all.
+     */
     @FXML
     void loadUserOrders(KeyEvent event) {
         if (txtSearch.getText().isEmpty()) {
             orderTable.getItems().clear();
             loadOrder();
         }
-
     }
 
+    /** Fetch the user order by date and set the value in table by sending request to RMI Server.*/
     @FXML
     void btnGo(MouseEvent event) {
         LocalDate initialDateValue= initialDate.getValue();
         LocalDate finalDateValue= finalDate.getValue();
-
         try {
             UserOrderDao ud= (UserOrderDao) Naming.lookup("rmi://localhost/HelloUserOrder");
             ResultSet rs= ud.getUserOrderByDate(initialDateValue, finalDateValue);
@@ -127,16 +139,16 @@ public class UserOrderController implements Initializable {
         }
     }
 
-
+    /** Refresh the user order table*/
     @FXML
-    void btnRefresh(MouseEvent event) { // Refresh the order table
+    void btnRefresh(MouseEvent event) {
         orderTable.getItems().clear();
         loadOrder();
     }
 
-
+    /** Search the user order by First Name and sets the value in the table */
     @FXML
-    void btnSearch(MouseEvent event) { // Search the user order by its First Name
+    void btnSearch(MouseEvent event) {
         try {
             UserOrderDao ud= (UserOrderDao) Naming.lookup("rmi://localhost/HelloUserOrder");
             ResultSet rs= ud.getUserOrderByName(txtSearch.getText());
@@ -183,8 +195,10 @@ public class UserOrderController implements Initializable {
 
     }
 
-
-
+    /**
+     *Confirmation dialog appears when the user press the logout button.
+     * After confirmation page navigate to login screen, otherwise remains in same page.
+     */
     @FXML
     void btnLogout(MouseEvent event) throws IOException {
         try{
@@ -194,53 +208,45 @@ public class UserOrderController implements Initializable {
             JFXButton okButton = new JFXButton("Yes");
             JFXButton cancelButton = new JFXButton("Cancel");
             JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
-
             okButton.setOnAction(e->{
                 try{
                     dialog.close();
                     StackPane pane = FXMLLoader.load(getClass().getResource("../View/login.fxml"));
                     rootStackPane .getChildren().setAll(pane);
-
                 }catch(Exception ex){
                     System.out.println(ex);
                 }
-
-
-
             });
             cancelButton.setOnAction(ex->dialog.close());
-
             content.setActions(cancelButton,okButton);
             dialog.show();
-
         }catch(Exception e){
             System.out.println(e);
-
         }
-
     }
 
+    /** Navigation to Dashboard page**/
     @FXML
     void btnDashboard(MouseEvent event) throws IOException {
         StackPane pane = FXMLLoader.load(getClass().getResource("../View/dashboard.fxml"));
         rootStackPane.getChildren().setAll(pane);
 
     }
-
+    /** Navigation to Sales Detail page**/
     @FXML
     void btnSalesDetails(ActionEvent event) throws IOException {
         StackPane pane = FXMLLoader.load(getClass().getResource("../View/salesDetail.fxml"));
         rootStackPane.getChildren().setAll(pane);
 
     }
-
+    /** Navigation to My Profile page**/
     @FXML
     void myProfile(MouseEvent event) throws IOException {
         StackPane pane = FXMLLoader.load(getClass().getResource("../View/myProfile.fxml"));
         rootStackPane.getChildren().setAll(pane);
 
     }
-
+    /** Navigation to Topup User  page**/
     @FXML
     void btnTopUpUser(MouseEvent event) throws IOException {
         StackPane pane = FXMLLoader.load(getClass().getResource("../View/topupUser.fxml"));
@@ -249,7 +255,7 @@ public class UserOrderController implements Initializable {
 
     }
 
-
+    /** Navigation to Add Food page**/
     @FXML
     void btnAddFood(ActionEvent event) throws IOException {
         System.out.println("Add food button is pressed");
@@ -258,13 +264,18 @@ public class UserOrderController implements Initializable {
 
 
     }
-
+    /** Navigation to User Order page**/
     @FXML
     void btnUserOrder(ActionEvent event) throws IOException {
         System.out.println("User Order Button is pressed.");
         StackPane pane = FXMLLoader.load(getClass().getResource("../View/userOrder.fxml"));
         rootStackPane.getChildren().setAll(pane);
     }
+
+    /**
+     * Fetch the user order from database by sending request to RMI Server and sets the value in table.
+     */
+
     void loadOrder(){
         try {
             UserOrderDao ud= (UserOrderDao) Naming.lookup("rmi://localhost/HelloUserOrder");
@@ -289,12 +300,15 @@ public class UserOrderController implements Initializable {
             quantity.setCellValueFactory(new PropertyValueFactory<>("quantity"));
             total_price.setCellValueFactory(new PropertyValueFactory<>("total_price"));
             status.setCellValueFactory(new PropertyValueFactory<>("status"));
-
             orderTable.setItems(oblist);
 
-
-
+            /**
+             * Opens the dialog box only when the value is double clicked.
+             */
             orderTable.setOnMouseClicked(e ->{
+                /**
+                 * Sets the order status of the user in the variable orderStatus.
+                 */
                 String orderStatus=orderTable.getSelectionModel().getSelectedItem().getStatus();
                 System.out.println("OrderStatus:"+ orderStatus);
 
@@ -303,16 +317,14 @@ public class UserOrderController implements Initializable {
                         JFXDialogLayout content = new JFXDialogLayout();
                         content.setHeading(new Text("Food Status"));
                         content.setBody(new Text("What's the food status?"));
-
                         JFXButton pendingButton = new JFXButton("Pending");
                         JFXButton processingButton = new JFXButton("Processing");
                         JFXButton readyButton = new JFXButton("Ready");
                         JFXButton receivedButton = new JFXButton("Received");
                         JFXButton cancelButton = new JFXButton("Cancel");
-
-
                         JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
 
+                        /** Change the background color of order status button*/
                         switch (orderStatus){
                             case "Pending":
                                 pendingButton.setStyle("-fx-background-color: yellow");
@@ -330,7 +342,7 @@ public class UserOrderController implements Initializable {
                                 cancelButton.setStyle("-fx-background-color: yellow");
                                 break;
                         }
-
+                        /**Sets the order status to cancel*/
                         cancelButton.setOnAction(event -> {
                             try{
                                 ud.updateStatus(orderTable.getSelectionModel().getSelectedItem().getOrder_id(), "Cancel");
@@ -339,11 +351,10 @@ public class UserOrderController implements Initializable {
                                 dialog.close();
                             }catch(Exception ex){
                                 System.out.println(ex);
-
                             }
-
                             dialog.close();
                         });
+                        /** Sets the order status to pending */
                         pendingButton.setOnAction(event ->{
                             try{
                                 ud.updateStatus(orderTable.getSelectionModel().getSelectedItem().getOrder_id(), "Pending");
@@ -352,10 +363,10 @@ public class UserOrderController implements Initializable {
                                 dialog.close();
                             }catch(Exception ex){
                                 System.out.println(ex);
-
                             }
                             dialog.close();
                         });
+                        /** Sets the order status to Processing */
                         processingButton.setOnAction(event ->{
                             try{
                                 ud.updateStatus(orderTable.getSelectionModel().getSelectedItem().getOrder_id(), "Processing");
@@ -368,6 +379,7 @@ public class UserOrderController implements Initializable {
                             }
                             dialog.close();
                         });
+                        /** Sets the order status to Ready */
                         readyButton.setOnAction(event ->{
                             try{
                                 ud.updateStatus(orderTable.getSelectionModel().getSelectedItem().getOrder_id(), "Ready");
@@ -380,6 +392,7 @@ public class UserOrderController implements Initializable {
                             }
                             dialog.close();
                         });
+                        /** Sets the order status to Received */
                         receivedButton.setOnAction(event ->{
                             try{
                                 ud.updateStatus(orderTable.getSelectionModel().getSelectedItem().getOrder_id(), "Received");
@@ -410,6 +423,10 @@ public class UserOrderController implements Initializable {
 
     }
 
+    /**
+     * Fetch the information of vendor using the id they is fetched after successfull login.
+     * imagepath variable stores the profile picture of the vendor.
+     */
     void getVendorInfo(){
         try{
             VendorDao vd= (VendorDao) Naming.lookup("rmi://localhost/HelloServer");
@@ -429,7 +446,7 @@ public class UserOrderController implements Initializable {
     }
 
 
-
+    /** Fetch the pending order only and set the values in the user order table. */
     @FXML
     void showPendingOrder(MouseEvent event) {
         try {
@@ -475,7 +492,7 @@ public class UserOrderController implements Initializable {
     }
 
 
-
+    /** Fetch the user order of current date only.*/
     @FXML
     void showTodaysOrder(MouseEvent event) {
         orderTable.getItems().clear();
@@ -514,6 +531,7 @@ public class UserOrderController implements Initializable {
         }
     }
 
+    /** Initialization of methods*/
     @Override
     public void initialize(URL location, ResourceBundle resources) {
                 btnUserOrder.setStyle("-fx-background-color: #c92052");

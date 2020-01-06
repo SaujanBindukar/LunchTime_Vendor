@@ -1,3 +1,9 @@
+/**
+ * @author Saujan Bindukar
+ * This is interface of the Student which is used to update the detail of the Student,
+ * fetch all the detail of the Student, search the detail of username using firstName and
+ * count the total number of students and count the total number of canteen coins.
+ */
 package dao;
 import java.rmi.Remote;
 import java.rmi.RemoteException;

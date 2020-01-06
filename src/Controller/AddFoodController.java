@@ -1,7 +1,8 @@
 /**
- * @Author Saujan Bindukar
- * @since 2019-
- *
+ * @author Saujan Bindukar
+ * This controller fetch the available food from database by sending request to RMI Server. Adding food item and
+ * updating the food items including name, price and image is handled by this controller.
+ * Image upload API is used for uploading the images of Food items.
  * */
 
 package Controller;
@@ -105,34 +106,41 @@ public class AddFoodController implements Initializable {
     final FileChooser fileChooser = new FileChooser();
     File file;
 
+    ObservableList<FoodMenu> oblist = FXCollections.observableArrayList();
 
+    /** Variables for validation*/
     private boolean foodNameIsEmpty = true;
     private boolean priceIsEmpty = true;
     private boolean priceIsValid = false;
     private boolean foodIsEmpty = true;
     private boolean foodIsValid = false;
 
-    ObservableList<FoodMenu> oblist = FXCollections.observableArrayList();
+
 
     FoodDao fd= (FoodDao) Naming.lookup("rmi://localhost/HelloFoodMenu");
 
+    /** Constructor for throwing Exceptions*/
     public AddFoodController() throws RemoteException, NotBoundException, MalformedURLException {
 
     }
-
+    /** Clears the text fields*/
     void clearFields(){
         txtFoodName.clear();
         txtFoodPrice.clear();
     }
 
+    /** Navigation to dashboard page */
     @FXML
     void btnDashboard(MouseEvent event) throws IOException {
         StackPane pane = FXMLLoader.load(getClass().getResource("../View/dashboard.fxml"));
         rootStackPane.getChildren().setAll(pane);
     }
 
+    /**
+     * Check the validation for all the fields for adding, updating and deleting the food items.
+     */
     @FXML
-    void btnUpdate(MouseEvent event) throws IOException, ClassNotFoundException {
+    void btnUpdate(MouseEvent event) {
         if (txtFoodPrice.getText().isEmpty() || txtFoodName.getText().isEmpty()) {
             JFXDialogLayout content = new JFXDialogLayout();
             content.setHeading(new Text("Error"));
@@ -145,6 +153,7 @@ public class AddFoodController implements Initializable {
 
         }else{
             if(file==null){
+                /** If the selected image is empty*/
                 System.out.println("File is null");
                 try{
                     Platform.runLater(() -> {
@@ -200,7 +209,7 @@ public class AddFoodController implements Initializable {
                 }
             }
             else{
-                System.out.println("File is not null");
+                /** If the selected image is not empty*/
                 try{
                     Platform.runLater(() -> {
                         JFXDialogLayout content = new JFXDialogLayout();
@@ -284,12 +293,14 @@ public class AddFoodController implements Initializable {
                 }catch (Exception e){
                     System.out.print(e);
                 }
-
             }
         }
     }
 
-
+    /**
+     *Confirmation dialog appears when the user press the logout button.
+     * After confirmation page navigate to login screen, otherwise remains in same page.
+     */
     @FXML
     void btnLogout(MouseEvent event) throws IOException {
         try{
@@ -318,33 +329,37 @@ public class AddFoodController implements Initializable {
 
         }
     }
-
+    /** Navigation to Sales Detail Page*/
     @FXML
     void btnSalesDetails(ActionEvent event) throws IOException {
             StackPane pane = FXMLLoader.load(getClass().getResource("../View/salesDetail.fxml"));
             rootStackPane.getChildren().setAll(pane);
     }
-
+    /** Navigation to  My Profile Page*/
     @FXML
     void myProfile(MouseEvent event) throws IOException {
         StackPane pane = FXMLLoader.load(getClass().getResource("../View/myProfile.fxml"));
         rootStackPane.getChildren().setAll(pane);
 
     }
-
+    /** Navigation to Add Food Page*/
     @FXML
     void btnClear(MouseEvent event) throws IOException {
         StackPane pane = FXMLLoader.load(getClass().getResource("../View/addFoodItems.fxml"));
         rootStackPane.getChildren().setAll(pane);
 
     }
-
+    /** Navigation to Top up user Page*/
     @FXML
     void btnTopUpUser(MouseEvent event) throws IOException {
         StackPane pane = FXMLLoader.load(getClass().getResource("../View/topupUser.fxml"));
         rootStackPane.getChildren().setAll(pane);
     }
 
+    /**
+     * Add new food items after correct validation of text fields and images.
+     * Image upload API is used for uploading images of food items.
+     */
     @FXML
     void btnSubmitMenu(ActionEvent event) {
         String foodName=txtFoodName.getText();
@@ -393,11 +408,8 @@ public class AddFoodController implements Initializable {
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
-
-
                         });
                         content1.setActions(yesButton1);
-
                         okButton.setOnAction(e ->{
                             try{
                                 Platform.runLater(()->{
@@ -429,23 +441,17 @@ public class AddFoodController implements Initializable {
                                         else if(message=="Success"){
                                             Platform.runLater(()->{
                                                 dialog1.show();
-
                                             });
-
-
                                         }
-
                                     } catch (RemoteException ex) {
                                         ex.printStackTrace();
                                     }
-
                                 });
                             }catch(Exception ex){
                                 System.out.println(ex);
                             }
                             dialog.close();
                         });
-
                         cancelButton.setOnAction(e-> dialog.close());
                         content.setActions(cancelButton,okButton);
                         dialog.show();
@@ -454,7 +460,6 @@ public class AddFoodController implements Initializable {
                     System.out.print(e);
                 }
             }
-
             else{
                 System.out.println("File is not null");
                 try{
@@ -544,7 +549,6 @@ public class AddFoodController implements Initializable {
 //                                                    }catch (Exception e){
 //                                                        System.out.println(e);
 //                                                    }
-
                                                 }
 
                                             } catch (RemoteException ex) {
@@ -558,7 +562,7 @@ public class AddFoodController implements Initializable {
 
                                     @Override
                                     public void onFailure(Call<UploadResponse> call, Throwable throwable) {
-
+                                        System.out.println("Error uploading image");
                                     }
                                 });
                             }catch(Exception ex){
@@ -577,6 +581,8 @@ public class AddFoodController implements Initializable {
         }
 
     }
+
+    /** Load food items in table*/
     @FXML
     void loadFoodMenu(KeyEvent event) {
         if (txtSearchFoodName.getText().isEmpty()) {
@@ -586,6 +592,9 @@ public class AddFoodController implements Initializable {
 
     }
 
+    /**
+     * Delete the food items
+     */
     @FXML
     void btnDelete(MouseEvent event) {
             Platform.runLater(() -> {
@@ -606,18 +615,12 @@ public class AddFoodController implements Initializable {
                     try{
                         StackPane pane = FXMLLoader.load(getClass().getResource("../View/addFoodItems.fxml"));
                         rootStackPane.getChildren().setAll(pane);
-
                     } catch(Exception e){
                         System.out.print(e);
-
                     }
-
-
                 });
                 content1.setActions(yesButton1);
-
                 cancelButton.setOnAction(eventClose -> dialog.close());
-
                 yesButton.setOnAction(eventConfirm ->{
                     try{
                         fd.deleteMenu(txtFoodName.getText());
@@ -635,15 +638,11 @@ public class AddFoodController implements Initializable {
                 content.setActions(cancelButton, yesButton);
                 dialog.show();
             });
-
-
-
-
-
-      //  }
     }
 
-
+    /**
+     * Search the food by its name by sending request to RMI Server and sets the data to the table.
+     */
     @FXML
     void btnSearch(ActionEvent event) {
         try{
@@ -662,14 +661,14 @@ public class AddFoodController implements Initializable {
                 loadData();
             }
             MenuTable.setItems(oblist);
-
-
-
         }catch(Exception e){
             System.out.println(e);
         }
-
     }
+
+    /**
+     * Loads the food items into table by sending request to RMI Server.
+     */
     void loadData(){
         try {
            FoodDao fd= (FoodDao) Naming.lookup("rmi://localhost/HelloFoodMenu");
@@ -708,29 +707,25 @@ public class AddFoodController implements Initializable {
 
 
     }
-
+    /** Navigation to Add Food page */
     @FXML
     void btnAddFood(ActionEvent event) throws IOException {
         StackPane pane = FXMLLoader.load(getClass().getResource("../View/addFoodItems.fxml"));
         rootStackPane.getChildren().setAll(pane);
-
     }
-
+    /** Navigation to User Order page */
     @FXML
     void btnUserOrder(ActionEvent event) throws IOException {
         StackPane pane = FXMLLoader.load(getClass().getResource("../View/userOrder.fxml"));
         rootStackPane.getChildren().setAll(pane);
-
     }
-
-
+    /** Enable update button and disable delete button */
     @FXML
     void changeFoodName(KeyEvent event) {
         btnUpdate.setDisable(false);
         btnDelete.setDisable(true);
-
     }
-
+    /** Enable update button and enable delete button */
     @FXML
     void changeFoodPrice(KeyEvent event) {
         btnUpdate.setDisable(false);
@@ -738,6 +733,7 @@ public class AddFoodController implements Initializable {
 
     }
 
+    /**  Open dialog to select the image   */
     @FXML
     void btnChoosePicture(MouseEvent event) {
         try{
@@ -755,10 +751,11 @@ public class AddFoodController implements Initializable {
             System.out.println(e);
 
         }
-
-
-
     }
+
+    /**
+     * Fetch all information of vendor by sending request to RMI Server.
+     */
     void getVendorInfo(){
         try{
             VendorDao vd= (VendorDao) Naming.lookup("rmi://localhost/HelloServer");
@@ -776,9 +773,12 @@ public class AddFoodController implements Initializable {
         }
     }
 
+    /**
+     * Regex validation and field required validation of different text fields.
+     */
     public void fieldValidators() {
 
-        //Field Required validator for FoodName
+        /**Field Required validator for FoodName*/
         RequiredFieldValidator firstNameRequiredFieldValidator = new RequiredFieldValidator();
         txtFoodName.getValidators().add(firstNameRequiredFieldValidator);
         firstNameRequiredFieldValidator.setMessage("Please enter Name!");
@@ -796,7 +796,7 @@ public class AddFoodController implements Initializable {
         });
         txtFoodName.textProperty().addListener((observable, oldValue, newValue) -> txtFoodName.validate());
 
-        // food nameValidator
+        /**food nameValidator*/
         RegexValidator foodName = new RegexValidator();
         foodName.setRegexPattern("[a-zA-Z ]+");
         txtFoodName.setValidators(foodName);
@@ -816,7 +816,7 @@ public class AddFoodController implements Initializable {
 
 
 
-        //Field Required validator for food price
+        /** Field Required validator for food price */
         RequiredFieldValidator phoneRequiredFieldValidator = new RequiredFieldValidator();
         txtFoodPrice.getValidators().add(phoneRequiredFieldValidator);
         phoneRequiredFieldValidator.setMessage("Please enter a price");
@@ -833,7 +833,7 @@ public class AddFoodController implements Initializable {
         });
         txtFoodPrice.textProperty().addListener((observable, oldValue, newValue) -> txtFoodPrice.validate());
 
-        //number validator for food price
+        /**number validator for food price */
         NumberValidator phoneFieldValidator = new NumberValidator();
         txtFoodPrice.getValidators().add(phoneFieldValidator);
         phoneFieldValidator.setMessage("Only numbers accepted!");
@@ -851,6 +851,7 @@ public class AddFoodController implements Initializable {
         txtFoodPrice.textProperty().addListener((observable, oldValue, newValue) -> txtFoodPrice.validate());
     }
 
+    /** Initialization of methods*/
     @Override
     public void initialize(URL location, ResourceBundle resources) {
             getVendorInfo();

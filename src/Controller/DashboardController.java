@@ -1,5 +1,14 @@
-package Controller;
+/**
+ * @author Saujan Bindukar
+ * This is the controller of the Dashboard. This controller fetch the number of food,
+ * number of student, total canteen coins deposited and total sales till date.
+ * This controller also shows the piechart of highest food solds and also the vendor can
+ * customize the pie charts using dates. Also bar graph showing the student spending highest
+ * number of canteen coins is also shown which can be also customized using dates.
+ * Naviagtion to different pages can also be done from this page.
+ */
 
+package Controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXDialog;
@@ -17,13 +26,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Text;
-
 import java.io.IOException;
 import java.net.URL;
 import java.rmi.Naming;
@@ -35,21 +42,6 @@ import java.util.ResourceBundle;
 public class DashboardController implements Initializable {
     @FXML
     private StackPane rootStackPane;
-
-    @FXML
-    private JFXButton btnUserOrder;
-
-    @FXML
-    private JFXButton btnAddFood;
-
-    @FXML
-    private JFXButton btnSalesDetails;
-
-    @FXML
-    private JFXButton btnTopUpUser;
-
-    @FXML
-    private ImageView btnLogout;
 
     @FXML
     private Circle profilePictureView;
@@ -69,7 +61,6 @@ public class DashboardController implements Initializable {
     @FXML
     private PieChart foodPreferenceChart;
 
-
     @FXML
     private BarChart<String, Integer> topUserChart;
 
@@ -78,8 +69,6 @@ public class DashboardController implements Initializable {
 
     @FXML
     private NumberAxis yAxis;
-
-    private ObservableList<PieChart.Data> data= FXCollections.observableArrayList();
 
     @FXML
     private JFXButton btnDashboard;
@@ -91,25 +80,72 @@ public class DashboardController implements Initializable {
     private JFXDatePicker foodFinalDate;
 
     @FXML
-    private JFXButton btnFoodPreference;
-
-    @FXML
     private JFXDatePicker userFinalDate;
 
     @FXML
     private JFXDatePicker userInitialDate;
 
+    private ObservableList<PieChart.Data> data= FXCollections.observableArrayList();
+
+    /**
+     * Navigation to dashboard page.
+     */
     @FXML
-    private JFXButton btnTopUser;
-
-
-
-    @FXML
-    void btnDashboard(MouseEvent event) throws IOException {
+    void btnDashboard() throws IOException {
         StackPane pane = FXMLLoader.load(getClass().getResource("../View/dashboard.fxml"));
         rootStackPane.getChildren().setAll(pane);
     }
 
+    /**
+     * Navigation to Sales Detail page.
+     */
+    @FXML
+    void btnSalesDetails(ActionEvent event) throws IOException {
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/salesDetail.fxml"));
+        rootStackPane.getChildren().setAll(pane);
+    }
+    /**
+     * Navigation to My Profile page.
+     */
+
+    @FXML
+    void myProfile(MouseEvent event) throws IOException {
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/myProfile.fxml"));
+        rootStackPane.getChildren().setAll(pane);
+    }
+    /**
+     * Naviagtion to Topup User page
+     */
+
+    @FXML
+    void btnTopUpUser(MouseEvent event) throws IOException {
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/topupUser.fxml"));
+        rootStackPane.getChildren().setAll(pane);
+    }
+    /**
+     * Navigation to Add Food page.
+     */
+
+    @FXML
+    void btnAddFood(ActionEvent event) throws IOException {
+        System.out.println("Add food button is pressed");
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/addFoodItems.fxml"));
+        rootStackPane.getChildren().setAll(pane);
+    }
+
+    /**
+     * Navigation to User Order page.
+     */
+    @FXML
+    void btnUserOrder(ActionEvent event) throws IOException {
+        System.out.println("User Order Button is pressed.");
+        StackPane pane = FXMLLoader.load(getClass().getResource("../View/userOrder.fxml"));
+        rootStackPane.getChildren().setAll(pane);
+    }
+    /**
+     *Confirmation dialog appears when the user press the logout button.
+     * After confirmation page navigate to login screen, otherwise remains in same page.
+     */
     @FXML
     void btnLogout(MouseEvent event) throws IOException {
         try{
@@ -125,95 +161,26 @@ public class DashboardController implements Initializable {
                     dialog.close();
                     StackPane pane = FXMLLoader.load(getClass().getResource("../View/login.fxml"));
                     rootStackPane.getChildren().setAll(pane);
-
                 }catch(Exception ex){
                     System.out.println(ex);
                 }
-
-
-
             });
             cancelButton.setOnAction(ex->dialog.close());
-
             content.setActions(okButton, cancelButton);
             dialog.show();
-
         }catch(Exception e){
             System.out.println(e);
-
         }
     }
 
-    @FXML
-    void btnSalesDetails(ActionEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/salesDetail.fxml"));
-        rootStackPane.getChildren().setAll(pane);
-    }
-
-    @FXML
-    void myProfile(MouseEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/myProfile.fxml"));
-        rootStackPane.getChildren().setAll(pane);
-    }
-
-    @FXML
-    void btnTopUpUser(MouseEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/topupUser.fxml"));
-        rootStackPane.getChildren().setAll(pane);
-    }
-
-
-    @FXML
-    void btnAddFood(ActionEvent event) throws IOException {
-        System.out.println("Add food button is pressed");
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/addFoodItems.fxml"));
-        rootStackPane.getChildren().setAll(pane);
-    }
-
-
-
-
-    @FXML
-    void btnStudents(MouseEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/topupUser.fxml"));
-        rootStackPane.getChildren().setAll(pane);
-
-    }
-
-    @FXML
-    void btnSales(MouseEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/salesDetail.fxml"));
-        rootStackPane.getChildren().setAll(pane);
-
-    }
-
-    @FXML
-    void btnFood(MouseEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/addFoodItems.fxml"));
-        rootStackPane.getChildren().setAll(pane);
-
-    }
-
-    @FXML
-    void btnCanteenCoins(MouseEvent event) throws IOException {
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/topupUser.fxml"));
-        rootStackPane.getChildren().setAll(pane);
-
-    }
-
-
-
-    @FXML
-    void btnUserOrder(ActionEvent event) throws IOException {
-        System.out.println("User Order Button is pressed.");
-        StackPane pane = FXMLLoader.load(getClass().getResource("../View/userOrder.fxml"));
-        rootStackPane.getChildren().setAll(pane);
-    }
+    /**
+     * Fetch the information of vendor using the id they is fetched after successfull login.
+     * imagepath variable stores the profile picture of the vendor.
+     */
     void getVendorInfo(){
         try{
             VendorDao vd= (VendorDao) Naming.lookup("rmi://localhost/HelloServer");
             ResultSet getInfo=vd.getInfo(LoginController.id);
-
             while(getInfo.next()){
                 try{
                     String imagePath= getInfo.getString("picture");
@@ -227,23 +194,30 @@ public class DashboardController implements Initializable {
             System.out.println("Exception: "+e);
         }
     }
+
+    /**
+     * Fetch the total number of students by sending request to RMI Server.
+     * number of students is set to labelStudentNumber and number of canteen
+     * coins is set to labelCanteenCoins.
+     */
     void getTotalStudents() {
         try {
             StudentDao sd= (StudentDao) Naming.lookup("rmi://localhost/HelloStudent");
             ResultSet rs= sd.getTotalStudent();
-
             while (rs.next()) {
                 labelStudentNumber.setText(rs.getString("id"));
                 labelCanteenCoins.setText(rs.getString("balance"));
             }
-
         }catch(Exception e){
             System.out.print(e);
-
         }
-
-
     }
+
+    /**
+     * Counts the total sales by sending request to RMI Server and set the total price to
+     * the variable labelSales.
+     */
+
     void getTotalSales() {
         try {
             UserOrderDao ud= (UserOrderDao) Naming.lookup("rmi://localhost/HelloUserOrder");
@@ -255,6 +229,12 @@ public class DashboardController implements Initializable {
             System.out.print(e);
         }
     }
+
+    /**
+     * Counts the total number of food available by ssending request to RMI Server and
+     * sets the total sales in the variable labelTotalFood.
+     */
+
     void  getTotalFood(){
         try{
             FoodDao fd= (FoodDao) Naming.lookup("rmi://localhost/HelloFoodMenu");
@@ -268,26 +248,31 @@ public class DashboardController implements Initializable {
         }
     }
 
+    /**
+     * Fetch the highest food sold in canteen by sending request to RMI server and
+     * sets the data in the Pie-Chart.
+     */
+
     void loadFoodPreferenceChart(){
         try{
             UserOrderDao ud= (UserOrderDao) Naming.lookup("rmi://localhost/HelloUserOrder");
             ResultSet rs=ud.getFoodPreference();
             while (rs.next()) {
-
                 data.add(new PieChart.Data(rs.getString(1),rs.getInt(2)));
             }
-            //foodPreferenceChart.getData().addAll(data);
             foodPreferenceChart.setData(data);
-
         }catch (Exception e){
             System.out.println(e);
-
         }
     }
 
+    /**
+     * Fetch the student record spending highest number of canteen coins by sending request to RMI Server
+     * and sets the data into Bar Chart.
+     */
+
     void loadTopUser(){
         XYChart.Series<String, Integer> series= new XYChart.Series<>();
-
         try
         {
             UserOrderDao ud= (UserOrderDao) Naming.lookup("rmi://localhost/HelloUserOrder");
@@ -298,9 +283,14 @@ public class DashboardController implements Initializable {
             topUserChart.getData().addAll(series);
         }catch(Exception e){
             System.out.println(e);
-
         }
     }
+
+    /**
+     * Fetch the highest food sold in canteen from database by sending request to RMI Server
+     * and sets the data into Pie Chart with date preference.
+     *
+     */
 
     @FXML
     void btnFoodPreference(MouseEvent event) {
@@ -319,9 +309,12 @@ public class DashboardController implements Initializable {
         }catch (Exception e){
             System.out.println(e);
         }
-
     }
 
+    /**
+     * Fetch the student record spending highest canteen coins with date preference and sets the data
+     * into Bar Chart by sending request to RMI Server.
+     */
     @FXML
     void btnTopUser(MouseEvent event) {
         LocalDate initialDate= userInitialDate.getValue();
@@ -341,7 +334,9 @@ public class DashboardController implements Initializable {
 
     }
 
-
+    /**
+     * Initialization of different method when page is loaded.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         xAxis.setLabel("Student ID");

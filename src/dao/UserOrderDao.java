@@ -1,12 +1,16 @@
+/**
+ * @author Saujan Bindukar
+ * This is the interface of the User which is used to fetch the order of food, update the food order status,
+ * filters the user order by date and name, fetch the sales detail and calculates the total amount of sales,
+ * fetch the highest food sold and get the student spending the highest canteen coins students and also fetch the
+ * pending order and get todays order using the correct date.
+ */
 package dao;
-
-import java.io.Serializable;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.Date;
+
 
 public interface UserOrderDao extends Remote{
     ResultSet getUserOrder() throws RemoteException;
