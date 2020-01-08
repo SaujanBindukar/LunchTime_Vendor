@@ -302,21 +302,22 @@ public class UserOrderController implements Initializable {
             status.setCellValueFactory(new PropertyValueFactory<>("status"));
             orderTable.setItems(oblist);
 
-            /**
-             * Opens the dialog box only when the value is double clicked.
-             */
+
             orderTable.setOnMouseClicked(e ->{
                 /**
                  * Sets the order status of the user in the variable orderStatus.
                  */
                 String orderStatus=orderTable.getSelectionModel().getSelectedItem().getStatus();
                 System.out.println("OrderStatus:"+ orderStatus);
-
+                /**
+                 * Opens the dialog box only when the value is double clicked.
+                 */
                 if (e.getClickCount()==2){
                     Platform.runLater(() -> {
                         JFXDialogLayout content = new JFXDialogLayout();
                         content.setHeading(new Text("Food Status"));
                         content.setBody(new Text("What's the food status?"));
+                        // Declaring different buttons
                         JFXButton pendingButton = new JFXButton("Pending");
                         JFXButton processingButton = new JFXButton("Processing");
                         JFXButton readyButton = new JFXButton("Ready");
@@ -324,7 +325,8 @@ public class UserOrderController implements Initializable {
                         JFXButton cancelButton = new JFXButton("Cancel");
                         JFXDialog dialog = new JFXDialog(rootStackPane, content, JFXDialog.DialogTransition.CENTER);
 
-                        /** Change the background color of order status button*/
+                        /** Change the background color of order status button
+                         * according to order status*/
                         switch (orderStatus){
                             case "Pending":
                                 pendingButton.setStyle("-fx-background-color: yellow");
