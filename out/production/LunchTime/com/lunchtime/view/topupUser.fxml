@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<StackPane fx:id="rootStackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.lunchtime.controller.TopupUserController">
+   <children>
+      <AnchorPane fx:id="userOrderPane" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #f0f5fb;">
+         <children>
+            <Pane prefHeight="83.0" prefWidth="1000.0" style="-fx-background-color: #DB0F4B;">
+               <children>
+                  <JFXButton fx:id="btnUserOrder" layoutX="210.0" layoutY="-1.0" onAction="#btnUserOrder" prefHeight="83.0" prefWidth="146.0" style="-fx-background-color: #DB0F4B;" text="User Order" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnAddFood" layoutX="356.0" layoutY="-1.0" onAction="#btnAddFood" prefHeight="83.0" prefWidth="163.0" style="-fx-background-color: #DB0F4B;" text="Add Food Items" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnSalesDetails" layoutX="519.0" layoutY="-1.0" onAction="#btnSalesDetails" prefHeight="83.0" prefWidth="185.0" style="-fx-background-color: #DB0F4B;" text="View Sales Details" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton fx:id="btnTopUpUser" layoutX="704.0" layoutY="-1.0" onMouseClicked="#btnTopUpUser" prefHeight="83.0" prefWidth="146.0" style="-fx-background-color: #DB0F4B;" text="Topup User" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                     </font>
+                  </JFXButton>
+                  <ImageView fitHeight="82.0" fitWidth="109.0" pickOnBounds="true">
+                     <image>
+                        <Image url="/com/lunchtime/assets/logo.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="btnLogout" fitHeight="42.0" fitWidth="38.0" layoutX="948.0" layoutY="23.0" onMouseClicked="#btnLogout" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="/com/lunchtime/assets/logout.png" />
+                     </image>
+                  </ImageView>
+                  <Circle fx:id="profilePictureView" fill="WHITE" layoutX="894.0" layoutY="42.0" onMouseClicked="#myProfile" radius="32.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                  <JFXButton fx:id="btnDashboard" layoutX="88.0" layoutY="-1.0" onMouseClicked="#btnDashboard" prefHeight="83.0" prefWidth="122.0" style="-fx-background-color: #DB0F4B;" text="Dashboard" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                     </font>
+                  </JFXButton>
+               </children>
+            </Pane>
+            <AnchorPane layoutY="82.0" prefHeight="520.0" prefWidth="1000.0" style="-fx-background-color: #f0f5fb;">
+               <children>
+                  <Pane layoutX="25.0" layoutY="86.0" prefHeight="418.0" prefWidth="411.0" style="-fx-background-color: white; -fx-background-radius: 10;">
+                     <effect>
+                        <DropShadow color="#aba0a0" />
+                     </effect>
+                     <children>
+                        <JFXButton fx:id="btnUpdate" buttonType="RAISED" layoutX="6.0" layoutY="362.0" onMouseClicked="#btnUpdate" prefHeight="48.0" prefWidth="185.0" style="-fx-background-color: green; -fx-background-radius: 10;" text="Update" textFill="WHITE">
+                           <font>
+                              <Font name="Arial Rounded MT Bold" size="18.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </Pane>
+                  <TableView fx:id="userTable" layoutX="469.0" layoutY="13.0" prefHeight="492.0" prefWidth="519.0" style="-fx-border-radius: 10; -fx-background-radius: 10;">
+                     <columns>
+                        <TableColumn fx:id="id" prefWidth="33.0" style="border-radius: 10;" text="Id" />
+                        <TableColumn fx:id="firstName" prefWidth="86.0" text="First Name" />
+                        <TableColumn fx:id="lastName" prefWidth="88.0" text="Last Name" />
+                        <TableColumn fx:id="email" prefWidth="148.0" text="Email" />
+                        <TableColumn fx:id="phoneNumber" prefWidth="85.0" text="Number" />
+                        <TableColumn fx:id="balance" prefWidth="78.0" text="Balance" />
+                     </columns>
+                     <effect>
+                        <DropShadow color="#aba0a0" />
+                     </effect>
+                  </TableView>
+                  <JFXTextField fx:id="txtSearch" focusColor="RED" labelFloat="true" layoutX="29.0" layoutY="25.0" onKeyReleased="#loadAllUsers" prefHeight="48.0" prefWidth="280.0" promptText="Search by Student Name" style="-fx-border-radius: 10; -fx-background-color: #f0f5fb;" unFocusColor="BLACK" />
+                  <JFXButton fx:id="btnSearch" buttonType="RAISED" layoutX="334.0" layoutY="25.0" onMouseClicked="#btnSearch" prefHeight="48.0" prefWidth="104.0" style="-fx-background-color: #ff039e; -fx-background-radius: 10; -fx-border-radius: 10;" text="Search" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                     </font>
+                     <effect>
+                        <DropShadow color="#aba0a0" />
+                     </effect>
+                  </JFXButton>
+                  <JFXTextField fx:id="txtFirstName" focusColor="RED" labelFloat="true" layoutX="33.0" layoutY="120.0" prefHeight="38.0" prefWidth="185.0" promptText="First Name" style="-fx-background-color: white;" unFocusColor="BLACK" />
+                  <JFXTextField fx:id="txtphoneNumber" focusColor="RED" labelFloat="true" layoutX="32.0" layoutY="211.0" prefHeight="38.0" prefWidth="389.0" promptText="Phone Number" style="-fx-background-color: white;" unFocusColor="BLACK" />
+                  <JFXTextField fx:id="txtCurrentBalance" editable="false" focusColor="RED" labelFloat="true" layoutX="32.0" layoutY="388.0" prefHeight="38.0" prefWidth="185.0" promptText="Current Balance" style="-fx-background-color: white;" unFocusColor="BLACK" />
+                  <JFXTextField fx:id="txtLastName" focusColor="RED" labelFloat="true" layoutX="233.0" layoutY="120.0" prefHeight="38.0" prefWidth="185.0" promptText="Last Name" unFocusColor="BLACK" />
+                  <JFXButton fx:id="btnClear" buttonType="RAISED" layoutX="233.0" layoutY="448.0" onMouseClicked="#btnClear" prefHeight="48.0" prefWidth="185.0" style="-fx-background-color: red; -fx-background-radius: 10;" text="Clear" textFill="WHITE">
+                     <font>
+                        <Font name="Arial Rounded MT Bold" size="18.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXTextField fx:id="txtEmail" focusColor="RED" labelFloat="true" layoutX="32.0" layoutY="300.0" prefHeight="38.0" prefWidth="389.0" promptText="Email" style="-fx-background-color: white;" unFocusColor="BLACK" />
+                  <JFXTextField fx:id="txtAddBalance" focusColor="RED" labelFloat="true" layoutX="236.0" layoutY="387.0" prefHeight="38.0" prefWidth="185.0" promptText="Add Balance" style="-fx-background-color: white;" unFocusColor="BLACK" />
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>
