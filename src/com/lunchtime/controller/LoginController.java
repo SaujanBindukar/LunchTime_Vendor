@@ -133,7 +133,6 @@ public class LoginController implements Initializable {
                 Boolean rs = vd.checkVendor(txtEmail.getText(), txtPassword.getText());
                 try {
                     if (rs) {
-                        
                         ResultSet rs1= vd.getVendorInfo(txtEmail.getText());
                         while (rs1.next()) {
                             id = rs1.getInt("vendor_id");

@@ -239,6 +239,7 @@ public class AddFoodController implements Initializable {
 
                         okButton.setOnAction(e ->{
                             try{
+                            	 //------------------For creating the signature for using in api---------------------//
                                 long timestamp = System.currentTimeMillis();
                                 String apiKey = "588753441842251";
                                 String eager = "w_400,h_400,c_pad";
@@ -246,25 +247,30 @@ public class AddFoodController implements Initializable {
                                 MessageDigest messageDigest = MessageDigest.getInstance("SHA-1");
                                 messageDigest.update(("eager=w_400,h_400,c_pad&public_id=" + publicId + "&timestamp=" + timestamp + "oWEOZ2sxuB2cpixDPaa6XhLS23E").getBytes());
                                 String signature = DatatypeConverter.printHexBinary(messageDigest.digest());
-
+                                
+                                //Create a multipart builder for the request body
                                 MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
-                                builder.addFormDataPart("timestamp", String.valueOf(timestamp))
-                                        .addFormDataPart("public_id", publicId)
-                                        .addFormDataPart("api_key", apiKey)
-                                        .addFormDataPart("eager", eager)
-                                        .addFormDataPart("signature", signature)
-                                        .addFormDataPart("file", file.getName(), RequestBody.create(MultipartBody.FORM, file));
+                                builder.addFormDataPart("timestamp", String.valueOf(timestamp)) //Timestamp used when creating the signature
+                                        .addFormDataPart("public_id", publicId) //Unique name for the upload file so that it will not override the existing file in the server
+                                        .addFormDataPart("api_key", apiKey) //Unique API Key provided by the API provider.
+                                        .addFormDataPart("eager", eager)  //Custom Dimension file the request in the response for smaller file sizes
+                                        .addFormDataPart("signature", signature)  //Unique signature for upload
+                                        .addFormDataPart("file", file.getName(), RequestBody.create(MultipartBody.FORM, file)); //Picture file
 
                                 RequestBody requestBody = builder.build();
+                                
+                                //Run the Upload Api with the request body
                                 Call<UploadResponse> call = UploadAPI.apiService.upload(requestBody);
 
                                 call.enqueue(new Callback<UploadResponse>() {
                                     @Override
                                     public void onResponse(Call<UploadResponse> call, Response<UploadResponse> response) {
                                         Platform.runLater(()->{
+                                        	// if picture is uploaded successfully then image is set to variable
                                             String picture=response.body().getEager().get(0).getSecureUrl();
-                                            System.out.println("Picture: "+ picture);
+                                            
                                             try {
+                                            	//update food menu
                                                 fd.updateMenu(txtFoodName.getText(),Integer.parseInt(txtFoodPrice.getText()), foodId, picture);
                                                 MenuTable.getItems().clear();
                                                 loadData();
@@ -276,6 +282,7 @@ public class AddFoodController implements Initializable {
                                             }
                                         });
                                     }
+                                    //if picture is not uploaded
                                     @Override
                                     public void onFailure(Call<UploadResponse> call, Throwable throwable) {
                                         System.out.println("Cannot upload image");
@@ -399,15 +406,19 @@ public class AddFoodController implements Initializable {
                         JFXButton yesButton1 = new JFXButton("OK");
                         JFXDialog dialog1 = new JFXDialog(rootStackPane, content1, JFXDialog.DialogTransition.CENTER);
                         yesButton1.setOnAction(event1 ->{
-                            loadData();
+                        	System.out.print("yes button pressed");
+                            //loadData();
                             dialog1.close();
-                            try {
-                                StackPane pane;
-                                pane = FXMLLoader.load(getClass().getResource("../View/addFoodItems.fxml"));
-                                rootStackPane.getChildren().setAll(pane);
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                           
+							try {
+								 StackPane pane = FXMLLoader.load(getClass().getResource("../View/addFoodItems.fxml"));
+								 rootStackPane.getChildren().setAll(pane);
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+                          
+                            
                         });
                         content1.setActions(yesButton1);
                         okButton.setOnAction(e ->{
@@ -479,12 +490,14 @@ public class AddFoodController implements Initializable {
                         yesButton1.setOnAction(event1 ->{
                             loadData();
                             dialog1.close();
+                            
                             try{
                                 StackPane pane = FXMLLoader.load(getClass().getResource("../View/addFoodItems.fxml"));
                                 rootStackPane.getChildren().setAll(pane);
                             }catch (Exception e){
                                 System.out.println(e);
                             }
+                            dialog1.close();
                         });
                         content1.setActions(yesButton1);
                         dialog1.show();

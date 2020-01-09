@@ -340,14 +340,14 @@ public class UserOrderController implements Initializable {
                             case "Received":
                                 receivedButton.setStyle("-fx-background-color: yellow");
                                 break;
-                            case "Cancel":
+                            case "Cancelled":
                                 cancelButton.setStyle("-fx-background-color: yellow");
                                 break;
                         }
                         /**Sets the order status to cancel*/
                         cancelButton.setOnAction(event -> {
                             try{
-                                ud.updateStatus(orderTable.getSelectionModel().getSelectedItem().getOrder_id(), "Cancel");
+                                ud.updateStatus(orderTable.getSelectionModel().getSelectedItem().getOrder_id(), "Cancelled");
                                 orderTable.getItems().clear();
                                 loadOrder();
                                 dialog.close();

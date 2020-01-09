@@ -191,9 +191,10 @@ public class SalesDetailController implements Initializable {
                 oblist.add(new UserOrder(
                         rs.getDate("date"),
                         rs.getInt("total_price")));
-               series.getData().add(new XYChart.Data<>(rs.getString(1), rs.getInt(2)));
+               series.getData().add(new XYChart.Data<>(rs.getString(1), rs.getInt(2))); //getting data in chart
             }
-            salesChart.getData().addAll(series);
+            salesChart.getData().addAll(series);  //adding data in chart
+
             date.setCellValueFactory(new PropertyValueFactory<>("date"));
             total_price.setCellValueFactory(new PropertyValueFactory<>("total_price"));
             salesTable.setItems(oblist);
